@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -35,4 +35,59 @@
   to {
     transform: rotate(360deg);
   }
+}*/
+
+.app-wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 100px 1fr;
+  grid-gap: 10px;
+  grid-template-areas:
+    "hh hh"
+    "nn cc";
+  background-color: antiquewhite;
+  margin: 30px;
+}
+.header {
+  background-color: burlywood;
+  grid-area: hh;
+}
+.nav {
+  background-color: aqua;
+  grid-area: nn;
+}
+.content {
+  background-color: darkseagreen;
+  grid-area: cc;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 250px 1fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas:
+          "high-img high-img"
+          "avphoto avdescription"
+          "posts posts";
+}
+.high-image {
+  grid-area: high-img;
+  height: 250px;
+  width: 100%;
+
+}
+.avatar-photo {
+  grid-area: avphoto;
+  height: 250px;
+  width: 250px;
+  background-color: lightsteelblue;
+}
+.avatar-description {
+  grid-area: avdescription;
+  /*background-color: coral;*/
+}
+.posts {
+  grid-area: posts;
+  text-align: center;
 }
