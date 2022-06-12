@@ -41,7 +41,7 @@
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-template-rows: 100px 1fr;
-  grid-gap: 10px;
+  grid-gap: 0px;
   grid-template-areas:
     "hh hh"
     "nn cc";
@@ -49,23 +49,21 @@
   margin: 30px;
 }
 .header {
-  background-color: burlywood;
+  background-color: wheat;
   grid-area: hh;
 }
 .nav {
-  background-color: aqua;
+  margin: 10px;
+  background-color: wheat;
   grid-area: nn;
 }
-.content {
-  background-color: darkseagreen;
+.profile {
+  background-color: wheat;
   grid-area: cc;
-}
-
-.content {
   display: grid;
   grid-template-columns: 2fr 10fr;
   grid-template-rows: 250px 1fr 1fr;
-  grid-gap: 5px;
+  grid-gap: 0px;
   grid-template-areas:
           "high-img high-img"
           "avphoto avdescription"
