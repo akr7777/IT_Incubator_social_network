@@ -2,11 +2,12 @@
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-template-rows: 150px 1fr;
-  grid-gap: 0px;
+  grid-gap: 1px;
   grid-template-areas:
     "hh hh"
     "nn cc";
   background-color: rgba(250, 235, 275, 0.8);
   margin: 30px;
+  height: 100%;
 }
 

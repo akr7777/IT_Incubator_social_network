@@ -1,4 +1,21 @@
 .post_image {
     height: 50px;
     width: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+
+    text-align: center;
+}
+.post_message_text {
+    /*justify-content: center;
+    align-self: center;
+    justify-self: center;*/
+}
+.post_div {
+    /*justify-content: center;*/
+    /*align-items: center;*/
 }
