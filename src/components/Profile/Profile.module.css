@@ -1,0 +1,34 @@
+.profile {
+    margin-top: 100px;
+    background-color: #edf1f1;
+    grid-area: cc;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 250px 1fr 1fr;
+    grid-gap: 0px;
+    grid-template-areas:
+          "high-img high-img"
+          "avphoto avdescription"
+          "posts posts";
+    height: 100%;
+}
+.high_image {
+    grid-area: high-img;
+    height: 250px;
+    width: 100%;
+
+}
+.avatar_photo {
+    grid-area: avphoto;
+    height: 200px;
+    width: 200px;
+    background-color: lightsteelblue;
+}
+.avatar_description {
+    grid-area: avdescription;
+    /*background-color: coral;*/
+}
+.posts {
+    grid-area: posts;
+    text-align: center;
+}

@@ -1,0 +1,24 @@
+.nav {
+    height: 100%;
+    background-color: #edf1f1;
+    grid-area: nn;
+    text-align: center;
+}
+.item {
+    color: black;
+}
+.item.active {
+    color: gold;
+}
+.a {
+    color: saddlebrown;
+    font-size: 20px;
+}
+.a.hover {
+    color: gold;
+    font-size: 20px;
+}
+.ava_image {
+    height: 200px;
+    width: 200px;
+}

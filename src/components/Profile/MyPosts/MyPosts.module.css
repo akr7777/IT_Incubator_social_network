@@ -1,0 +1,36 @@
+.wrapped_div {
+    width: 500px;
+    height: 100%;
+
+    text-align: center;
+    justify-content: center;
+    /*align-content: center;*/
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "title_text" "input_textarea" "button_add_new_post";
+}
+.title_text {
+    padding-top: 100px;
+    text-align: center;
+    grid-area: title_text;
+    margin: 10px;
+    font-family: Damascus;
+}
+.input_textarea {
+    grid-area: input_textarea;
+    text-align: center;
+    width: 400px;
+    height: 150px;
+    border:3px;
+    background-color:aliceblue;
+    margin: 10px;
+}
+.button_add_new_post{
+    grid-area: button_add_new_post;
+    font-family: Damascus;
+    text-align: center;
+    width: 150px;
+    height: 40px;
+}

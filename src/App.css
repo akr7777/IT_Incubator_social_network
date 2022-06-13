@@ -1,91 +1,12 @@
-/*.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}*/
-
 .app-wrapper {
   display: grid;
   grid-template-columns: 200px 1fr;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 150px 1fr;
   grid-gap: 0px;
   grid-template-areas:
     "hh hh"
     "nn cc";
-  background-color: antiquewhite;
+  background-color: rgba(250, 235, 275, 0.8);
   margin: 30px;
 }
-.header {
-  background-color: wheat;
-  grid-area: hh;
-}
-.nav {
-  margin: 10px;
-  background-color: wheat;
-  grid-area: nn;
-}
-.profile {
-  background-color: wheat;
-  grid-area: cc;
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-  grid-template-rows: 250px 1fr 1fr;
-  grid-gap: 0px;
-  grid-template-areas:
-          "high-img high-img"
-          "avphoto avdescription"
-          "posts posts";
-}
-.high-image {
-  grid-area: high-img;
-  height: 250px;
-  width: 100%;
 
-}
-.avatar-photo {
-  grid-area: avphoto;
-  height: 250px;
-  width: 250px;
-  background-color: lightsteelblue;
-}
-.avatar-description {
-  grid-area: avdescription;
-  /*background-color: coral;*/
-}
-.posts {
-  grid-area: posts;
-  text-align: center;
-}
