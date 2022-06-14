@@ -1,0 +1,20 @@
+.messages {
+    background-color: #edf1f1;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.messages .dialogItems {
+    padding: 10px;
+}
+
+.messages .dialogItems .names {
+    padding: 10px;
+}
+.messages .dialogItems .active {
+    color: gold;
+}
+
+.messages .message {
+    padding: 10px;
+}

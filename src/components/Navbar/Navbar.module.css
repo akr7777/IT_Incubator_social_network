@@ -6,6 +6,7 @@
 }
 .item {
     color: black;
+    padding: 20px;
 }
 .item.active {
     color: gold;
@@ -13,10 +14,10 @@
 .a {
     color: saddlebrown;
     font-size: 20px;
+    text-decoration: none;
 }
-.a.hover {
+.a.active {
     color: gold;
-    font-size: 20px;
 }
 .ava_image {
     height: 200px;
