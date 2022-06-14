@@ -1,5 +1,5 @@
 .profile {
-    margin-top: 100px;
+    margin-top: 0px;
     background-color: #edf1f1;
     grid-area: cc;
     display: grid;
@@ -12,12 +12,12 @@
           "posts posts";
     height: 100%;
 }
-.high_image {
+/*.high_image {
     grid-area: high-img;
     height: 250px;
     width: 100%;
 
-}
+}*/
 .avatar_photo {
     grid-area: avphoto;
     height: 200px;

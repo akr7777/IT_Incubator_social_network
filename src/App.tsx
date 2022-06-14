@@ -5,29 +5,31 @@ import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
     Routes,
     Route
 } from "react-router-dom";
 import Messages from "./components/Messages/Messages";
+import Footer from "./components/Foorter/Footer";
 
 
 const App = () => {
     return (
+
         <div className={"app-wrapper"}>
             <Header/>
             <Navbar/>
 
-            <Router>
+            <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Profile/>} />
-                    <Route path="/profile" element={<Profile/>} />
-                    <Route path="/messages" element={<Messages/>} />
+                    {/*<Route path="/" element={<Profile/>}/>*/}
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/messages" element={<Messages/>}/>
 
                 </Routes>
-            </Router>
+            </BrowserRouter>
 
-
+            <Footer/>
         </div>
     );
 }

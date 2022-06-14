@@ -1,0 +1,4 @@
+.myfooter {
+    grid-area: footer;
+    background-color: gold;
+}
