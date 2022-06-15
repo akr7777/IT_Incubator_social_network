@@ -1,0 +1,14 @@
+.app_wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 250px 100% 40px;
+    grid-gap: 1px;
+    grid-template-areas:
+    "hh hh"
+    "nn cc"
+    "footer footer";
+    background-color: rgba(250, 235, 275, 0.8);
+    margin: 30px;
+    height: 100%;
+}
+

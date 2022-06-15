@@ -5,19 +5,18 @@
     text-align: center;
 }
 .item {
-    color: black;
-    padding: 20px;
+    padding: 5px;
 }
-.item.active {
-    color: gold;
-}
-.a {
-    color: saddlebrown;
+.a_link {
     font-size: 20px;
     text-decoration: none;
+    cursor: default;
 }
-.a.active {
+.active_link {
     color: gold;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: default;
 }
 .ava_image {
     height: 200px;
