@@ -3,6 +3,7 @@
     background-color: #edf1f1;
     grid-area: nn;
     text-align: center;
+
 }
 .item {
     padding: 5px;
@@ -21,4 +22,13 @@
 .ava_image {
     height: 200px;
     width: 200px;
+}
+.friends_div {
+    margin-top: 100px;
+}
+.friends_ava_div{
+    margin-top: 10px;
+    display: grid;
+    padding-left: 20px;
+    grid-template-columns: repeat(3, auto);
 }

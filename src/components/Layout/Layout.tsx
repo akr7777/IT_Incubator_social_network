@@ -5,12 +5,12 @@ import Footer from "../Foorter/Footer";
 import s from "./Layout.module.css"
 import Navbar from "../Navbar/Navbar";
 
-const Layout = () => {
+const Layout = (props: any) => {
     return(
         <div className={s.app_wrapper}>
             <Header />
 
-            <Navbar />
+            <Navbar friendsSidebar={props.friendsSidebar}/>
 
             <Outlet />
             <Footer />

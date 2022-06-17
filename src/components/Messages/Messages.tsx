@@ -4,7 +4,8 @@ import {NavLink} from "react-router-dom";
 
 export type DialogNamesPropsType = {
     id: number,
-    name: string
+    name: string,
+    img_link: string
 }
 export type UserMessagesPropsType = {
     userID: number,
@@ -15,11 +16,8 @@ export type MessagesPropsType = {
     userMessages: Array< UserMessagesPropsType >
 }
 export const Messages = (props: MessagesPropsType) => {
-   /* debugger;
-    const dialogsNames = props.dialogsNames;
-    const userMessages = props.userMessages;*/
 
-    const dialogsNamesElements = props.dialogsNames.map( elem => <Dialog id={elem.id} name={elem.name}/> );
+    const dialogsNamesElements = props.dialogsNames.map( elem => <Dialog id={elem.id} name={elem.name} img_link={elem.img_link}/> );
     const messagesElements = props.userMessages.map( elem => <Message userID={elem.userID} messageText={elem.messageText} /> );
 
     return (
@@ -36,12 +34,14 @@ export const Messages = (props: MessagesPropsType) => {
 
 type DialogPropsType = {
     id: number,
-    name: string
+    name: string,
+    img_link: string
 }
 const Dialog = (props: DialogPropsType) => {
     return(
         <div className={s.names}>
-            <NavLink to={"/messages/" + props.id}>{props.name}</NavLink>
+                <img className={s.ava_img_friends} src={props.img_link}/>
+                <NavLink to={"/messages/" + props.id}>{props.name}</NavLink>
         </div>
     );
 }
@@ -51,9 +51,11 @@ type MessagePropsType = {
     messageText: string
 }
 const Message = (props: MessagePropsType) => {
+    let messageText1 = props.userID == 1 ? <div className={s.msg_left}>{props.messageText}</div> : <div className={s.msg_rigth}>{props.messageText}</div>
     return(
         <div>
-            {props.userID}: {props.messageText}
+            {/*{props.messageText}*/}
+            {messageText1}
         </div>
     );
 }

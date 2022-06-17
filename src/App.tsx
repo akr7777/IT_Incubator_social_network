@@ -39,7 +39,7 @@ const App = (props: any) => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path="/" element={<Layout friendsSidebar={props.state.friendsSidebar}/>}>
                     <Route index element={<Profile
                         profileDescription={props.state.profilePage.profileDescription}
                         profilePosts={props.state.profilePage.profilePosts}

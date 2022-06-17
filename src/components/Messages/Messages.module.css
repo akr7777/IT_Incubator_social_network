@@ -10,14 +10,29 @@
 
 .messages .dialogItems .names {
     padding: 10px;
+    align-items: center;
+    horiz-align: center;
 }
 
 
 .messages .message {
+    width: 60%;
     padding: 10px;
 }
 
 .messages .dialogItems a {
     text-decoration: none;
     color: darkgreen;
+}
+.ava_img_friends {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}
+
+.msg_left {
+    text-align: left;
+}
+.msg_rigth {
+    text-align: end;
 }
