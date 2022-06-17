@@ -33,7 +33,6 @@ type AppPropsType = {
     dialogsNames: Array< {id: number, name: string} >,
     userMessages: Array< {id: number, messageText: string} >,
     profileDescription: DescriptionPropsType
-
 };
 
 const App = (props: any) => {
@@ -41,9 +40,21 @@ const App = (props: any) => {
         <>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<Profile profileDescription={props.profileDescription} profilePosts={props.profilePosts}/>}/>
-                    <Route path="profile" element={<Profile profileDescription={props.profileDescription} profilePosts={props.profilePosts}/>}/>
-                    <Route path="messages" element={<Messages dialogsNames={props.dialogsNames} userMessages={props.userMessages}/>}/>
+                    <Route index element={<Profile
+                        profileDescription={props.state.profilePage.profileDescription}
+                        profilePosts={props.state.profilePage.profilePosts}
+                        />}
+                    />
+                    <Route path="profile" element={<Profile
+                        profileDescription={props.state.profilePage.profileDescription}
+                        profilePosts={props.state.profilePage.profilePosts}
+                        />}
+                    />
+                    <Route path="messages" element={<Messages
+                        dialogsNames={props.state.messagesPage.dialogsNames}
+                        userMessages={props.state.messagesPage.userMessages}
+                        />}
+                    />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
