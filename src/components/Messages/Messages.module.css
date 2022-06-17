@@ -11,10 +11,13 @@
 .messages .dialogItems .names {
     padding: 10px;
 }
-.messages .dialogItems .active {
-    color: gold;
-}
+
 
 .messages .message {
     padding: 10px;
+}
+
+.messages .dialogItems a {
+    text-decoration: none;
+    color: darkgreen;
 }

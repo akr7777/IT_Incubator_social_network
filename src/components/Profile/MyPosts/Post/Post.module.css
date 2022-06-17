@@ -1,21 +1,34 @@
-.post_image {
-    height: 50px;
-    width: 50px;
+:root {
+    --post_image_height: 70px;
+    --post_image_width: 70px;
+}
+
+.post_div {
     margin-top: 10px;
-    margin-bottom: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 100px 1fr;
+    grid-template-areas:
+            "img text"
+            "img likes";
+}
+
+.post_image {
+    grid-area: img;
+    height: var(--post_image_height);
+    width: var(--post_image_width);
 
     align-self: center;
     justify-self: center;
     align-items: center;
+    vertical-align: center;
 
     text-align: center;
 }
 .post_message_text {
-    /*justify-content: center;
-    align-self: center;
-    justify-self: center;*/
+    grid-area: text;
 }
-.post_div {
-    /*justify-content: center;*/
-    /*align-items: center;*/
+
+.post_likes {
+    color: green;
 }
