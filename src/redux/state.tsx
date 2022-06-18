@@ -42,12 +42,12 @@ let state: any = {
             {id: 1, postText: "Hi, 132, this is my first post!", likes: 3},
             {id: 2, postText: "the second post!", likes: 5},
             {id: 3, postText: "Whats new?", likes: 1},
-            {id: 3, postText: "Whats new?", likes: 1},
-            {id: 3, postText: "Whats new?", likes: 1},
-            {id: 3, postText: "Whats new?", likes: 1},
-            {id: 3, postText: "Whats new?", likes: 1},
-            {id: 3, postText: "Whats new?", likes: 1},
-            {id: 3, postText: "HHHHH", likes: 1123}
+            {id: 4, postText: "Whats new?", likes: 1},
+            {id: 5, postText: "Whats new?", likes: 1},
+            {id: 6, postText: "Whats new?", likes: 1},
+            {id: 7, postText: "Whats new?", likes: 1},
+            {id: 8, postText: "Whats new?", likes: 1},
+            {id: 9, postText: "HHHHH", likes: 1123}
         ]
     },
     messagesPage: {
@@ -69,4 +69,15 @@ let state: any = {
     ]
 }
 
+type AddPostPropsType = {
+    newPostText: string
+}
+export let addPost = (props: AddPostPropsType) => {
+    let newPost = {
+        id: 10,
+        postText: props.newPostText,
+        likes: 0
+    }
+    state.profilePage.profilePosts.push(newPost);
+}
 export default state;

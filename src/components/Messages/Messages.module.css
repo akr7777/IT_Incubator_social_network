@@ -36,3 +36,28 @@
 .msg_rigth {
     text-align: end;
 }
+
+.new_message_textarea {
+    width: 500px;
+    height: 200px;
+    background-color: #d7d798;
+}
+.new_message_button {
+    width: 120px;
+    height: 50px;
+}
+.add_new_message_div {
+    display: grid;
+    flex-direction: column;
+    grid-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid;
+}
+.new_message_item {
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -43,11 +43,13 @@ const App = (props: any) => {
                     <Route index element={<Profile
                         profileDescription={props.state.profilePage.profileDescription}
                         profilePosts={props.state.profilePage.profilePosts}
+                        profilePage_addPost={props.profilePage_addPost}
                         />}
                     />
                     <Route path="profile" element={<Profile
                         profileDescription={props.state.profilePage.profileDescription}
                         profilePosts={props.state.profilePage.profilePosts}
+                        profilePage_addPost={props.profilePage_addPost}
                         />}
                     />
                     <Route path="messages" element={<Messages

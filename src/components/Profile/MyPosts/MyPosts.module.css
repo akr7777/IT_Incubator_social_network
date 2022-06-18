@@ -4,8 +4,8 @@
 }
 .input_textarea {
     /*justify-content: center;*/
-    width: 400px;
-    height: 150px;
+    width: 500px;
+    height: 250px;
     border:3px;
     background-color:aliceblue;
 }
@@ -20,4 +20,8 @@
     flex-direction: column;
     /*margin-left: 200px;*/
     /*justify-content: center;*/
+}
+.new_post_adding_item {
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -8,8 +8,7 @@ import {DescriptionPropsType} from "./components/Profile/Description/Description
 import {DialogNamesPropsType, UserMessagesPropsType} from "./components/Messages/Messages";
 import {MyPostsPropsType} from "./components/Profile/MyPosts/MyPosts";
 import state from "./redux/state";
-
-//data here
+import {addPost} from "./redux/state";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -20,10 +19,7 @@ root.render(
         <BrowserRouter>
             <App
                 state = {state}
-                /*dialogsNames = {dialogsNames}
-                userMessages = {userMessages}
-                profileDescription = {profileDescription}
-                profilePosts = {profilePosts}*/
+                profilePage_addPost = {addPost}
             />
         </BrowserRouter>
     </React.StrictMode>

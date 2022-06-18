@@ -6,14 +6,15 @@ import {ProfilePostsPropsType1} from "../../redux/state";
 
 type ProfilePropsType = {
     profileDescription: DescriptionPropsType,
-    profilePosts: ProfilePostsPropsType1
+    profilePosts: ProfilePostsPropsType1,
+    profilePage_addPost: (newPostText: string) => null
 }
 
 const Profile = (props: ProfilePropsType) => {
     return (
         <div className={s1.profile}>
             <Description profileDescription={props.profileDescription}/>
-            <MyPosts profilePosts={props.profilePosts}/>
+            <MyPosts profilePosts={props.profilePosts} profilePage_addPost={props.profilePage_addPost}/>
 
         </div>
     );
