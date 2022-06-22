@@ -5,35 +5,42 @@ import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../r
 import {
     actionPropsType,
     state_messagePage_userMessages_PropsType,
-    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
+    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType, storePropsType
 } from "../../redux/state";
 
 export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
     userMessages: Array<state_messagePage_userMessages_PropsType>,
     typingNewMessageText: string,
-    dispatch: (action: actionPropsType) => number
+    addNewMessage: (txt: string) => void,
+    updateTextArea: (txt:string)=> void
+    /*dispatch: (action: actionPropsType) => number*/
+}
+type MessagesPropsType1 = {
+    store: storePropsType
 }
 export const Messages = (props: MessagesPropsType) => {
 
     const dialogsNamesElements = props.dialogsNames.map( elem => <Dialog id={elem.id} name={elem.name} img_link={elem.img_link}/> );
     const messagesElements = props.userMessages.map( elem => <Message userID={elem.userID} messageText={elem.messageText} /> );
-
     let newMessageTextarea = useRef<HTMLTextAreaElement>(null);
-    let addNewMessage = () => {
+
+    let onAddNewMessage = () => {
         let el = newMessageTextarea.current;
         if (el !== null) {
             let txt = el.value;
-            props.dispatch(addNewMessageActionCreator(txt));
+            props.addNewMessage(txt);
+            /*props.store.dispatch(addNewMessageActionCreator(txt));*/
             el.value = "";
         }
     }
 
-    let updateNewMessageTextArea = () => {
+    let onUpdateTextArea = () => {
         let el = newMessageTextarea.current;
         if (el !== null) {
             let txt = el.value;
-            props.dispatch( updateNewMessageActionCreator(txt) );
+            props.updateTextArea(txt);
+            /*props.dispatch( updateNewMessageActionCreator(txt) );*/
         }
     }
 
@@ -51,9 +58,9 @@ export const Messages = (props: MessagesPropsType) => {
                         ref={newMessageTextarea}
                         placeholder="type your new message here"
                         value={props.typingNewMessageText}
-                        onChange={updateNewMessageTextArea}
+                        onChange={onUpdateTextArea}
                     />
-                    <button className={s.new_message_button + " " + s.new_message_item} onClick={addNewMessage}>Отправить</button>
+                    <button className={s.new_message_button + " " + s.new_message_item} onClick={onAddNewMessage}>Отправить</button>
                 </div>
             </div>
         </div>

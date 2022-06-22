@@ -5,8 +5,9 @@ import {Description} from "./Description/Description";
 import {
     actionPropsType,
     state_ProfilePage_profileDescription_PropsType,
-    state_profilePage_profilePosts_PropsType
+    state_profilePage_profilePosts_PropsType, storePropsType
 } from "../../redux/state";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 type ProfilePropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,//name: string,birthday: string, phone: string, email: string
@@ -14,15 +15,19 @@ type ProfilePropsType = {
     updatedPostText_inTextArea: string,
     dispatch: (action: actionPropsType) => number
 }
-
-const Profile = (props: ProfilePropsType) => {
+type ProfilePropsType1 = {
+    store: storePropsType
+}
+const Profile = (props: ProfilePropsType1) => {
+    let state = props.store.getState()
     return (
         <div className={s1.profile}>
-            <Description profileDescription={props.profileDescription}/>
-            <MyPosts
-                profilePosts={props.profilePosts}
-                updatedPostText_inTextArea={props.updatedPostText_inTextArea}
-                dispatch={props.dispatch}
+            <Description profileDescription={state.profilePage.profileDescription}/>
+            <MyPostsContainer
+                /*store={props.store}*/
+                profilePosts={state.profilePage.profilePosts}
+                updatedPostText_inTextArea={state.profilePage.updatedPostText_inTextArea}
+                dispatch={props.store.dispatch}
             />
 
         </div>

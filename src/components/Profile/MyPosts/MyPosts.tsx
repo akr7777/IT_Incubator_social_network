@@ -8,27 +8,27 @@ import {actionPropsType, state_profilePage_profilePosts_PropsType} from "../../.
 export type MyPostsPropsType = {
     profilePosts: Array<state_profilePage_profilePosts_PropsType>,
     updatedPostText_inTextArea: string,
-    dispatch: (action: actionPropsType) => number,
+    //dispatch: (action: actionPropsType) => number,
+    addPost: () => void,
+    updateNewPostText: (text: string) => void
 }
 const MyPosts = (props: MyPostsPropsType) => {
-    let posts = props.profilePosts;
-    const postsElements = posts.map((p) => <Post id={p.id} postText={p.postText} likes={p.likes}/>);
+
 
     let newPostElement = useRef<HTMLTextAreaElement>(null);
-    let addPost = () => {
-        props.dispatch( addPostActionCreator() );
+    let onAddPost = () => {
+        props.addPost();
+        //props.dispatch( addPostActionCreator() );
     }
 
-    let updateTextArea = () => {
+    let onUpdate = () => {
         let el = newPostElement.current;
         if (el !== null) {
-            props.dispatch( updateTextAreaActionCreator(el.value) );
-
+            //props.dispatch( updateTextAreaActionCreator(el.value) );
+            props.updateNewPostText(el.value);
             el.setSelectionRange(0,2);
             el.focus();
             el.select();
-            //el.autofocus;
-            //el.setSelectionRange(el.value.length, el.value.length);
         }
 
     }
@@ -43,12 +43,12 @@ const MyPosts = (props: MyPostsPropsType) => {
                           ref={newPostElement}
                           value={props.updatedPostText_inTextArea}
                           /*onfocus="this.value = this.value;"*/
-                          onChange={updateTextArea}
+                          onChange={onUpdate}
                 />
                 <button className={s.button_add_new_post+" "+s.new_post_adding_item}
-                        onClick={addPost}>Add a note.</button>
+                        onClick={onAddPost}>Add a note.</button>
             </div>
-            {postsElements}
+            { props.profilePosts.map((p) => <Post id={p.id} postText={p.postText} likes={p.likes}/>) }
         </div>
     );
 }
