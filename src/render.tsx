@@ -5,10 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
-/*import {store} from "./redux/state";*/
-import store from "./redux/redux-store"
 
-export let renderingWholeTree = (state: any) => {
+/*export let renderingWholeTree = (props: any) => {
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
     );
@@ -16,19 +14,11 @@ export let renderingWholeTree = (state: any) => {
         <React.StrictMode>
             <BrowserRouter>
                 <App
-                    state={store.getState()}
-                    dispatch={store.dispatch.bind(store)}
+                    state={props}
+                    profilePage_addPost={addPost}
+                    updateTextAreaWritingNewPost={updateTextAreaWritingNewPost}
                 />
             </BrowserRouter>
         </React.StrictMode>
     );
-}
-
-renderingWholeTree(store.getState());
-
-store.subscribe( () => {
-    let state = store.getState();
-    renderingWholeTree(state);
-});
-
-reportWebVitals();
+}*/

@@ -3,10 +3,10 @@
     --post_image_width: 70px;
 }
 
-.post_div {
+.post_div25 {
     margin-top: 10px;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 30px 30px;
     grid-template-columns: 100px 1fr;
     grid-template-areas:
             "img text"

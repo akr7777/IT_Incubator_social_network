@@ -1,19 +1,18 @@
 import React, {useRef} from "react";
 import s from "./Messages.module.css";
 import {NavLink} from "react-router-dom";
+import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../redux/messages-reducer";
+import {
+    actionPropsType,
+    state_messagePage_userMessages_PropsType,
+    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
+} from "../../redux/state";
 
-export type DialogNamesPropsType = {
-    id: number,
-    name: string,
-    img_link: string
-}
-export type UserMessagesPropsType = {
-    userID: number,
-    messageText: string
-}
 export type MessagesPropsType = {
-    dialogsNames: Array<DialogNamesPropsType>,
-    userMessages: Array< UserMessagesPropsType >
+    dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
+    userMessages: Array<state_messagePage_userMessages_PropsType>,
+    typingNewMessageText: string,
+    dispatch: (action: actionPropsType) => number
 }
 export const Messages = (props: MessagesPropsType) => {
 
@@ -22,8 +21,20 @@ export const Messages = (props: MessagesPropsType) => {
 
     let newMessageTextarea = useRef<HTMLTextAreaElement>(null);
     let addNewMessage = () => {
-        let txt = newMessageTextarea.current !== null ? newMessageTextarea.current.value : "";
-        alert(txt);
+        let el = newMessageTextarea.current;
+        if (el !== null) {
+            let txt = el.value;
+            props.dispatch(addNewMessageActionCreator(txt));
+            el.value = "";
+        }
+    }
+
+    let updateNewMessageTextArea = () => {
+        let el = newMessageTextarea.current;
+        if (el !== null) {
+            let txt = el.value;
+            props.dispatch( updateNewMessageActionCreator(txt) );
+        }
     }
 
     return (
@@ -35,7 +46,13 @@ export const Messages = (props: MessagesPropsType) => {
                 { messagesElements }
                 <div className={s.add_new_message_div}>
                     <h3 className={s.new_message_item}>New message</h3>
-                    <textarea className={s.new_message_textarea + " " + s.new_message_item} ref={newMessageTextarea} placeholder="type your new message here"/>
+                    <textarea
+                        className={s.new_message_textarea + " " + s.new_message_item}
+                        ref={newMessageTextarea}
+                        placeholder="type your new message here"
+                        value={props.typingNewMessageText}
+                        onChange={updateNewMessageTextArea}
+                    />
                     <button className={s.new_message_button + " " + s.new_message_item} onClick={addNewMessage}>Отправить</button>
                 </div>
             </div>
@@ -43,12 +60,12 @@ export const Messages = (props: MessagesPropsType) => {
     );
 }
 
-type DialogPropsType = {
+/*type DialogPropsType = {
     id: number,
     name: string,
     img_link: string
-}
-const Dialog = (props: DialogPropsType) => {
+}*/
+const Dialog = (props: state_messagesPage_dialogsNames_PropsType) => {
     return(
         <div className={s.names}>
                 <img className={s.ava_img_friends} src={props.img_link}/>
@@ -57,11 +74,11 @@ const Dialog = (props: DialogPropsType) => {
     );
 }
 
-type MessagePropsType = {
+/*type MessagePropsType = {
     userID: number
     messageText: string
-}
-const Message = (props: MessagePropsType) => {
+}*/
+const Message = (props: state_messagePage_userMessages_PropsType) => {
     let messageText1 = props.userID == 1 ? <div className={s.msg_left}>{props.messageText}</div> : <div className={s.msg_rigth}>{props.messageText}</div>
     return(
         <div>
