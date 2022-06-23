@@ -1,8 +1,13 @@
 import React from "react";
 import {addPostActionCreator, updateTextAreaActionCreator} from "../../../redux/profile-reducer";
-import {actionPropsType, state_profilePage_profilePosts_PropsType, storePropsType} from "../../../redux/state";
+import {
+    actionPropsType,
+    state_profilePage_profilePosts_PropsType,
+    statePropsType,
+    storePropsType
+} from "../../../redux/state";
 import MyPosts from "./MyPosts";
-import {StoreContext} from "../../../StoreContext";
+import {connect} from "react-redux";
 
 
 export type MyPostsPropsType = {
@@ -10,7 +15,7 @@ export type MyPostsPropsType = {
     updatedPostText_inTextArea: string,
     dispatch: (action: actionPropsType) => number,
 }
-const MyPostsContainer = (/*props: /!*MyPostsPropsType*!/ any*/) => {
+/*const MyPostsContainer = (/!*props: /!*MyPostsPropsType*!/ any*!/) => {
 
     return (
         <StoreContext.Consumer>
@@ -34,5 +39,24 @@ const MyPostsContainer = (/*props: /!*MyPostsPropsType*!/ any*/) => {
             }
         </StoreContext.Consumer>
     );
+}*/
+
+let mapStateToProps = (state: statePropsType) => {
+    return {
+        profilePosts: state.profilePage.profilePosts,
+        updatedPostText_inTextArea: state.profilePage.updatedPostText_inTextArea
+    }
 }
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        addPost: () => {
+            dispatch(addPostActionCreator());
+        },
+        updateNewPostText: (text: string) => {
+            let action = updateTextAreaActionCreator(text);
+            dispatch(action);
+        }
+    }
+}
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 export default MyPostsContainer;

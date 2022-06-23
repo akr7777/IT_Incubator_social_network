@@ -4,9 +4,8 @@ import Profile from "./components/Profile/Profile";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage"
 import Layout from "./components/Layout/Layout";
 import {Routes, Route} from "react-router-dom";
-import Messages from "./components/Messages/Messages";
+import {MessagesContainer} from "./components/Messages/MessagesContainer";
 import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
-import MessagesContainer from "./components/Messages/MessagesContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 
 type AppPropsType = {

@@ -4,10 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-
-/*import {store} from "./redux/state";*/
-import store from "./redux/redux-store"
-import {StoreContext} from "./StoreContext";
+import store from "./redux/redux-store";
+import {Provider} from "react-redux";
 
 export let renderingWholeTree = (state: any) => {
     const root = ReactDOM.createRoot(
@@ -16,9 +14,9 @@ export let renderingWholeTree = (state: any) => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <StoreContext.Provider value={store}>
+                <Provider store={store}>
                     <App />
-                </StoreContext.Provider>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>
     );

@@ -5,10 +5,11 @@ import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../r
 import {
     actionPropsType,
     state_messagePage_userMessages_PropsType,
-    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType, storePropsType
+    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType, statePropsType, storePropsType
 } from "../../redux/state";
 import Messages from "./Messages";
-import {StoreContext} from "../../StoreContext";
+/*import {StoreContext} from "../../StoreContext";*/
+import {connect} from "react-redux";
 
 export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
@@ -19,7 +20,7 @@ export type MessagesPropsType = {
 type MessagesPropsType1 = {
     store: storePropsType
 }
-export const MessagesContainer = () => {
+/*export const MessagesContainer = () => {
 
     return (
         <StoreContext.Consumer>
@@ -47,6 +48,24 @@ export const MessagesContainer = () => {
     );
 
 
+}*/
+
+let mapStateToProps = (state: statePropsType) => {
+    return {
+        dialogsNames: state.messagesPage.dialogsNames,
+        userMessages: state.messagesPage.userMessages,
+        typingNewMessageText: state.messagesPage.typingNewMessageText
+    }
+}
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        addNewMessage: (txt: string) => {
+            dispatch(addNewMessageActionCreator(txt));
+        },
+        updateTextArea: (txt: string) => {
+            dispatch(updateNewMessageActionCreator(txt));
+        }
+    }
 }
 
-export default MessagesContainer;
+export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
