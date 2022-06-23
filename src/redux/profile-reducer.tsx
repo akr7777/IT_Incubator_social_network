@@ -21,20 +21,25 @@ let initialState = {
 export const profileReducer = (state: state_ProfilePage_PropsType = initialState, action: actionPropsType) => {
 
     switch (action.type) {
-        case add_Post:
+        case add_Post: {
             let newPost = {
                 id: 4,
                 postText: state.updatedPostText_inTextArea,
                 likes: 0
             }
-            state.profilePosts.push(newPost);
-            state.updatedPostText_inTextArea = "";
-            return state;
-        case update_new_post_text:
-            if (typeof(action.newText)==='string') {
-                state.updatedPostText_inTextArea = action.newText;
+            let copyState = {...state}
+            copyState.profilePosts = [...state.profilePosts]
+            copyState.profilePosts.push(newPost);
+            copyState.updatedPostText_inTextArea = "";
+            return copyState;
+        }
+        case update_new_post_text: {
+            let copyState = {...state}
+            if (typeof (action.newText) === 'string') {
+                copyState.updatedPostText_inTextArea = action.newText;
             }
-            return state;
+            return copyState;
+        }
         default:
             return state;
     }

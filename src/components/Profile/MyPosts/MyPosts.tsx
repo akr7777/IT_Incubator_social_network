@@ -18,17 +18,12 @@ const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null);
     let onAddPost = () => {
         props.addPost();
-        //props.dispatch( addPostActionCreator() );
     }
 
     let onUpdate = () => {
         let el = newPostElement.current;
         if (el !== null) {
-            //props.dispatch( updateTextAreaActionCreator(el.value) );
             props.updateNewPostText(el.value);
-            el.setSelectionRange(0,2);
-            el.focus();
-            el.select();
         }
 
     }
@@ -42,7 +37,6 @@ const MyPosts = (props: MyPostsPropsType) => {
                           placeholder={"add new note here"}
                           ref={newPostElement}
                           value={props.updatedPostText_inTextArea}
-                          /*onfocus="this.value = this.value;"*/
                           onChange={onUpdate}
                 />
                 <button className={s.button_add_new_post+" "+s.new_post_adding_item}

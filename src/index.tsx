@@ -24,9 +24,9 @@ export let renderingWholeTree = (state: any) => {
 
 renderingWholeTree(store.getState());
 
-store.subscribe(() => {
+/*store.subscribe(() => {
     let state = store.getState();
     renderingWholeTree(state);
-});
+});*/
 
 reportWebVitals();

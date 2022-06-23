@@ -18,17 +18,22 @@ let initialState = {
 
 export const messagesReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
-        case add_new_message_string:
+        case add_new_message_string: {
             let newMsg = {
                 userID: 2,
                 messageText: action.messageText
             }
-            state.userMessages.push(newMsg);
-            state.typingNewMessageText = "";
-            return state;
-        case update_new_message_text:
-            state.typingNewMessageText = action.updatedMessageText;
-            return state;
+            let copyState = {...state};
+            copyState.userMessages = [...state.userMessages];
+            copyState.userMessages.push(newMsg);
+            copyState.typingNewMessageText = "";
+            return copyState;
+        }
+        case update_new_message_text: {
+            let copyState = {...state}
+            copyState.typingNewMessageText = action.updatedMessageText;
+            return copyState;
+        }
         default:
             return state;
     }

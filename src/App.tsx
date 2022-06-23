@@ -18,7 +18,6 @@ type AppPropsType1 = {
 }
 
 const App = () => {
-    debugger;
     return (
         <>
             <Routes>

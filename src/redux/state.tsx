@@ -60,7 +60,7 @@ export type storePropsType = {
     dispatch: (action: actionPropsType) => number
 }
 
-export let store:storePropsType = {
+/*export let store:storePropsType = {
     _state: {
         profilePage: {
             profileDescription: {
@@ -116,6 +116,6 @@ export let store:storePropsType = {
         this._callSubscriber(this._state);
         return 1;
     }
-}
+}*/
 
 /*window.store = store;*/
