@@ -23,16 +23,24 @@ export const messagesReducer = (state: any = initialState, action: any) => {
                 userID: 2,
                 messageText: action.messageText
             }
-            let copyState = {...state};
-            copyState.userMessages = [...state.userMessages];
-            copyState.userMessages.push(newMsg);
-            copyState.typingNewMessageText = "";
-            return copyState;
+            return {
+                ...state,
+                typingNewMessageText: "",
+                userMessages: [...state.userMessages, newMsg]
+            };
+           /* copyState.userMessages = [...state.userMessages, newMsg];*/
+            /*copyState.userMessages.push(newMsg);
+            copyState.typingNewMessageText = "";*/
+            /*return copyState;*/
         }
         case update_new_message_text: {
-            let copyState = {...state}
+            return {
+                ...state,
+                typingNewMessageText: action.updatedMessageText
+            }
+            /*let copyState = {...state}
             copyState.typingNewMessageText = action.updatedMessageText;
-            return copyState;
+            return copyState;*/
         }
         default:
             return state;

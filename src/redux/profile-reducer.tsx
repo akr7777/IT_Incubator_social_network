@@ -27,18 +27,26 @@ export const profileReducer = (state: state_ProfilePage_PropsType = initialState
                 postText: state.updatedPostText_inTextArea,
                 likes: 0
             }
-            let copyState = {...state}
-            copyState.profilePosts = [...state.profilePosts]
-            copyState.profilePosts.push(newPost);
-            copyState.updatedPostText_inTextArea = "";
-            return copyState;
+            return {
+                ...state,
+                updatedPostText_inTextArea: "",
+                profilePosts: [...state.profilePosts, newPost]
+            }
+            /*copyState.profilePosts = [...state.profilePosts, newPost]*/
+            /*copyState.profilePosts.push(newPost);
+            copyState.updatedPostText_inTextArea = "";*/
+            /*return copyState;*/
         }
         case update_new_post_text: {
-            let copyState = {...state}
+            return {
+                ...state,
+                updatedPostText_inTextArea: action.newText
+            }
+            /*let copyState = {...state}
             if (typeof (action.newText) === 'string') {
                 copyState.updatedPostText_inTextArea = action.newText;
             }
-            return copyState;
+            return copyState;*/
         }
         default:
             return state;
