@@ -10,49 +10,24 @@ import MessagesContainer from "./components/Messages/MessagesContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 
 type AppPropsType = {
-    dialogsNames: Array< {id: number, name: string} >,
-    userMessages: Array< {id: number, messageText: string} >,
+    dialogsNames: Array<{ id: number, name: string }>,
+    userMessages: Array<{ id: number, messageText: string }>,
     profileDescription: state_ProfilePage_profileDescription_PropsType
 };
 type AppPropsType1 = {
     store: storePropsType
 }
 
-const App = (props: any) => {
+const App = () => {
     debugger;
     return (
         <>
             <Routes>
-                <Route path="/" element={<Layout friendsSidebar={props.store.getState().friendsSidebar}/>}>
-                    <Route index element={<Profile
-                        store={props.store}
-                        /*profileDescription={props.state.profilePage.profileDescription}
-                        profilePosts={props.state.profilePage.profilePosts}
-                        dispatch={props.dispatch}
-                        /!*profilePage_addPost={props.profilePage_addPost}*!/
-                        updatedPostText_inTextArea={props.state.profilePage.updatedPostText_inTextArea}
-                        /!*updateTextAreaWritingNewPost={props.updateTextAreaWritingNewPost}*!/*/
-                        />}
-                    />
-                    <Route path="profile" element={<Profile
-                        store={props.store}
-                        /*profileDescription={props.state.profilePage.profileDescription}
-                        profilePosts={props.state.profilePage.profilePosts}
-                        dispatch={props.dispatch}
-                        /!*profilePage_addPost={props.profilePage_addPost}*!/
-                        updatedPostText_inTextArea={props.state.profilePage.updatedPostText_inTextArea}
-                        /!*updateTextAreaWritingNewPost={props.updateTextAreaWritingNewPost}*!/*/
-                    />}
-                    />
-                    <Route path="messages" element={<MessagesContainer
-                        store={props.store}
-                        /*dialogsNames={props.state.messagesPage.dialogsNames}
-                        userMessages={props.state.messagesPage.userMessages}
-                        typingNewMessageText={props.state.messagesPage.typingNewMessageText}
-                        dispatch={props.dispatch}*/
-                        />}
-                    />
-                    <Route path="*" element={<NotFoundPage />} />
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Profile />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="messages" element={<MessagesContainer />} />
+                    <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
             </Routes>
         </>

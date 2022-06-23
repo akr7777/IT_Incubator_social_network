@@ -7,6 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 
 /*import {store} from "./redux/state";*/
 import store from "./redux/redux-store"
+import {StoreContext} from "./StoreContext";
 
 export let renderingWholeTree = (state: any) => {
     const root = ReactDOM.createRoot(
@@ -15,11 +16,9 @@ export let renderingWholeTree = (state: any) => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App
-                    store={store}
-                    /*state={store.getState()}
-                    dispatch={store.dispatch.bind(store)}*/
-                />
+                <StoreContext.Provider value={store}>
+                    <App />
+                </StoreContext.Provider>
             </BrowserRouter>
         </React.StrictMode>
     );
@@ -27,7 +26,7 @@ export let renderingWholeTree = (state: any) => {
 
 renderingWholeTree(store.getState());
 
-store.subscribe( () => {
+store.subscribe(() => {
     let state = store.getState();
     renderingWholeTree(state);
 });

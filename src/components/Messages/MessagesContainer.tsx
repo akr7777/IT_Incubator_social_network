@@ -8,6 +8,7 @@ import {
     state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType, storePropsType
 } from "../../redux/state";
 import Messages from "./Messages";
+import {StoreContext} from "../../StoreContext";
 
 export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
@@ -18,24 +19,34 @@ export type MessagesPropsType = {
 type MessagesPropsType1 = {
     store: storePropsType
 }
-export const MessagesContainer = (props: MessagesPropsType1) => {
+export const MessagesContainer = () => {
 
-    let addNewMessage = (txt: string) => {
-        props.store.dispatch(addNewMessageActionCreator(txt));
-    }
+    return (
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    let addNewMessage = (txt: string) => {
+                        store.dispatch(addNewMessageActionCreator(txt));
+                    }
 
-    let updateNewMessageTextArea = (txt: string) => {
-        props.store.dispatch( updateNewMessageActionCreator(txt) );
-    }
+                    let updateNewMessageTextArea = (txt: string) => {
+                        store.dispatch( updateNewMessageActionCreator(txt) );
+                    }
 
-    return (<Messages
-        dialogsNames={props.store.getState().messagesPage.dialogsNames}
-        userMessages={props.store.getState().messagesPage.userMessages}
-        typingNewMessageText={props.store.getState().messagesPage.typingNewMessageText}
+                    return (<Messages
+                        dialogsNames={store.getState().messagesPage.dialogsNames}
+                        userMessages={store.getState().messagesPage.userMessages}
+                        typingNewMessageText={store.getState().messagesPage.typingNewMessageText}
 
-        addNewMessage={addNewMessage}
-        updateTextArea={updateNewMessageTextArea}
-    />);
+                        addNewMessage={addNewMessage}
+                        updateTextArea={updateNewMessageTextArea}
+                    />);
+                }
+            }
+        </StoreContext.Consumer>
+    );
+
+
 }
 
 export default MessagesContainer;

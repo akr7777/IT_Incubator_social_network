@@ -8,6 +8,7 @@ import {
     state_profilePage_profilePosts_PropsType, storePropsType
 } from "../../redux/state";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {DescriptionContainer} from "./Description/DescriptionContainer";
 
 type ProfilePropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,//name: string,birthday: string, phone: string, email: string
@@ -18,18 +19,12 @@ type ProfilePropsType = {
 type ProfilePropsType1 = {
     store: storePropsType
 }
-const Profile = (props: ProfilePropsType1) => {
-    let state = props.store.getState()
+const Profile = () => {
+    //let state = props.store.getState()
     return (
         <div className={s1.profile}>
-            <Description profileDescription={state.profilePage.profileDescription}/>
-            <MyPostsContainer
-                /*store={props.store}*/
-                profilePosts={state.profilePage.profilePosts}
-                updatedPostText_inTextArea={state.profilePage.updatedPostText_inTextArea}
-                dispatch={props.store.dispatch}
-            />
-
+            <DescriptionContainer />
+            <MyPostsContainer />
         </div>
     );
 }
