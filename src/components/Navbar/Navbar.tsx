@@ -7,7 +7,7 @@ type NavbarPropsType = {
     friendsSidebar: Array<{id: number, name: string, link: string}>
 }
 const Navbar = (props: NavbarPropsType) => {
-    const friends = props.friendsSidebar.map(elem => <Friend name={elem.name} link={elem.link}/> );
+    const friends = props.friendsSidebar.map(elem => <Friend key={elem.id} name={elem.name} link={elem.link}/> );
 
     return(
         <div className={s.nav}>
@@ -21,6 +21,9 @@ const Navbar = (props: NavbarPropsType) => {
             </div>
             <div className={s.item}>
                 <NavLink to="/messages" className={ ({isActive}) => isActive ? s.active_link : s.a_link}>Messages</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/users" className={ ({isActive}) => isActive ? s.active_link : s.a_link}>Users</NavLink>
             </div>
 
             <div className={s.friends_div}>

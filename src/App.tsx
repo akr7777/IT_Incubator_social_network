@@ -6,6 +6,8 @@ import Layout from "./components/Layout/Layout";
 import {Routes, Route} from "react-router-dom";
 import {MessagesContainer} from "./components/Messages/MessagesContainer";
 import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
+import Users from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 
 type AppPropsType = {
@@ -25,6 +27,7 @@ const App = () => {
                     <Route index element={<Profile />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="messages" element={<MessagesContainer />} />
+                    <Route path="users" element={<UsersContainer />} />
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
             </Routes>

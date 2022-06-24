@@ -50,7 +50,8 @@ export type state_friendsSidebar_PropsType = {
 export type statePropsType = {
     profilePage: state_ProfilePage_PropsType,
     messagesPage: state_messagesPage_PropsType,
-    friendsSidebar: Array<state_friendsSidebar_PropsType>
+    friendsSidebar: Array<state_friendsSidebar_PropsType>,
+    users: Array<userType>
 }
 export type storePropsType = {
     _state: statePropsType,
@@ -58,6 +59,20 @@ export type storePropsType = {
     getState: () => statePropsType,
     subscribe: (observer: any) => number,
     dispatch: (action: actionPropsType) => number
+}
+
+export type usersType = Array<userType>;
+export type locationType = {
+    city: string,
+    country: string
+}
+export type userType = {
+    id: number,
+    photoUrl: string,
+    followed: boolean,
+    name: string,
+    status: string,
+    location: locationType;
 }
 
 /*export let store:storePropsType = {

@@ -9,17 +9,7 @@ import {statePropsType} from "../../redux/state";
 type NavbarPropsType = {
     friendsSidebar: Array<{id: number, name: string, link: string}>
 }
-/*const NavbarContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    return <Navbar friendsSidebar={store.getState().friendsSidebar}/>
-                }
-            }
-        </StoreContext.Consumer>
-    );
-}*/
+
 let mapStateToProps = (state: statePropsType) => {
     return {
         friendsSidebar: state.friendsSidebar
