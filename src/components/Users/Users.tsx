@@ -13,62 +13,22 @@ type UsersPropsType1 = {
     unfollow: (userid: number) => void
 }
 
-const Users = (props: UsersPropsType1) => {
-    const getUsers1 = () => {
-        if (props.users == null || props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                props.setUsers(response.data.items);
-            });
-        }
+class Users extends React.Component<any, any> {
+
+    constructor(props: any) {
+        super(props);
+
+        //alert('New users');
+
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            this.props.setUsers(response.data.items);
+        });
     }
 
-    /*if (props.users.length !== 0) {
-        props.users.map((u: userType) => <div key={u.id}>
-                    <span>
-                        <div>
-                            <img src={u.photoUrl} className={s.user_photo}/>
-                        </div>
-                        <div>
-                            {
-                                u.followed
-                                    ? <button onClick={() => {
-                                        props.unfollow(u.id)
-                                    }}>Unfollow</button>
-                                    : <button onClick={() => {
-                                        props.follow(u.id)
-                                    }}>Follow</button>
-                            }
-                        </div>
-                    </span>
-            <span>
-                        <span>
-                            <div>
-                                {u.name}
-                            </div>
-                            <div>
-                                {u.status}
-                            </div>
-                        </span>
-                        <span>
-                            <div>
-                                {u.location.city}
-                            </div>
-                            <div>
-                                {u.location.country}
-                            </div>
-                        </span>
-                    </span>
-        </div>);
-    }*/
-
-    debugger;
-    //console.log('dim=', props.users[0].name, props.users[0].id, props.users[0].followed)
-
-    return (
-        <div>
-            <button onClick={getUsers1}>get all users</button>
+    render() {
+        return (<div>
             {
-                props.users.map((u: userType1) => <div key={u.id}>
+                this.props.users.map((u: userType1) => <div key={u.id}>
                     <span>
                         <div>
                             <img src={ u.photos.small !== null ? u.photos.small : abstractUserPhoto} className={s.user_photo}/>
@@ -77,10 +37,10 @@ const Users = (props: UsersPropsType1) => {
                             {
                                 u.followed
                                     ? <button onClick={() => {
-                                        props.unfollow(u.id)
+                                        this.props.unfollow(u.id)
                                     }}>Unfollow</button>
                                     : <button onClick={() => {
-                                        props.follow(u.id)
+                                        this.props.follow(u.id)
                                     }}>Follow</button>
                             }
                         </div>
@@ -105,8 +65,9 @@ const Users = (props: UsersPropsType1) => {
                     </span>
                 </div>)
             }
-        </div>
-    );
+        </div>)
+    }
 }
+
 
 export default Users;

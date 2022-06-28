@@ -3,7 +3,6 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import {statePropsType, usersType} from "../../redux/state";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
-import axios from "axios";
 
 const mapStateToProps = (state: /*statePropsType*/any) => {
     return {
