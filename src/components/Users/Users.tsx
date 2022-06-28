@@ -23,18 +23,44 @@ class Users extends React.Component<any, any> {
     }*/
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items);
+            this.props.setTotalUsersCount(response.data.totalCount);
+        });
+    }
+
+    onPageChanged(pageNumber:number) {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items);
         });
     }
 
     render() {
-        return (<div>
-            {
-                this.props.users.map((u: userType1) => <div key={u.id}>
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages: Array<number> = [];
+
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+        const pagesDiv = pages.map((p) => {
+                return <span
+                    className={this.props.currentPage === p ? s.selected_page : s.non_selected_page}
+                    onClick={ (e) => { this.onPageChanged(p)/*this.props.setCurrentPage(p)*/} }
+                >{p}</span>
+            })
+
+        return (
+            <div>
+
+                { pagesDiv }
+
+                {
+                    this.props.users.map((u: userType1) => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={ u.photos.small !== null ? u.photos.small : abstractUserPhoto} className={s.user_photo}/>
+                            <img src={u.photos.small !== null ? u.photos.small : abstractUserPhoto}
+                                 className={s.user_photo}/>
                         </div>
                         <div>
                             {
@@ -48,7 +74,7 @@ class Users extends React.Component<any, any> {
                             }
                         </div>
                     </span>
-                    <span>
+                        <span>
                         <span>
                             <div>
                                 {u.name}
@@ -66,9 +92,9 @@ class Users extends React.Component<any, any> {
                             </div>
                         </span>
                     </span>
-                </div>)
-            }
-        </div>)
+                    </div>)
+                }
+            </div>)
     }
 }
 

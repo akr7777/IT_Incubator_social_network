@@ -2,3 +2,11 @@
     width: 100px;
     height: 100px;
 }
+.selected_page {
+    font-weight: bold;
+    padding-right: 5px;
+}
+.non_selected_page {
+    color: red;
+    padding-right: 5px;
+}
