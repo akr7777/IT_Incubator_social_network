@@ -10,7 +10,6 @@ let reducers = combineReducers({
     friendsSidebar: friendsSidebarReducer,
     usersPage: userReducer,
 });
-
 let store = createStore(reducers);
 
 /*window.store = store;*/

@@ -1,7 +1,10 @@
 import React from "react";
-import {usersType, userType} from "../../redux/state";
+import {usersType, userType1} from "../../redux/state";
 import s from "./users.module.css";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
+/*import * as axios from "axios";*/
+import axios from "axios";
+import abstractUserPhoto from "./../../assets/images/abst_user_ava.png";
 
 type UsersPropsType1 = {
     users: usersType,//Array<userType>
@@ -10,17 +13,15 @@ type UsersPropsType1 = {
     unfollow: (userid: number) => void
 }
 
-const Users = (props: any) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {id: 1, photoUrl: "https://upload.wikimedia.org/wikipedia/commons/9/96/Staatshoofden%2C_portretten%2C_Bestanddeelnr_925-6564.jpg",
-                followed: true, name: 'Dmitry', status: "I'm happy", location: {city: 'Moscow', country: 'Russia'}},
-            {id: 2, photoUrl: "https://upload.wikimedia.org/wikipedia/commons/9/96/Staatshoofden%2C_portretten%2C_Bestanddeelnr_925-6564.jpg",
-                followed: false, name: 'Konstantin', status: "I'm happy 2", location: {city: 'Minsk', country: 'Belarus'}},
-            {id: 3, photoUrl: "https://upload.wikimedia.org/wikipedia/commons/9/96/Staatshoofden%2C_portretten%2C_Bestanddeelnr_925-6564.jpg",
-                followed: true, name: 'Nikolay', status: "I'm happy 3", location: {city: 'Kiev', country: 'Ukraine'}}
-        ]);
+const Users = (props: UsersPropsType1) => {
+    const getUsers1 = () => {
+        if (props.users == null || props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items);
+            });
+        }
     }
+
     /*if (props.users.length !== 0) {
         props.users.map((u: userType) => <div key={u.id}>
                     <span>
@@ -60,13 +61,17 @@ const Users = (props: any) => {
         </div>);
     }*/
 
+    debugger;
+    //console.log('dim=', props.users[0].name, props.users[0].id, props.users[0].followed)
+
     return (
         <div>
+            <button onClick={getUsers1}>get all users</button>
             {
-                props.users.users.map((u: userType) => <div key={u.id}>
+                props.users.map((u: userType1) => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photoUrl} className={s.user_photo}/>
+                            <img src={ u.photos.small !== null ? u.photos.small : abstractUserPhoto} className={s.user_photo}/>
                         </div>
                         <div>
                             {
@@ -91,10 +96,10 @@ const Users = (props: any) => {
                         </span>
                         <span>
                             <div>
-                                {u.location.city}
+                                {"u.location.city"}
                             </div>
                             <div>
-                                {u.location.country}
+                                {"u.location.country"}
                             </div>
                         </span>
                     </span>

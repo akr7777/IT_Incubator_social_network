@@ -3,10 +3,11 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import {statePropsType, usersType} from "../../redux/state";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
+import axios from "axios";
 
-const mapStateToProps = (state: any/*statePropsType*/) => {
+const mapStateToProps = (state: /*statePropsType*/any) => {
     return {
-        users: state.usersPage
+        users: state.usersPage.users
     }
 }
 const mapDispatchToProps = (dispatch: any) => {

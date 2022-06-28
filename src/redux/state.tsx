@@ -51,7 +51,7 @@ export type statePropsType = {
     profilePage: state_ProfilePage_PropsType,
     messagesPage: state_messagesPage_PropsType,
     friendsSidebar: Array<state_friendsSidebar_PropsType>,
-    users: Array<userType>
+    usersPage: Array<userType1>
 }
 export type storePropsType = {
     _state: statePropsType,
@@ -61,18 +61,31 @@ export type storePropsType = {
     dispatch: (action: actionPropsType) => number
 }
 
-export type usersType = Array<userType>;
+export type usersType = Array<userType1>;
 export type locationType = {
     city: string,
     country: string
 }
-export type userType = {
+/*export type userType = {
     id: number,
     photoUrl: string,
     followed: boolean,
     name: string,
     status: string,
     location: locationType;
+}*/
+
+type userPhotosType = {
+    small: string,
+    large: string,
+}
+export type userType1 = {
+    id: number,
+    name: string,
+    uniqueUrlName: string,
+    status?: string,
+    photos: userPhotosType,
+    followed: boolean /*Is current authorized user following returned user. If current user is anonymous then value always will be false*/
 }
 
 /*export let store:storePropsType = {

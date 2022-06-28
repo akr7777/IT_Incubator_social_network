@@ -1,5 +1,5 @@
 import React from "react";
-import {userType, usersType, statePropsType} from "./state"
+import {userType1, usersType, statePropsType} from "./state"
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -15,14 +15,22 @@ let initialState = {
             followed: true, name: 'Nikolay', status: "I'm happy 3", location: {city: 'Kiev', country: 'Ukraine'}}
     ]
 }
+let initState1 = {
+    "users": []
+}
 
-export const userReducer = (state:any = initialState, action: any) => {
+type statePropsTypeForUSER_REDUCER = {
+    users: Array<userType1>
+}
+
+export const userReducer = (state: any = initState1/*= initialState*/, action: any) => {
+    debugger;
     switch (action.type) {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map( (u: userType) => {
-                    if (u.id === action.userID) {
+                users: state.users.map( (u: userType1) => {
+                    if (u.id === action.userid) {
                         return {...u, followed: true}
                     }
                     return u;
@@ -32,8 +40,8 @@ export const userReducer = (state:any = initialState, action: any) => {
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map( (u: userType) => {
-                    if (u.id === action.userID) {
+                users: state.users.map( (u: userType1) => {
+                    if (u.id === action.userid) {
                         return {...u, followed: false}
                     }
                     return u;
