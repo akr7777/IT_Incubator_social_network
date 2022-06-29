@@ -1,4 +1,5 @@
 import React from "react";
+import { AnyAction } from "redux";
 import {userType1, usersType, statePropsType} from "./state"
 
 const FOLLOW = 'FOLLOW';
@@ -18,18 +19,19 @@ const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT';
     ]
 }*/
 let initState1 = {
-    "users": [],
+    users: [] as userType1[],
     pageSize: 5,
     totalUsersCount: 20,
     currentPage: 2,
 }
 
+type UsersInitialState = typeof initState1
+
 type statePropsTypeForUSER_REDUCER = {
     users: Array<userType1>
 }
 
-export const userReducer = (state: any = initState1/*= initialState*/, action: any) => {
-    debugger;
+export const userReducer = (state: UsersInitialState = initState1, action: AnyAction) => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -71,5 +73,5 @@ export const userReducer = (state: any = initState1/*= initialState*/, action: a
 export const followAC = (userid: number) => ( {type: FOLLOW, userid: userid} );
 export const unfollowAC = (userid: number) => ( {type: UNFOLLOW, userid: userid} );
 export const setUsersAC = (users: usersType) => ({ type: SET_USERS, users: users});
-export const setCurrentPageAC = (p: number) => ({type: SET_CURRENT_PAGE, currentPage: p});
+export const setCurrentPageAC = (p: number) => ( {type: SET_CURRENT_PAGE, currentPage: p} );
 export const setTotalUsersCountAC = (totalCount: number) => ({ type:TOTAL_USERS_COUNT, totalUsersCount:totalCount});

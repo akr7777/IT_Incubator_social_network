@@ -6,7 +6,7 @@ import Layout from "./components/Layout/Layout";
 import {Routes, Route} from "react-router-dom";
 import {MessagesContainer} from "./components/Messages/MessagesContainer";
 import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
-import Users from "./components/Users/Users";
+//import UsersAPIComponent from "./components/Users/UsersAPIComponent";
 import {UsersContainer} from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 
