@@ -74,9 +74,16 @@ export const userReducer = (state: UsersInitialState = initState1, action: AnyAc
     }
 }
 
+/*
 export const followAC = (userid: number) => ( {type: FOLLOW, userid: userid} );
 export const unfollowAC = (userid: number) => ( {type: UNFOLLOW, userid: userid} );
 export const setUsersAC = (users: usersType) => ({ type: SET_USERS, users: users});
 export const setCurrentPageAC = (p: number) => ( {type: SET_CURRENT_PAGE, currentPage: p} );
 export const setTotalUsersCountAC = (totalCount: number) => ({ type:TOTAL_USERS_COUNT, totalUsersCount:totalCount});
-export const toggleIsFetchingAC = (isFetching: boolean) => ( { type:TOGGLE_IS_FETCHING, isFetching } );
+export const toggleIsFetchingAC = (isFetching: boolean) => ( { type:TOGGLE_IS_FETCHING, isFetching } );*/
+export const follow = (userid: number) => ( {type: FOLLOW, userid: userid} );
+export const unfollow = (userid: number) => ( {type: UNFOLLOW, userid: userid} );
+export const setUsers = (users: usersType) => ({ type: SET_USERS, users: users});
+export const setCurrentPage = (p: number) => ( {type: SET_CURRENT_PAGE, currentPage: p} );
+export const setTotalUsersCount = (totalCount: number) => ({ type:TOTAL_USERS_COUNT, totalUsersCount:totalCount});
+export const toggleIsFetching = (isFetching: boolean) => ( { type:TOGGLE_IS_FETCHING, isFetching } );
