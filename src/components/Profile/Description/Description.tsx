@@ -1,6 +1,6 @@
 import React from "react";
 import ccs_classes from "./Description.module.css";
-import {state_ProfilePage_profileDescription_PropsType} from "../../../redux/state";
+import {actionPropsType, state_ProfilePage_profileDescription_PropsType} from "../../../redux/state";
 import myava from './../../../assets/images/myava.jpeg';
 import { ProfilePropsType0 } from "../Profile";
 import Preloader from "../../common/Preloader";
@@ -15,16 +15,14 @@ export type DescriptionPropsType = {
 type DescriptionPropsType5 = {
     /*profileDescription: state_ProfilePage_profileDescription_PropsType*/
     profile: ProfilePropsType0,
-    dispatch: () => void,
+    dispatch: (action: actionPropsType) => void,
     //setUserProfile: (data: ProfilePropsType1) => void,
 
 }
 export const Description = (props: any) => {
     if (!props.profile) {
         return <Preloader />
-        //largePhoto = myava;
     }
-    debugger;
     return (
         <div className={ccs_classes.description}>
             <div>

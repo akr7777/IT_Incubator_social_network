@@ -26,6 +26,9 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<ProfileContainer />} />
+
+                    {/*<Route path="profile" element={<ProfileContainer />} />
+                    <Route path="profile/:id" element={<ProfileContainer />} />*/}
                     <Route path="profile" element={<ProfileContainer />} >
                         <Route path=':id' element={<ProfileContainer />} />
                     </Route>

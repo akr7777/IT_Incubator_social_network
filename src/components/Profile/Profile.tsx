@@ -30,8 +30,8 @@ type contactsPropsType = {
     "mainLink": string | null,
 }
 type photosPropsType = {
-    "small": string | null,
-    "large": string | null,
+    "small": string,
+    "large": string,
 }
 export type ProfilePropsType0 = {
     "aboutMe": string,
@@ -44,7 +44,8 @@ export type ProfilePropsType0 = {
 }
 export type ProfilePropsType1 = {
     profile: ProfilePropsType0,
-    setUserProfile: (data:ProfilePropsType0) => actionPropsType,
+    //setUserProfile: (data:ProfilePropsType0) => void/*actionPropsType*/,
+    dispatch: (action: actionPropsType) => void,
 }
 const Profile = (props: any) => {
     //let state = props.store.getState()
