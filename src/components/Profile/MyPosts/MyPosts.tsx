@@ -14,12 +14,10 @@ export type MyPostsPropsType = {
 }
 const MyPosts = (props: MyPostsPropsType) => {
 
-
     let newPostElement = useRef<HTMLTextAreaElement>(null);
     let onAddPost = () => {
         props.addPost();
     }
-
     let onUpdate = () => {
         let el = newPostElement.current;
         if (el !== null) {

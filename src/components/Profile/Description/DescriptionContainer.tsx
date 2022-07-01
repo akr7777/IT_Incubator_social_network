@@ -4,30 +4,22 @@ import {Description} from "./Description";
 import {connect} from "react-redux";
 /*import {StoreContext} from "../../../StoreContext";*/
 
+/*
 type DescriptionPropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType
 }
-/*export const DescriptionContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    return <Description profileDescription={store.getState().profilePage.profileDescription} />
-                }
-            }
+*/
 
-        </StoreContext.Consumer>
-    );
-}*/
 
 let mapStateToProps = (state: statePropsType) => {
     return {
-        profileDescription: state.profilePage.profileDescription
+        profile: state.profilePage.profile,
+        /*profileDescription: state.profilePage.profileDescription*/
     }
 }
-let mapDispatchToProps = () => {
+/*let mapDispatchToProps = () => {
     return {
 
     }
-}
+}*/
 export const DescriptionContainer = connect(mapStateToProps)(Description);

@@ -8,7 +8,8 @@ export type actionPropsType = {
     type: string,
     newText?: string,
     messageText?: string,
-    updatedMessageText?: string
+    updatedMessageText?: string,
+    profile?: any,
 }
 export type state_ProfilePage_profileDescription_PropsType = {
     name: string,
@@ -24,7 +25,8 @@ export type state_profilePage_profilePosts_PropsType = {
 export type state_ProfilePage_PropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,
     profilePosts: Array<state_profilePage_profilePosts_PropsType>,
-    updatedPostText_inTextArea: string
+    updatedPostText_inTextArea: string,
+    profile: any,
 }
 export type state_messagesPage_dialogsNames_PropsType = {
     id: number,
@@ -51,7 +53,7 @@ export type statePropsType = {
     profilePage: state_ProfilePage_PropsType,
     messagesPage: state_messagesPage_PropsType,
     friendsSidebar: Array<state_friendsSidebar_PropsType>,
-    usersPage: Array<userType1>
+    usersPage: Array<userType1>,
 }
 export type storePropsType = {
     _state: statePropsType,
