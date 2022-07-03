@@ -36,7 +36,6 @@ type ProfileContainerPropsType = {
 }
 class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
     componentDidMount() {
-        debugger;
         /*let profileId = this.props.router.params.id;
         if (!profileId) {
             profileId = 2;

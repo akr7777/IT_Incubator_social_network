@@ -10,6 +10,13 @@ export type actionPropsType = {
     messageText?: string,
     updatedMessageText?: string,
     profile?: any,
+    data?: authDataType,
+}
+export type authDataType = {
+    id: number,
+    email: string,
+    login: string,
+    isAuth: boolean,
 }
 export type state_ProfilePage_profileDescription_PropsType = {
     name: string,
