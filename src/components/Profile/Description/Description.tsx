@@ -4,6 +4,7 @@ import {actionPropsType, state_ProfilePage_profileDescription_PropsType} from ".
 import myava from './../../../assets/images/myava.jpeg';
 import { ProfilePropsType0 } from "../Profile";
 import Preloader from "../../common/Preloader";
+import {Navigate, NavLink } from "react-router-dom";
 /*
 export type DescriptionPropsType = {
     name: string,
@@ -23,6 +24,11 @@ export const Description = (props: any) => {
     if (!props.profile) {
         return <Preloader />
     }
+
+    const onCL = () => {
+        return <Navigate to={'/profile/500'}/>
+    }
+
     return (
         <div className={ccs_classes.description}>
             <div>
@@ -31,6 +37,9 @@ export const Description = (props: any) => {
             <div>
                 <div>Имя: {props.profile.fullName}</div>
                 <div>Status: {props.profile.aboutMe}</div>
+                <div>
+                    <NavLink to={'/profile/5'} reloadDocument>user 5</NavLink>
+                </div>
             </div>
             {/*<div>Name: {props.profileDescription.name}</div>
             <div>Birthdate: {props.profileDescription.birthday}</div>

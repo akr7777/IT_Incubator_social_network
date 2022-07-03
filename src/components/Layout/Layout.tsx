@@ -10,9 +10,7 @@ const Layout = () => {
     return(
         <div className={s.app_wrapper}>
             <Header />
-
             <NavbarContainer />
-
             <Outlet />
             <Footer />
         </div>
