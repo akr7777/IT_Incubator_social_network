@@ -5,19 +5,19 @@ import { setAuthUserDataAC } from "../../redux/auth-reducer";
 import { connect } from "react-redux";
 import { actionPropsType } from "../../redux/state";
 
-/* type dataPropsType = {
+ type dataPropsType = {
     id: number,
     email: string,
     login: string,
 }
  type HeaderComponentPropsType = {
-    isAuth: boolean,
-    login: string,
-    data: dataPropsType,
-    setAuthUserData: (type: string, data: dataPropsType) => void,
-}*/
+        isAuth: boolean,
+        login: string,
+        /*data: dataPropsType,*/
+        setAuthUserDataAC: (id: number, email:string, login:string) => void,
+}
 
-class HeaderContainer extends React.Component</*HeaderComponentPropsType*/any> {
+class HeaderContainer extends React.Component<HeaderComponentPropsType> {
 
     componentDidMount() {
         /*this.props.toggleIsFetching(true);*/
@@ -28,7 +28,7 @@ class HeaderContainer extends React.Component</*HeaderComponentPropsType*/any> {
             debugger;
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
-                this.props.setAuthUserData( {id, email, login} );
+                this.props.setAuthUserDataAC(id, email, login);
             }
 
             //this.props.setCurrentPage(23);

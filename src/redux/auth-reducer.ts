@@ -19,7 +19,7 @@ type authReducerPropsType = {
     isAuth: boolean,
 }
 
-export const authReducer = (state: /*authReducerPropsType*/any = initialState, action: actionPropsType) => {
+export const authReducer = (state: authReducerPropsType = initialState, action: actionPropsType) => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
