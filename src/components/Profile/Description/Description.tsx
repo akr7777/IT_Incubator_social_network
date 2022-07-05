@@ -25,9 +25,7 @@ export const Description = (props: any) => {
         return <Preloader />
     }
 
-    const onCL = () => {
-        return <Navigate to={'/profile/500'}/>
-    }
+    debugger;
 
     return (
         <div className={ccs_classes.description}>

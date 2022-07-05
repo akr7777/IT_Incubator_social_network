@@ -4,7 +4,6 @@ import classes from "./Header.module.css";
 //import {HeaderComponentPropsType} from './HeaderContainer';
 
 const Header = (props: /*HeaderComponentPropsType*/any) => {
-    debugger;
     return (
         <header className={classes.header}>
             {/*<img src={"https://img.freepik.com/psd-gratis/logomodel-op-grijze-muur_35913-2122.jpg?w=2000"}/>*/}

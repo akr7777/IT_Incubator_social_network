@@ -25,10 +25,9 @@ class HeaderContainer extends React.Component<HeaderComponentPropsType> {
             withCredentials: true
         }).then(response => {
             /*this.props.toggleIsFetching(false);*/
-            debugger;
             if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data;
-                this.props.setAuthUserDataAC(id, email, login);
+                let {id, login, email} = response.data.data;
+                this.props.setAuthUserDataAC(id, login, email);
             }
 
             //this.props.setCurrentPage(23);
