@@ -40,7 +40,6 @@ class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
         if (!profileId) {
             profileId = 2;
         }*/
-        debugger;
         let profileId = this.props.router.params.id ? this.props.router.params.id : 2;
         let URLPath= `https://social-network.samuraijs.com/api/1.0/profile/${profileId}`;
 

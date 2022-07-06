@@ -25,8 +25,6 @@ export const Description = (props: any) => {
         return <Preloader />
     }
 
-    debugger;
-
     return (
         <div className={ccs_classes.description}>
             <div>

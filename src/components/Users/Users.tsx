@@ -5,21 +5,6 @@ import abstractUserPhoto from "./../../assets/images/abst_user_ava.png";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-/*type UsersPropsType = {
-    users: usersType,//Array<userType>
-    pageSize: number,
-    totalUsersCount: number,
-    currentPage: number,
-}
-type UsersStateType = {
-    /!*setUsers: (users: usersType) => void,*!/
-    follow: (userid: number) => void,
-    unfollow: (userid: number) => void,
-    onPageChanged: (pageNumber: number) => void,
-    /!*setCurrentPage: (p: number) => void,
-    setTotalUsersCount: (totalCount: number) => void,*!/
-}*/
-
 type UsersPropsType = {
     users: usersType,//Array<userType>
     pageSize: number,
@@ -34,9 +19,6 @@ const Users = (props: UsersPropsType) => {
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages: Array<number> = [];
-    /*for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }*/
     const startPageIndex = (props.currentPage-10) < 1
         ? 1
         : props.currentPage-10;
@@ -72,7 +54,6 @@ const Users = (props: UsersPropsType) => {
                             {
                                 u.followed
                                     ? <button onClick={() => {
-
                                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                             withCredentials: true,
                                             headers: { 'API-KEY': '00d0d9a-fef3-4b7a-b24e-af21295219e6'}
@@ -84,7 +65,6 @@ const Users = (props: UsersPropsType) => {
 
                                     }}>Unfollow</button>
                                     : <button onClick={() => {
-
                                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                             withCredentials: true,
                                             headers: { 'API-KEY': '00d0d9a-fef3-4b7a-b24e-af21295219e6'}

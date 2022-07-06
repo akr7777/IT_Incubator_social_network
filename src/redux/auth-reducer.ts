@@ -12,7 +12,7 @@ let initialState = {
     /*isFetching: true,*/
 }
 
-type authReducerPropsType = {
+export type authReducerPropsType = {
     id: number,
     email: string,
     login: string,

@@ -4,6 +4,7 @@ import axios from "axios";
 import { setAuthUserDataAC } from "../../redux/auth-reducer";
 import { connect } from "react-redux";
 import { actionPropsType } from "../../redux/state";
+import {userAPI} from './../../api/api';
 
  type dataPropsType = {
     id: number,
@@ -17,16 +18,22 @@ import { actionPropsType } from "../../redux/state";
         setAuthUserDataAC: (id: number, email:string, login:string) => void,
 }
 
+/*
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    headers: {
+        'API-KEY': '000d0d9a-fef3-4b7a-b24e-af21295219e6'
+    }
+})*/
+
 class HeaderContainer extends React.Component<HeaderComponentPropsType> {
 
     componentDidMount() {
-        /*this.props.toggleIsFetching(true);*/
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
-        }).then(response => {
+        userAPI.authMe().then(data => {
             /*this.props.toggleIsFetching(false);*/
-            if (response.data.resultCode === 0) {
-                let {id, login, email} = response.data.data;
+            if (data.resultCode === 0) {
+                let {id, login, email} = data.data;
                 this.props.setAuthUserDataAC(id, login, email);
             }
 
