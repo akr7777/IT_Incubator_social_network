@@ -17,6 +17,7 @@ type UsersPropsType = {
     //followingInProgress: boolean,
     followingInProgress: number[],
     toggleFollowingProgress: (isFetching: boolean, userID: number) => Object,
+
 }
 
 const Users = (props: UsersPropsType) => {

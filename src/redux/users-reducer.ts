@@ -1,5 +1,6 @@
 import React from "react";
 import { AnyAction } from "redux";
+import { userAPI } from "../api/api";
 import {userType1, usersType, statePropsType} from "./state"
 
 const FOLLOW = 'FOLLOW';
@@ -101,3 +102,14 @@ export const setCurrentPage = (p: number) => ( {type: SET_CURRENT_PAGE, currentP
 export const setTotalUsersCount = (totalCount: number) => ({ type:TOTAL_USERS_COUNT, totalUsersCount:totalCount});
 export const toggleIsFetching = (isFetching: boolean) => ( { type:TOGGLE_IS_FETCHING, isFetching } );
 export const toggleFollowingProgress = (isFetching: boolean, userID: number) => ( { type:TOGGLE_FOLLOWING_PROGRESS, isFetching, userID } );
+
+export const getUsers = (currentPage: number, pageSize:number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true));
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+    }
+}
