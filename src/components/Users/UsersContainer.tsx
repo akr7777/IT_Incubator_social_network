@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {statePropsType, usersType} from "../../redux/state";
-import {follow, setCurrentPage, setTotalUsersCount, setUsers, unfollow, toggleIsFetching} from "../../redux/users-reducer";
+import {follow, setCurrentPage, setTotalUsersCount, setUsers, unfollow, toggleIsFetching, toggleFollowingProgress} from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
 import {AppStateType} from "./../../redux/redux-store";
@@ -40,6 +40,8 @@ class UsersAPIComponent extends Component<UsersContainerPropsType> {
                 onPageChanged={this.onPageChanged}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
+                followingInProgress={this.props.followingInProgress}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         </>
     }
@@ -51,6 +53,8 @@ type MapStatePropsType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
+    //followingInProgress: boolean,
+    followingInProgress: Array<number>,
 }
 
 const mapStateToProps = (state: AppStateType) => {
@@ -60,9 +64,15 @@ const mapStateToProps = (state: AppStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
+type toggleFollowingProgressPropsType = {
+    type: string,
+    isFetching: boolean,
+    userID: number,
+}
 export type mapDispatchToPropsType = {
     setUsers: (users: usersType) => void,
     follow: (userid: number) => void,
@@ -70,8 +80,11 @@ export type mapDispatchToPropsType = {
     setCurrentPage: (p: number) => void,
     setTotalUsersCount: (totalCount: number) => void,
     toggleIsFetching: (isfetching: boolean) => void,
+    toggleFollowingProgress: (isfetching: boolean, userID: number) => toggleFollowingProgressPropsType,
 }
 
 type UsersContainerPropsType = MapStatePropsType & mapDispatchToPropsType;
 
-export const UsersContainer = connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersAPIComponent);
+export const UsersContainer = connect(mapStateToProps,
+    {follow, unfollow, setUsers, setCurrentPage,
+    setTotalUsersCount, toggleIsFetching, toggleFollowingProgress})(UsersAPIComponent);

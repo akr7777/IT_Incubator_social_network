@@ -20,6 +20,17 @@ export const userAPI = {
             return response.data;
         });
     },
+
+    follow_unfollow(toFollow: boolean = true, userID: number = 2) {
+        return toFollow
+            ? instance.post(`follow/${userID}`).then(response => {
+                    return response.data;
+                })
+            : instance.delete(`follow/${userID}`).then(response => {
+                    return response.data;
+                });
+    },
+
 }
 
 
