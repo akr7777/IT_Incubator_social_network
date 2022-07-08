@@ -41,7 +41,6 @@ class UsersAPIComponent extends Component<UsersContainerPropsType> {
     }
 
     onPageChanged = (pageNumber: number) => {
-        debugger
         this.props.getUsers(pageNumber, this.props.pageSize);
         /*this.props.toggleIsFetching(true);
                 this.props.setCurrentPage(pageNumber);
@@ -52,7 +51,6 @@ class UsersAPIComponent extends Component<UsersContainerPropsType> {
     }
 
     render() {
-        debugger
         return <>
             { this.props.isFetching ? <Preloader /> : null }
             <Users

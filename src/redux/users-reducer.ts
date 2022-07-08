@@ -97,12 +97,12 @@ export const toggleFollowingProgress = (isFetching: boolean, userID: number) => 
 //export type UserActionsType = ReturnType<typeof followSuccess>
 
 export const getUsers = (currentPage: number, pageSize:number) => {
-    debugger
     return (dispatch: any) => {
         dispatch(toggleIsFetching(true));
         userAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false));
             dispatch(setUsers(data.items));
+            dispatch(setCurrentPage(currentPage));
             dispatch(setTotalUsersCount(data.totalCount));
         });
     }
