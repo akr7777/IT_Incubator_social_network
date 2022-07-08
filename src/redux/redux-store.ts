@@ -13,10 +13,12 @@ let reducers = combineReducers({
     usersPage: userReducer,
     auth: authReducer,
 });
+
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+export type storeType = typeof reducers;
+export type AppStateType = ReturnType<storeType>;
 
-export type AppStateType = ReturnType<typeof reducers>
-
+let st: AppStateType;
 /*window.store = store;*/
 
 export default store;

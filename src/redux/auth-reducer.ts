@@ -1,6 +1,6 @@
 import React from "react";
 import {AnyAction} from "redux";
-import {userType1, usersType, statePropsType, actionPropsType} from "./state"
+import {actionPropsType} from "./state"
 
 const SET_USER_DATA = 'SET_USER_DATA';
 

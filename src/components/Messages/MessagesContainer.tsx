@@ -1,15 +1,16 @@
 import React, {useRef} from "react";
 import s from "./Messages.module.css";
 import {NavLink} from "react-router-dom";
-import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../redux/messages-reducer";
+import {addNewMessageActionCreator, MessagesReducerType, updateNewMessageActionCreator} from "../../redux/messages-reducer";
 import {
     actionPropsType,
     state_messagePage_userMessages_PropsType,
-    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType, statePropsType, storePropsType
+    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
 } from "../../redux/state";
 import Messages from "./Messages";
 /*import {StoreContext} from "../../StoreContext";*/
 import {connect} from "react-redux";
+import { AppStateType } from "../../redux/redux-store";
 
 export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
@@ -17,9 +18,7 @@ export type MessagesPropsType = {
     typingNewMessageText: string,
     dispatch: (action: actionPropsType) => number
 }
-type MessagesPropsType1 = {
-    store: storePropsType
-}
+
 /*export const MessagesContainer = () => {
 
     return (
@@ -50,7 +49,7 @@ type MessagesPropsType1 = {
 
 }*/
 
-let mapStateToProps = (state: statePropsType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         dialogsNames: state.messagesPage.dialogsNames,
         userMessages: state.messagesPage.userMessages,

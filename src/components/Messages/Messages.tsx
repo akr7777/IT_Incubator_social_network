@@ -5,7 +5,7 @@ import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../r
 import {
     actionPropsType,
     state_messagePage_userMessages_PropsType,
-    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType, storePropsType
+    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
 } from "../../redux/state";
 
 export type MessagesPropsType = {
@@ -16,9 +16,7 @@ export type MessagesPropsType = {
     updateTextArea: (txt:string)=> void
     /*dispatch: (action: actionPropsType) => number*/
 }
-type MessagesPropsType1 = {
-    store: storePropsType
-}
+
 export const Messages = (props: MessagesPropsType) => {
 
     const dialogsNamesElements = props.dialogsNames.map( elem => <Dialog id={elem.id} name={elem.name} img_link={elem.img_link}/> );

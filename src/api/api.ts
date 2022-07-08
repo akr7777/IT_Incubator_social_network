@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 
 export const userAPI = {
-    getUsers(currentPage: number = 1, pageSize: number = 10) {
+    getUsers(currentPage: number, pageSize: number = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
             return response.data;
         });
@@ -21,7 +21,17 @@ export const userAPI = {
         });
     },
 
-    follow_unfollow(toFollow: boolean = true, userID: number = 2) {
+    follow (userID: number) {
+        return instance.post(`follow/${userID}`).then(response => {
+            return response.data;
+        })
+    },
+    unfollow (userID: number) {
+        return instance.delete(`follow/${userID}`).then(response => {
+            return response.data;
+        })
+    }
+    /*follow_unfollow(toFollow: boolean = true, userID: number = 2) {
         return toFollow
             ? instance.post(`follow/${userID}`).then(response => {
                     return response.data;
@@ -29,7 +39,7 @@ export const userAPI = {
             : instance.delete(`follow/${userID}`).then(response => {
                     return response.data;
                 });
-    },
+    },*/
 
 }
 

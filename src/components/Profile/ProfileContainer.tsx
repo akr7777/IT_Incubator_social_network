@@ -5,8 +5,6 @@ import {
     actionPropsType,
     state_ProfilePage_profileDescription_PropsType,
     state_profilePage_profilePosts_PropsType,
-    storePropsType,
-    statePropsType,
 } from "../../redux/state";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {DescriptionContainer} from "./Description/DescriptionContainer";
@@ -21,6 +19,7 @@ import {
     useNavigate,
     useParams,
 } from "react-router-dom";
+import { AppStateType } from "../../redux/redux-store";
 
 /*type ProfilePropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,//name: string,birthday: string, phone: string, email: string
@@ -54,7 +53,7 @@ class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
     }
     render () {
         return (
-            <Profile /*{...this.props}*/ profile={this.props.profile}/>
+            <Profile />
             /*<div className={s1.profile}>
                 <DescriptionContainer/>
                 <MyPostsContainer/>
@@ -63,8 +62,8 @@ class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
     }
 }
 
-let mapStateToProps = (state: statePropsType) => ({
-    profile: state.profilePage.profile
+let mapStateToProps = (state: AppStateType) => ({
+    profilePage: state.profilePage
 });
 
 function withRouter(Component: any) {

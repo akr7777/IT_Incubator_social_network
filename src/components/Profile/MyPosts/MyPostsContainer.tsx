@@ -1,13 +1,9 @@
 import React from "react";
 import {addPostActionCreator, updateTextAreaActionCreator} from "../../../redux/profile-reducer";
-import {
-    actionPropsType,
-    state_profilePage_profilePosts_PropsType,
-    statePropsType,
-    storePropsType
-} from "../../../redux/state";
+import {actionPropsType, state_profilePage_profilePosts_PropsType} from "../../../redux/state";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import { AppStateType } from "../../../redux/redux-store";
 
 
 export type MyPostsPropsType = {
@@ -15,36 +11,11 @@ export type MyPostsPropsType = {
     updatedPostText_inTextArea: string,
     dispatch: (action: actionPropsType) => number,
 }
-/*const MyPostsContainer = (/!*props: /!*MyPostsPropsType*!/ any*!/) => {
 
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let state = store.getState();
-                    let addPost = () => {
-                        store.dispatch(addPostActionCreator());
-                    }
-                    let updateNewPostText = (text: string) => {
-                        let action = updateTextAreaActionCreator(text);
-                        store.dispatch(action);
-                    }
-                    return <MyPosts
-                        updateNewPostText={updateNewPostText}
-                        addPost={addPost}
-                        profilePosts={store.getState().profilePage.profilePosts}
-                        updatedPostText_inTextArea={store.getState().profilePage.updatedPostText_inTextArea}
-                    />
-                }
-            }
-        </StoreContext.Consumer>
-    );
-}*/
-
-let mapStateToProps = (state: statePropsType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
-        profilePosts: state.profilePage.profilePosts,
-        updatedPostText_inTextArea: state.profilePage.updatedPostText_inTextArea
+       /* profilePosts: state.profilePage.profilePosts,
+        updatedPostText_inTextArea: state.profilePage.updatedPostText_inTextArea*/
     }
 }
 let mapDispatchToProps = (dispatch: any) => {

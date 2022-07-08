@@ -5,10 +5,11 @@ import {Description} from "./Description/Description";
 import {
     actionPropsType,
     state_ProfilePage_profileDescription_PropsType,
-    state_profilePage_profilePosts_PropsType, storePropsType
+    state_profilePage_profilePosts_PropsType,
 } from "../../redux/state";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {DescriptionContainer} from "./Description/DescriptionContainer";
+import {profileReducer, profileReducerType, profileType } from "../../redux/profile-reducer";
 
 /*type ProfilePropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,//name: string,birthday: string, phone: string, email: string
@@ -19,7 +20,7 @@ import {DescriptionContainer} from "./Description/DescriptionContainer";
 type ProfilePropsType1 = {
     store: storePropsType
 }*/
-type contactsPropsType = {
+/*type contactsPropsType = {
     "facebook": string | null,
     "website": string | null,
     "vk": string | null,
@@ -32,8 +33,8 @@ type contactsPropsType = {
 type photosPropsType = {
     "small": string,
     "large": string,
-}
-export type ProfilePropsType0 = {
+}*/
+/*export type ProfilePropsType0 = {
     "aboutMe": string,
     "contacts": contactsPropsType,
     "lookingForAJob": boolean,
@@ -41,17 +42,16 @@ export type ProfilePropsType0 = {
     "fullName": string | null,
     "userId": number,
     "photos": photosPropsType,
-}
-export type ProfilePropsType1 = {
-    profile: ProfilePropsType0,
-    //setUserProfile: (data:ProfilePropsType0) => void/*actionPropsType*/,
-    dispatch: (action: actionPropsType) => void,
-}
-const Profile = (props: any) => {
+}*/
+/*export type ProfilePropsType1 = {
+    //profile: profileType,
+    profilePage: typeof profileReducer
+}*/
+const Profile = () => {
     //let state = props.store.getState()
     return (
         <div className={s1.profile}>
-            <DescriptionContainer profile={props.profile}/>
+            <DescriptionContainer />
             {/*<MyPostsContainer />*/}
         </div>
     );

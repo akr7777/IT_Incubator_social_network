@@ -5,20 +5,20 @@ import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import Layout from "./components/Layout/Layout";
 import {Routes, Route, Navigate} from "react-router-dom";
 import {MessagesContainer} from "./components/Messages/MessagesContainer";
-import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
+//import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
 //import UsersAPIComponent from "./components/Users/UsersAPIComponent";
 import {UsersContainer} from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 import ProfileContainer from './components/Profile/ProfileContainer';
 
-type AppPropsType = {
+/*type AppPropsType = {
     dialogsNames: Array<{ id: number, name: string }>,
     userMessages: Array<{ id: number, messageText: string }>,
     profileDescription: state_ProfilePage_profileDescription_PropsType
-};
-type AppPropsType1 = {
+};*/
+/*type AppPropsType1 = {
     store: storePropsType
-}
+}*/
 
 const App = () => {
     return (

@@ -1,16 +1,66 @@
-import { ProfilePropsType1 } from "../components/Profile/Profile";
-import {actionPropsType, state_ProfilePage_PropsType} from "./state";
+//import { ProfilePropsType1 } from "../components/Profile/Profile";
+import { AnyAction } from "redux";
+import {actionPropsType} from "./state";
 
 const add_Post = 'ADD-POST';
 const update_new_post_text = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
-let initialState = {
-    profileDescription: {
-        name: "Dimych123",
-        birthday: "21.02.1985",
-        phone: "+7 (999) 123-45-67",
-        email: "sfhskh@sifj.com"
+//types
+type contactsPropsType = {
+    facebook: string | null,
+    website: string | null,
+    vk: string | null,
+    twitter: string | null,
+    instagram: string | null,
+    youtube: string | null,
+    github: string | null,
+    mainLink: string | null,
+}
+type photosPropsType = {
+    small: string,
+    large: string,
+}
+export type profileType = {
+    userId: number,
+    //aboutMe: string,
+    contacts: contactsPropsType,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string | null,
+    fullName: string | null,
+    photos: photosPropsType,
+}
+type profilePostType = {
+    id: number
+    postText: string
+    likes: number
+}
+export type profileReducerType = {
+    profile: profileType
+    profilePosts: profilePostType[]
+    updatedPostText_inTextArea: string
+}
+let initialState12: profileReducerType = {
+    profile: {
+        userId: 1,
+        //aboutMe: "Dimych123",
+        contacts: {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null,
+        },
+        lookingForAJob: false,
+        lookingForAJobDescription: "sfhskh@sifj.com",
+        fullName: 'sdffsd',
+        photos: {
+            small: 'dsf',
+            large: 'dsf',
+        }
     },
     profilePosts: [
         {id: 1, postText: "Hi, 132, this is my first post!", likes: 3},
@@ -18,10 +68,10 @@ let initialState = {
         {id: 3, postText: "Whats new?", likes: 1},
     ],
     updatedPostText_inTextArea: "text post",
-    profile: null,
+    //profile: null,
 }
 
-export const profileReducer = (state: state_ProfilePage_PropsType = initialState, action: actionPropsType) => {
+export const profileReducer = (state: profileReducerType = initialState12, action: AnyAction/*actionPropsType*/): profileReducerType => {
 
     switch (action.type) {
         case add_Post: {
@@ -44,7 +94,7 @@ export const profileReducer = (state: state_ProfilePage_PropsType = initialState
         }
         case SET_USER_PROFILE:
             return {
-                state,
+                ...state,
                 profile: action.profile
             }
         default:
@@ -63,6 +113,6 @@ export const updateTextAreaActionCreator = (text: string) => {
         newText: text
     }
 }
-export const setUserProfile = (profile: ProfilePropsType1) => {
+export const setUserProfile = (profile: profileType/*ProfilePropsType1*/) => {
     return {type: SET_USER_PROFILE, profile}
 }

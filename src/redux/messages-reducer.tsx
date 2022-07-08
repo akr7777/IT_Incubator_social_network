@@ -1,8 +1,23 @@
+import { AnyAction } from "redux";
 
 const add_new_message_string = "ADD-NEW-MESSAGE";
 const update_new_message_text = "UPDATE-NEW-MESSAGE-TEXT";
 
-let initialState = {
+type dialogsNamesType = {
+    id: number
+    name: string
+    img_link: string
+}
+type userMessagesType = {
+    userID: number
+    messageText: string
+}
+export type MessagesReducerType = {
+    dialogsNames: dialogsNamesType[]
+    userMessages: userMessagesType[]
+    typingNewMessageText: string
+}
+let initialState: MessagesReducerType = {
     dialogsNames: [
         {id: 1, name: 'Vika', img_link: "https://cdn3.vectorstock.com/i/1000x1000/13/92/cartoon-avatar-woman-front-view-vector-9421392.jpg"},
         {id: 2, name: 'Sasha', img_link: "https://yt3.ggpht.com/a/AATXAJwoNthHklpdVHlrH4H6hFsq7mqV1R0t1_kw7g=s900-c-k-c0xffffffff-no-rj-mo"},
@@ -16,7 +31,7 @@ let initialState = {
     typingNewMessageText: "new message..."
 }
 
-export const messagesReducer = (state: any = initialState, action: any) => {
+export const messagesReducer = (state: MessagesReducerType = initialState, action: AnyAction) => {
     switch (action.type) {
         case add_new_message_string: {
             let newMsg = {

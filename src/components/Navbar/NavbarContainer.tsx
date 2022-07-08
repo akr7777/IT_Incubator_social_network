@@ -4,13 +4,13 @@ import {NavLink} from "react-router-dom";
 import {Friend} from "./Friend/Friend";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
-import {statePropsType} from "../../redux/state";
+import { AppStateType } from "../../redux/redux-store";
 
 type NavbarPropsType = {
     friendsSidebar: Array<{id: number, name: string, link: string}>
 }
 
-let mapStateToProps = (state: statePropsType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         friendsSidebar: state.friendsSidebar
     }
