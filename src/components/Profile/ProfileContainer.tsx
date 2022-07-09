@@ -3,7 +3,6 @@ import MyPosts from "./MyPosts/MyPosts";
 import {Description} from "./Description/Description";
 import {
     actionPropsType,
-    state_ProfilePage_profileDescription_PropsType,
     state_profilePage_profilePosts_PropsType,
 } from "../../redux/state";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
@@ -13,51 +12,39 @@ import Profile from './Profile';
 import {Component} from 'react';
 import axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfile} from './../../redux/profile-reducer';
+import {profileReducerType, profileType, getUserProfile /*setUserProfile*/} from './../../redux/profile-reducer';
 import {
     useLocation,
     useNavigate,
     useParams,
 } from "react-router-dom";
 import { AppStateType } from "../../redux/redux-store";
+import { userAPI } from "../../api/api";
 
-/*type ProfilePropsType = {
-    profileDescription: state_ProfilePage_profileDescription_PropsType,//name: string,birthday: string, phone: string, email: string
+type ProfilePropsType = {
+    profile: profileType,
     profilePosts: Array<state_profilePage_profilePosts_PropsType>,
     updatedPostText_inTextArea: string,
     dispatch: (action: actionPropsType) => number
 }
-type ProfilePropsType1 = {
-    store: storePropsType
-}*/
+
 type ProfileContainerPropsType = {
-    setUserProfile: (data: any) => void,
+    profilePage: profileReducerType
+    //setUserProfile: (data: any) => void,
+    //getUserProfile: (userID: number) => void,
 }
 class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
     componentDidMount() {
-        /*let profileId = this.props.router.params.id;
-        if (!profileId) {
-            profileId = 2;
-        }*/
         let profileId = this.props.router.params.id ? this.props.router.params.id : 2;
-        let URLPath= `https://social-network.samuraijs.com/api/1.0/profile/${profileId}`;
-
-        axios.get(URLPath).then(response => {
+        this.props.getUserProfile(profileId);
+        /*userAPI.getProfile(profileId).then(response => {
             this.props.setUserProfile(response.data);
-            /*this.props.toggleIsFetching(false);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);*/
+        });*/
 
-            //this.props.setCurrentPage(23);
-        });
     }
     render () {
         return (
             <Profile />
-            /*<div className={s1.profile}>
-                <DescriptionContainer/>
-                <MyPostsContainer/>
-            </div>*/
         );
     }
 }
@@ -82,4 +69,4 @@ function withRouter(Component: any) {
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {getUserProfile}/*, {setUserProfile}*/)(withRouter(ProfileContainer));

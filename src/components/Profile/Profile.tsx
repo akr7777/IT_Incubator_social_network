@@ -4,7 +4,6 @@ import MyPosts from "./MyPosts/MyPosts";
 import {Description} from "./Description/Description";
 import {
     actionPropsType,
-    state_ProfilePage_profileDescription_PropsType,
     state_profilePage_profilePosts_PropsType,
 } from "../../redux/state";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";

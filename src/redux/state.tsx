@@ -18,23 +18,23 @@ export type authDataType = {
     login: string,
     isAuth: boolean,
 }
-export type state_ProfilePage_profileDescription_PropsType = {
+/*export type state_ProfilePage_profileDescription_PropsType = {
     name: string,
     birthday: string,
     phone: string,
     email: string
-}
+}*/
 export type state_profilePage_profilePosts_PropsType = {
     id: number,
     postText: string,
     likes: number,
 }
-export type state_ProfilePage_PropsType = {
+/*export type state_ProfilePage_PropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,
     profilePosts: Array<state_profilePage_profilePosts_PropsType>,
     updatedPostText_inTextArea: string,
     profile: any,
-}
+}*/
 export type state_messagesPage_dialogsNames_PropsType = {
     id: number,
     name: string,

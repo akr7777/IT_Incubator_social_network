@@ -1,44 +1,34 @@
 import React from "react";
 import Header from './Header';
 import axios from "axios";
-import { setAuthUserDataAC } from "../../redux/auth-reducer";
+import {getAuthUserDataThunkCreator/*, setAuthUserDataAC*/ } from "../../redux/auth-reducer";
 import { connect } from "react-redux";
 import { actionPropsType } from "../../redux/state";
-import {userAPI} from './../../api/api';
+import {authAPI, userAPI} from './../../api/api';
 
- type dataPropsType = {
+type dataPropsType = {
     id: number,
     email: string,
     login: string,
 }
- type HeaderComponentPropsType = {
+type HeaderComponentPropsType = {
         isAuth: boolean,
         login: string,
         /*data: dataPropsType,*/
-        setAuthUserDataAC: (id: number, email:string, login:string) => void,
+        //setAuthUserDataAC: (id: number, email:string, login:string) => void,
+        getAuthUserDataThunkCreator: () => void,
 }
-
-/*
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    headers: {
-        'API-KEY': '000d0d9a-fef3-4b7a-b24e-af21295219e6'
-    }
-})*/
 
 class HeaderContainer extends React.Component<HeaderComponentPropsType> {
 
     componentDidMount() {
-        userAPI.authMe().then(data => {
-            /*this.props.toggleIsFetching(false);*/
+        /*authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
                 this.props.setAuthUserDataAC(id, login, email);
             }
-
-            //this.props.setCurrentPage(23);
-        });
+        });*/
+        this.props.getAuthUserDataThunkCreator()
     }
 
     render() {
@@ -50,4 +40,4 @@ let mapStateToProps = (state: any) => ({
     login: state.auth.login,
 })
 
-export default connect(mapStateToProps, {setAuthUserDataAC})(HeaderContainer);
+export default connect(mapStateToProps, {/*setAuthUserDataAC*/getAuthUserDataThunkCreator})(HeaderContainer);

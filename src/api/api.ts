@@ -8,6 +8,14 @@ const instance = axios.create({
     }
 });
 
+export const authAPI = {
+    authMe() {
+        return instance.get(`auth/me`).then(response => {
+            return response.data;
+        });
+    },
+}
+
 export const userAPI = {
     getUsers(currentPage: number, pageSize: number = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
@@ -15,11 +23,11 @@ export const userAPI = {
         });
     },
 
-    authMe() {
+    /*authMe() {
         return instance.get(`auth/me`).then(response => {
             return response.data;
         });
-    },
+    },*/
 
     follow (userID: number) {
         return instance.post(`follow/${userID}`).then(response => {
@@ -30,16 +38,10 @@ export const userAPI = {
         return instance.delete(`follow/${userID}`).then(response => {
             return response.data;
         })
+    },
+    getProfile (userID: number) {
+        return instance.get(`profile/${userID}`)
     }
-    /*follow_unfollow(toFollow: boolean = true, userID: number = 2) {
-        return toFollow
-            ? instance.post(`follow/${userID}`).then(response => {
-                    return response.data;
-                })
-            : instance.delete(`follow/${userID}`).then(response => {
-                    return response.data;
-                });
-    },*/
 
 }
 

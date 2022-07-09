@@ -19,6 +19,7 @@ export type storeType = typeof reducers;
 export type AppStateType = ReturnType<storeType>;
 
 let st: AppStateType;
+
 /*window.store = store;*/
 
 export default store;

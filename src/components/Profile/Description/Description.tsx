@@ -1,6 +1,6 @@
 import React from "react";
 import ccs_classes from "./Description.module.css";
-import {actionPropsType, state_ProfilePage_profileDescription_PropsType} from "../../../redux/state";
+import {actionPropsType} from "../../../redux/state";
 import myava from './../../../assets/images/myava.jpeg';
 //import { ProfilePropsType0 } from "../Profile";
 import Preloader from "../../common/Preloader";
