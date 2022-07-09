@@ -20,7 +20,7 @@ export type UsersInitialStateType = {
     currentPage: number,
     isFetching: boolean,
     followingInProgress: number[],
-    isAuth: boolean,
+    //isAuth: boolean,
 }
 
 /*type statePropsTypeForUSER_REDUCER = {

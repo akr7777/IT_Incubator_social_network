@@ -1,25 +1,11 @@
 import React, {useRef} from "react";
 import s from "./Messages.module.css";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {addNewMessageActionCreator, MessagesReducerType, updateNewMessageActionCreator} from "../../redux/messages-reducer";
-import {
-    actionPropsType,
-    state_messagePage_userMessages_PropsType,
-    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
-} from "../../redux/state";
-import Messages from "./Messages";
-/*import {StoreContext} from "../../StoreContext";*/
+import Messages, { MessagesPropsType } from "./Messages";
 import {connect} from "react-redux";
 import { AppStateType, dispatchType } from "../../redux/redux-store";
-
-/*
-export type MessagesPropsType = {
-    dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
-    userMessages: Array<state_messagePage_userMessages_PropsType>,
-    typingNewMessageText: string,
-    dispatch: (action: actionPropsType) => number
-}
-*/
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
 
 
 let mapStateToProps = (state: AppStateType) => {
@@ -27,7 +13,7 @@ let mapStateToProps = (state: AppStateType) => {
         dialogsNames: state.messagesPage.dialogsNames,
         userMessages: state.messagesPage.userMessages,
         typingNewMessageText: state.messagesPage.typingNewMessageText,
-        isAuth: state.auth.isAuth,
+        //isAuth: state.auth.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: dispatchType) => {
@@ -41,4 +27,10 @@ let mapDispatchToProps = (dispatch: dispatchType) => {
     }
 }
 
-export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
+let AuthRedirectComponent = withAuthRedirect(Messages);
+/*let AuthRedirectComponent = (props:MessagesPropsType) => {
+    if (!props.isAuth) return <Navigate to="/login" replace={true} />
+    return <Messages {...props} />
+}*/
+
+export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
