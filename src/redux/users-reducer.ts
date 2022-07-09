@@ -1,6 +1,7 @@
 import React from "react";
 import { AnyAction } from "redux";
 import { userAPI } from "../api/api";
+import { dispatchType } from "./redux-store";
 import {userType} from "./state"
 
 const FOLLOW = 'FOLLOW';
@@ -19,6 +20,7 @@ export type UsersInitialStateType = {
     currentPage: number,
     isFetching: boolean,
     followingInProgress: number[],
+    isAuth: boolean,
 }
 
 /*type statePropsTypeForUSER_REDUCER = {
@@ -32,6 +34,7 @@ let initState1 = {
     currentPage: 1,
     isFetching: true,
     followingInProgress: [12332, 11213],
+    isAuth: false
 }
 
 
@@ -97,7 +100,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userID: number) => 
 //export type UserActionsType = ReturnType<typeof followSuccess>
 
 export const getUsers = (currentPage: number, pageSize:number) => {
-    return (dispatch: any) => {
+    return (dispatch: dispatchType) => {
         dispatch(toggleIsFetching(true));
         userAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false));
@@ -109,7 +112,7 @@ export const getUsers = (currentPage: number, pageSize:number) => {
 }
 
 export const follow = (userID: number) => {
-    return (dispatch: any) => {
+    return (dispatch: dispatchType) => {
         dispatch(toggleFollowingProgress(true, userID));
         userAPI.follow(userID).then(data => {
             if (data.resultCode === 0) {
@@ -120,7 +123,7 @@ export const follow = (userID: number) => {
     }
 }
 export const unfollow = (userID: number) => {
-    return (dispatch: any) => {
+    return (dispatch: dispatchType) => {
         dispatch(toggleFollowingProgress(true, userID));
         userAPI.unfollow(userID).then(data => {
             if (data.resultCode === 0) {

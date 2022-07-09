@@ -14,6 +14,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {profileReducerType, profileType, getUserProfile /*setUserProfile*/} from './../../redux/profile-reducer';
 import {
+    Navigate,
     useLocation,
     useNavigate,
     useParams,
@@ -29,20 +30,21 @@ type ProfilePropsType = {
 }
 
 type ProfileContainerPropsType = {
-    profilePage: profileReducerType
+    profilePage: profileReducerType,
+    isAuth: boolean,
     //setUserProfile: (data: any) => void,
-    //getUserProfile: (userID: number) => void,
+    getUserProfile: (userID: number) => void,
+    router: any,
 }
-class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
+class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
         let profileId = this.props.router.params.id ? this.props.router.params.id : 2;
         this.props.getUserProfile(profileId);
-        /*userAPI.getProfile(profileId).then(response => {
-            this.props.setUserProfile(response.data);
-        });*/
-
     }
+
     render () {
+        if (!this.props.isAuth) return <Navigate to="/login" replace={true} />
+
         return (
             <Profile />
         );
@@ -50,7 +52,8 @@ class ProfileContainer extends Component</*ProfileContainerPropsType*/any> {
 }
 
 let mapStateToProps = (state: AppStateType) => ({
-    profilePage: state.profilePage
+    profilePage: state.profilePage,
+    isAuth: state.auth.isAuth,
 });
 
 function withRouter(Component: any) {

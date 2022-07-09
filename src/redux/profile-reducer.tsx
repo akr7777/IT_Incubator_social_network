@@ -1,6 +1,7 @@
 //import { ProfilePropsType1 } from "../components/Profile/Profile";
 import { AnyAction } from "redux";
 import { userAPI } from "../api/api";
+import { dispatchType } from "./redux-store";
 import {actionPropsType} from "./state";
 
 const add_Post = 'ADD-POST';
@@ -73,7 +74,7 @@ let initialState12: profileReducerType = {
     //profile: null,
 }
 
-export const profileReducer = (state: profileReducerType = initialState12, action: AnyAction/*actionPropsType*/): profileReducerType => {
+export const profileReducer = (state: profileReducerType = initialState12, action: AnyAction): profileReducerType => {
 
     switch (action.type) {
         case add_Post: {
@@ -120,15 +121,11 @@ export const updateTextAreaActionCreator = (text: string) => {
         newText: text
     }
 }
-export const setUserProfile = (profile: profileType/*ProfilePropsType1*/) => {
+export const setUserProfile = (profile: profileType) => {
     return {type: SET_USER_PROFILE, profile}
 }
-export const getUserProfile = (userID: number) => (dispatch: any) => {
+export const getUserProfile = (userID: number) => (dispatch: dispatchType) => {
     userAPI.getProfile(userID).then(response => {
         dispatch(setUserProfile(response.data));
     });
 }
-/*
-(userID: number) => {
-    return { type: GET_USER_PROFILE, userID }
-}*/

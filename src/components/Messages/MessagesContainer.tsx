@@ -10,53 +10,27 @@ import {
 import Messages from "./Messages";
 /*import {StoreContext} from "../../StoreContext";*/
 import {connect} from "react-redux";
-import { AppStateType } from "../../redux/redux-store";
+import { AppStateType, dispatchType } from "../../redux/redux-store";
 
+/*
 export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
     userMessages: Array<state_messagePage_userMessages_PropsType>,
     typingNewMessageText: string,
     dispatch: (action: actionPropsType) => number
 }
+*/
 
-/*export const MessagesContainer = () => {
-
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let addNewMessage = (txt: string) => {
-                        store.dispatch(addNewMessageActionCreator(txt));
-                    }
-
-                    let updateNewMessageTextArea = (txt: string) => {
-                        store.dispatch( updateNewMessageActionCreator(txt) );
-                    }
-
-                    return (<Messages
-                        dialogsNames={store.getState().messagesPage.dialogsNames}
-                        userMessages={store.getState().messagesPage.userMessages}
-                        typingNewMessageText={store.getState().messagesPage.typingNewMessageText}
-
-                        addNewMessage={addNewMessage}
-                        updateTextArea={updateNewMessageTextArea}
-                    />);
-                }
-            }
-        </StoreContext.Consumer>
-    );
-
-
-}*/
 
 let mapStateToProps = (state: AppStateType) => {
     return {
         dialogsNames: state.messagesPage.dialogsNames,
         userMessages: state.messagesPage.userMessages,
-        typingNewMessageText: state.messagesPage.typingNewMessageText
+        typingNewMessageText: state.messagesPage.typingNewMessageText,
+        isAuth: state.auth.isAuth,
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: dispatchType) => {
     return {
         addNewMessage: (txt: string) => {
             dispatch(addNewMessageActionCreator(txt));

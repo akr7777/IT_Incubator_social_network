@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import s from "./Messages.module.css";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../redux/messages-reducer";
 import {
     actionPropsType,
@@ -13,7 +13,8 @@ export type MessagesPropsType = {
     userMessages: Array<state_messagePage_userMessages_PropsType>,
     typingNewMessageText: string,
     addNewMessage: (txt: string) => void,
-    updateTextArea: (txt:string)=> void
+    updateTextArea: (txt:string)=> void,
+    isAuth: boolean,
     /*dispatch: (action: actionPropsType) => number*/
 }
 
@@ -41,6 +42,8 @@ export const Messages = (props: MessagesPropsType) => {
             /*props.dispatch( updateNewMessageActionCreator(txt) );*/
         }
     }
+
+    if (!props.isAuth) return <Navigate to="/login" replace={true} />
 
     return (
         <div className={s.messages}>

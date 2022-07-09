@@ -5,6 +5,7 @@ import {getAuthUserDataThunkCreator/*, setAuthUserDataAC*/ } from "../../redux/a
 import { connect } from "react-redux";
 import { actionPropsType } from "../../redux/state";
 import {authAPI, userAPI} from './../../api/api';
+import { AppStateType } from "../../redux/redux-store";
 
 type dataPropsType = {
     id: number,
@@ -35,7 +36,7 @@ class HeaderContainer extends React.Component<HeaderComponentPropsType> {
         return <Header {...this.props} />
     }
 }
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
 })

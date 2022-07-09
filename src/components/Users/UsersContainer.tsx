@@ -9,6 +9,7 @@ import {AppStateType} from "./../../redux/redux-store";
 import {AnyAction, Dispatch} from 'redux';
 import Preloader from './../common/Preloader';
 import {userAPI} from './../../api/api';
+import { Navigate } from "react-router-dom";
 
 type toggleFollowingProgressPropsType = {
     type: string,
@@ -24,7 +25,7 @@ export type mapDispatchToPropsType = {
     toggleIsFetching: (isfetching: boolean) => void,
     toggleFollowingProgress: (isfetching: boolean, userID: number) => void,
     getUsers: (currentPage: number, pageSize: number) => void,
-
+    isAuth: boolean,
 }
 type UsersContainerPropsType = UsersInitialStateType & mapDispatchToPropsType
 
@@ -32,25 +33,15 @@ type UsersContainerPropsType = UsersInitialStateType & mapDispatchToPropsType
 class UsersAPIComponent extends Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
-        /*this.props.toggleIsFetching(true);
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        });*/
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize);
-        /*this.props.toggleIsFetching(true);
-                this.props.setCurrentPage(pageNumber);
-                userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-                    this.props.toggleIsFetching(false);
-                    this.props.setUsers(data.items);
-                });*/
     }
 
     render() {
+        if (!this.props.isAuth) return <Navigate to="/login" replace={true} />
+
         return <>
             { this.props.isFetching ? <Preloader /> : null }
             <Users
@@ -77,6 +68,7 @@ const mapStateToProps = (state: AppStateType):UsersInitialStateType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth,
     }
 }
 

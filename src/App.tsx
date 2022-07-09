@@ -10,6 +10,7 @@ import {MessagesContainer} from "./components/Messages/MessagesContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 import ProfileContainer from './components/Profile/ProfileContainer';
+import Login from './components/Login';
 
 /*type AppPropsType = {
     dialogsNames: Array<{ id: number, name: string }>,
@@ -34,6 +35,7 @@ const App = () => {
                     </Route>*/}
                     <Route path="messages" element={<MessagesContainer />} />
                     <Route path="users" element={<UsersContainer />} />
+                    <Route path="login" element={<Login />}/>
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
             </Routes>

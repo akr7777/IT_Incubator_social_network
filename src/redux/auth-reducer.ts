@@ -1,6 +1,7 @@
 import React from "react";
 import {AnyAction} from "redux";
 import { authAPI } from "../api/api";
+import { dispatchType } from "./redux-store";
 import {actionPropsType} from "./state"
 
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -38,7 +39,7 @@ export const authReducer = (state: authReducerPropsType = initialState, action: 
 
 export const setAuthUserDataAC = (id: number, email: string, login: string) => ( { type: SET_USER_DATA, data: {id, email, login} });
 //export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching});
-export const getAuthUserDataThunkCreator = () => (dispatch: any) => {
+export const getAuthUserDataThunkCreator = () => (dispatch: dispatchType) => {
     authAPI.authMe().then(data => {
         if (data.resultCode === 0) {
             let {id, login, email} = data.data;
