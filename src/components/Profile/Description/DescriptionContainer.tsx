@@ -7,6 +7,8 @@ import { profileReducerType } from "../../../redux/profile-reducer";
 let mapStateToProps = (state: AppStateType) => {
     return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        //updateStatus: //(status: string) => void,
     }
 }
 export const DescriptionContainer = connect(mapStateToProps)(Description);

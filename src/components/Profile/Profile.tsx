@@ -11,11 +11,15 @@ import {DescriptionContainer} from "./Description/DescriptionContainer";
 import {profileReducer, profileReducerType, profileType } from "../../redux/profile-reducer";
 import { Navigate } from "react-router-dom";
 
-const Profile = () => {
+type ProfilePropsType = {
+    updateStatus: (status: string) => void,
+}
+
+const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={s1.profile}>
-            <DescriptionContainer />
+            <DescriptionContainer updateStatus={props.updateStatus}/>
             {/*<MyPostsContainer />*/}
         </div>
     );

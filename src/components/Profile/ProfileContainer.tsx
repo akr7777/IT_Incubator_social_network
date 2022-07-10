@@ -12,7 +12,7 @@ import Profile from './Profile';
 import {Component} from 'react';
 import axios from "axios";
 import {connect} from "react-redux";
-import {profileReducerType, profileType, getUserProfile /*setUserProfile*/} from './../../redux/profile-reducer';
+import {profileReducerType, profileType, getUserProfile, getStatus, updateStatus} from './../../redux/profile-reducer';
 import {
     Navigate,
     useLocation,
@@ -36,21 +36,26 @@ export type ProfileContainerPropsType = {
     isAuth: boolean,
     getUserProfile: (userID: number) => void,
     router: any,
+
+    getStatus: (userID: number) => void,
+    updateStatus: (status: string) => void,
 }
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
-        let profileId = this.props.router.params.id ? this.props.router.params.id : 2;
-        this.props.getUserProfile(profileId);
+        let userID = this.props.router.params.id ? this.props.router.params.id : 2;
+        this.props.getUserProfile(userID);
+        this.props.getStatus(userID);
     }
 
     render () {
-        return ( <Profile /> );
+        return ( <Profile updateStatus={this.props.updateStatus}/> );
     }
 }
 
 let mapStateToProps = (state: AppStateType) => ({
     profilePage: state.profilePage,
+    status: state.profilePage.status,
 });
 
 function withRouter(Component: React.ComponentType) {
@@ -70,7 +75,7 @@ function withRouter(Component: React.ComponentType) {
 
 //export default connect(mapStateToProps, {getUserProfile})(withRouter(withAuthRedirect(ProfileContainer)))
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

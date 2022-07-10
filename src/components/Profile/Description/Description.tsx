@@ -10,6 +10,8 @@ import ProfileStatus from './ProfileStatus';
 type DescriptionPropsType5 = {
     /*profileDescription: state_ProfilePage_profileDescription_PropsType*/
     profile: profileType,
+    status: string,
+    updateStatus: (status: string) => void,
     //dispatch: (action: actionPropsType) => void,
     //setUserProfile: (data: ProfilePropsType1) => void,
 
@@ -26,8 +28,8 @@ export const Description = (props: DescriptionPropsType5) => {
             </div>
             <div>
                 <div>Имя: {props.profile.fullName}</div>
-                <div>Status: {props.profile.lookingForAJob}</div>
-                <div><ProfileStatus status={"sbfb"} /></div>
+                <div>lookingForAJob: {props.profile.lookingForAJob}</div>
+                <div><ProfileStatus status={props.status} updateStatus={props.updateStatus}/></div>
             </div>
             {/*<div>Name: {props.profileDescription.name}</div>
             <div>Birthdate: {props.profileDescription.birthday}</div>

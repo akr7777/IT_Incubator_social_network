@@ -34,9 +34,23 @@ export const userAPI = {
         })
     },
     getProfile (userID: number) {
-        return instance.get(`profile/${userID}`)
+        console.warn('obsolite method. use profileAPI.getProfile')
+        return profileAPI.getProfile(userID) //instance.get(`profile/${userID}`)
     }
 
 }
 
+export const profileAPI = {
+    getProfile (userID: number) {
+        return instance.get(`profile/${userID}`)
+    },
+    getStatus (userID: number) {
+        return instance.get(`profile/status/${userID}`).then(response => {
+            return response.data;
+        })
+    },
+    updateStatus (status: string) {
+        return instance.put(`profile/status`, { status: status} );
+    }
+}
 
