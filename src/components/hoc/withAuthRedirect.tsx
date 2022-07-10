@@ -4,28 +4,7 @@ import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { AppStateType } from '../../redux/redux-store';
 import { ProfileContainerPropsType } from '../Profile/ProfileContainer';
-/*
 
-export function withAuthRedirect<WP> (WrappedComponent: ComponentType<WP>) {
-    return (props: WP) => {
-            //if (!props.isAuth) return <Navigate to="/login" replace={true} />
-            debugger
-            return <WrappedComponent {...props} />
-        }
-}
-*/
-
-/*
-
-export const withAuthRedirect = (Component: any) => {
-    debugger
-    const RedirectComponent = (props: any) => {
-        debugger;
-        if (!props.isAuth) return <Navigate to="/login" replace={true} />
-        return <Component {...props} />
-    }
-}
-*/
 
 let mapStateToPropsForRedirect = (state: AppStateType) => ({
     isAuth: state.auth.isAuth

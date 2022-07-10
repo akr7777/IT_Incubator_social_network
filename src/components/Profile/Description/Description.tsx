@@ -2,10 +2,10 @@ import React from "react";
 import ccs_classes from "./Description.module.css";
 import {actionPropsType} from "../../../redux/state";
 import myava from './../../../assets/images/myava.jpeg';
-//import { ProfilePropsType0 } from "../Profile";
 import Preloader from "../../common/Preloader";
 import {Navigate, NavLink } from "react-router-dom";
 import {profileReducer, profileReducerType, profileType } from "../../../redux/profile-reducer";
+import ProfileStatus from './ProfileStatus';
 
 type DescriptionPropsType5 = {
     /*profileDescription: state_ProfilePage_profileDescription_PropsType*/
@@ -27,9 +27,7 @@ export const Description = (props: DescriptionPropsType5) => {
             <div>
                 <div>Имя: {props.profile.fullName}</div>
                 <div>Status: {props.profile.lookingForAJob}</div>
-                <div>
-                    <NavLink to={'/profile/5'} reloadDocument>user 5</NavLink>
-                </div>
+                <div><ProfileStatus status={"sbfb"} /></div>
             </div>
             {/*<div>Name: {props.profileDescription.name}</div>
             <div>Birthdate: {props.profileDescription.birthday}</div>
