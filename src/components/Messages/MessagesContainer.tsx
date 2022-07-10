@@ -6,6 +6,7 @@ import Messages, { MessagesPropsType } from "./Messages";
 import {connect} from "react-redux";
 import { AppStateType, dispatchType } from "../../redux/redux-store";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 
 let mapStateToProps = (state: AppStateType) => {
@@ -13,7 +14,6 @@ let mapStateToProps = (state: AppStateType) => {
         dialogsNames: state.messagesPage.dialogsNames,
         userMessages: state.messagesPage.userMessages,
         typingNewMessageText: state.messagesPage.typingNewMessageText,
-        //isAuth: state.auth.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: dispatchType) => {
@@ -27,10 +27,7 @@ let mapDispatchToProps = (dispatch: dispatchType) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(Messages);
-/*let AuthRedirectComponent = (props:MessagesPropsType) => {
-    if (!props.isAuth) return <Navigate to="/login" replace={true} />
-    return <Messages {...props} />
-}*/
-
-export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Messages)

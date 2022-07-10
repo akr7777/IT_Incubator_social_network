@@ -11,6 +11,7 @@ import Preloader from './../common/Preloader';
 import {userAPI} from './../../api/api';
 import { Navigate } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 type toggleFollowingProgressPropsType = {
     type: string,
@@ -67,20 +68,13 @@ const mapStateToProps = (state: AppStateType):UsersInitialStateType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        //isAuth: state.auth.isAuth,
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(UsersAPIComponent);
-/*
-
-let AuthRedirectComponent = (props:UsersContainerPropsType) => {
-    if (!props.isAuth) return <Navigate to="/login" replace={true} />
-    return <UsersAPIComponent {...props} />
-}
-*/
-
-export const UsersContainer = connect(mapStateToProps,
+export default compose<React.ComponentType>(
+    connect(mapStateToProps,
         {follow, unfollow, setCurrentPage,
-        setUsers, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress,
-            getUsers})(AuthRedirectComponent);
+            setUsers, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress,
+            getUsers}),
+    withAuthRedirect
+)(UsersAPIComponent)

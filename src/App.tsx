@@ -4,10 +4,10 @@ import Profile from "./components/Profile/Profile";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import Layout from "./components/Layout/Layout";
 import {Routes, Route, Navigate} from "react-router-dom";
-import {MessagesContainer} from "./components/Messages/MessagesContainer";
+import MessagesContainer from "./components/Messages/MessagesContainer";
 //import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
 //import UsersAPIComponent from "./components/Users/UsersAPIComponent";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersAPIContainer from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login';
@@ -26,7 +26,7 @@ const App = () => {
         <>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<UsersContainer />} />
+                    <Route index element={<UsersAPIContainer />} />
 
                     <Route path="profile" element={<Navigate to={'/profile/2'}/>} />
                     <Route path="profile/:id" element={<ProfileContainer />} />
@@ -34,7 +34,7 @@ const App = () => {
                         <Route path=':id' element={<ProfileContainer />} />
                     </Route>*/}
                     <Route path="messages" element={<MessagesContainer />} />
-                    <Route path="users" element={<UsersContainer />} />
+                    <Route path="users" element={<UsersAPIContainer />} />
                     <Route path="login" element={<Login />}/>
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
