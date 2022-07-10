@@ -9,7 +9,8 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         editMode: false
     }
 
-    activatedMode () {
+    activatedMode = () => {
+        debugger
         this.setState({
             editMode: true
         })
@@ -25,7 +26,7 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
             {
                 !this.state.editMode &&
                 <div>
-                    <span onClick={this.activatedMode.bind(this)}>{this.props.status}</span>
+                    <span onClick={this.activatedMode}>{this.props.status}</span>
                 </div>
             }
             {

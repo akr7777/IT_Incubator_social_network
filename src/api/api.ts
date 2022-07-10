@@ -23,12 +23,6 @@ export const userAPI = {
         });
     },
 
-    /*authMe() {
-        return instance.get(`auth/me`).then(response => {
-            return response.data;
-        });
-    },*/
-
     follow (userID: number) {
         return instance.post(`follow/${userID}`).then(response => {
             return response.data;
