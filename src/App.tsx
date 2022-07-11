@@ -10,7 +10,7 @@ import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersAPIContainer from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 import ProfileContainer from './components/Profile/ProfileContainer';
-import Login from './components/Login';
+import Login from './components/Login/Login';
 
 /*type AppPropsType = {
     dialogsNames: Array<{ id: number, name: string }>,

@@ -20,7 +20,7 @@ import {
     useParams,
 } from "react-router-dom";
 import { AppStateType } from "../../redux/redux-store";
-import { userAPI } from "../../api/api";
+//import { userAPI } from "../../api/api";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
 

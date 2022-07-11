@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+type LoginDataType = {
+    email: string
+    password: string,
+    rememberMe?: boolean,
+    captcha?: boolean,
+}
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -14,6 +21,11 @@ export const authAPI = {
             return response.data;
         });
     },
+    login(data:LoginDataType) {
+        return instance.post(`auth/login`, {...data}).then(response => {
+            return response.data;
+        });
+    }
 }
 
 export const userAPI = {
