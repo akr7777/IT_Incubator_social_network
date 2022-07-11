@@ -23,6 +23,11 @@ let mapDispatchToProps = (dispatch: dispatchType) => {
         },
         updateTextArea: (txt: string) => {
             dispatch(updateNewMessageActionCreator(txt));
+        },
+        onSubmitNewMessageForm: (values: any) => {
+            const txt = values.newMessageTextTextArea;
+            dispatch(updateNewMessageActionCreator('txt'));
+            dispatch(addNewMessageActionCreator(txt));
         }
     }
 }

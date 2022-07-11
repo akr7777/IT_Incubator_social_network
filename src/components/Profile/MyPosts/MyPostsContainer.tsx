@@ -6,16 +6,12 @@ import {connect} from "react-redux";
 import { AppStateType } from "../../../redux/redux-store";
 
 
-export type MyPostsPropsType = {
-    profilePosts: Array<state_profilePage_profilePosts_PropsType>,
-    updatedPostText_inTextArea: string,
-    dispatch: (action: actionPropsType) => number,
-}
+
 
 let mapStateToProps = (state: AppStateType) => {
     return {
-       /* profilePosts: state.profilePage.profilePosts,
-        updatedPostText_inTextArea: state.profilePage.updatedPostText_inTextArea*/
+        profilePosts: state.profilePage.profilePosts,
+        updatedPostText_inTextArea: state.profilePage.updatedPostText_inTextArea
     }
 }
 let mapDispatchToProps = (dispatch: any) => {
@@ -26,7 +22,14 @@ let mapDispatchToProps = (dispatch: any) => {
         updateNewPostText: (text: string) => {
             let action = updateTextAreaActionCreator(text);
             dispatch(action);
-        }
+        },
+        onSubmitNewPostForm: (values: any) => {
+            window.alert('OnSumbitNewPostForm' + JSON.stringify(values))
+            let text = values.newPostTexttextArea;
+            let action = updateTextAreaActionCreator(text);
+            dispatch(action);
+            dispatch(addPostActionCreator());
+        },
     }
 }
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);

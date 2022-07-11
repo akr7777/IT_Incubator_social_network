@@ -33,7 +33,7 @@ export type profileType = {
     fullName: string | null,
     photos: photosPropsType,
 }
-type profilePostType = {
+export type profilePostType = {
     id: number
     postText: string
     likes: number

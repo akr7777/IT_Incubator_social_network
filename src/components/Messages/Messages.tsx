@@ -7,15 +7,19 @@ import {
     state_messagePage_userMessages_PropsType,
     state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
 } from "../../redux/state";
+import {Form, Field} from 'react-final-form'
+import { render } from 'react-dom'
 
 export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
     userMessages: Array<state_messagePage_userMessages_PropsType>,
     typingNewMessageText: string,
+
     addNewMessage: (txt: string) => void,
     updateTextArea: (txt:string)=> void,
     isAuth: boolean,
     /*dispatch: (action: actionPropsType) => number*/
+    onSubmitNewMessageForm: (values:any) => void,
 }
 
 export const Messages = (props: MessagesPropsType) => {
@@ -43,7 +47,7 @@ export const Messages = (props: MessagesPropsType) => {
         }
     }
 
-    if (!props.isAuth) return <Navigate to="/login" replace={true} />
+    //if (!props.isAuth) return <Navigate to="/login" replace={true} />
 
     return (
         <div className={s.messages}>
@@ -52,17 +56,9 @@ export const Messages = (props: MessagesPropsType) => {
             </div>
             <div className={s.message}>
                 { messagesElements }
-                <div className={s.add_new_message_div}>
-                    <h3 className={s.new_message_item}>New message</h3>
-                    <textarea
-                        className={s.new_message_textarea + " " + s.new_message_item}
-                        ref={newMessageTextarea}
-                        placeholder="type your new message here"
-                        value={props.typingNewMessageText}
-                        onChange={onUpdateTextArea}
-                    />
-                    <button className={s.new_message_button + " " + s.new_message_item} onClick={onAddNewMessage}>Отправить</button>
-                </div>
+
+                <NewMessageForm onSubmitNewMessageForm={props.onSubmitNewMessageForm}/>
+
             </div>
         </div>
     );
@@ -94,4 +90,43 @@ const Message = (props: state_messagePage_userMessages_PropsType) => {
         </div>
     );
 }
+
+type ErrorsType = {
+    newMessageTextTextArea?: string
+}
+type NewMessageFormPropsType = {
+    onSubmitNewMessageForm: (values: any) => void
+}
+const NewMessageForm = (props: NewMessageFormPropsType) => {
+    return <Form
+        onSubmit={props.onSubmitNewMessageForm}
+        validate = {
+            values => {
+                const errors:ErrorsType = {}
+                if (!values.newMessageTextTextArea) {
+                    errors.newMessageTextTextArea = 'This field is required.'
+                }
+                return errors
+            }
+        }
+
+        render={({handleSubmit, form, submitting, pristine, values}) => (
+            <form className={s.add_new_message_div} onSubmit={handleSubmit}>
+                <Field name={'newMessageTextTextArea'}>
+                    {({input,meta}) => (
+                        <div className={s.add_new_message_div}>
+                            <label>New message:</label>
+                            <textarea {...input} className={s.new_message_textarea} />
+                            {meta.error && meta.touched && <span>{meta.error}</span>}
+                        </div>
+                    )}
+                </Field>
+
+                <button type="submit" disabled={submitting || pristine} className={s.new_message_button}> Send new MSG </button>
+                <pre>{JSON.stringify(values)}</pre>
+            </form>
+        )}
+    />
+}
+
 export default Messages;

@@ -20,7 +20,7 @@ const Profile = (props: ProfilePropsType) => {
     return (
         <div className={s1.profile}>
             <DescriptionContainer updateStatus={props.updateStatus}/>
-            {/*<MyPostsContainer />*/}
+            <MyPostsContainer />
         </div>
     );
 }
