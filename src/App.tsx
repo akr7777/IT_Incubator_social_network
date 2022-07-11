@@ -11,6 +11,7 @@ import UsersAPIContainer from "./components/Users/UsersContainer";
 /*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
+import { LoginContainer } from './components/Login/LoginContainer';
 
 /*type AppPropsType = {
     dialogsNames: Array<{ id: number, name: string }>,
@@ -35,7 +36,7 @@ const App = () => {
                     </Route>*/}
                     <Route path="messages" element={<MessagesContainer />} />
                     <Route path="users" element={<UsersAPIContainer />} />
-                    <Route path="login" element={<Login />}/>
+                    <Route path="login" element={<LoginContainer />}/>
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
             </Routes>

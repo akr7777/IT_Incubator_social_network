@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 import { authAPI } from '../../api/api';
 
 //types
-type ValuesType = {
+export type ValuesType = {
     email: string
     password: string
     rememberMe?: boolean,
@@ -19,20 +19,20 @@ type ErrorType = {
     rememberMe?: boolean,
     captcha?: boolean,
 }
+type LoginPropsType = {
+    onSubmitLoginForm: (values:ValuesType) => void
+}
 
-
-const Login = () => {
-    const onSubmit = (values:ValuesType) => {
-        window.alert(JSON.stringify(values))
-        debugger
+const Login = (props: LoginPropsType) => {
+    /*const onSubmit = (values:ValuesType) => {
         authAPI.login(values).then(response => {
             window.alert(JSON.stringify(response))
         });
-    }
+    }*/
 
     return <div>
         <div><h1>LOGIN FORM</h1></div>
-        <LoginForm onSubmit={onSubmit}/>
+        <LoginForm onSubmit={props.onSubmitLoginForm}/>
     </div>
 }
 
