@@ -81,7 +81,7 @@ const NewPostForm = (props: NewPostFormPropsType) => {
                     )}
                 </Field>
 
-                <button type="submit" disabled={submitting} className={s.button_add_new_post}> Send this post </button>
+                <button type="submit" disabled={submitting || pristine } className={s.button_add_new_post}> Send this post </button>
                 <pre>{JSON.stringify(values)}</pre>
             </form>
             )}

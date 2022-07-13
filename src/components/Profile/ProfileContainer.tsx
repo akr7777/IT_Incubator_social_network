@@ -36,6 +36,7 @@ export type ProfileContainerPropsType = {
     isAuth: boolean,
     getUserProfile: (userID: number) => void,
     router: any,
+    autorizedUserID: number,
 
     getStatus: (userID: number) => void,
     updateStatus: (status: string) => void,
@@ -43,7 +44,8 @@ export type ProfileContainerPropsType = {
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
-        let userID = this.props.router.params.id ? this.props.router.params.id : 2;
+        debugger
+        let userID = this.props.router.params.id ? this.props.router.params.id : this.props.autorizedUserID;
         this.props.getUserProfile(userID);
         this.props.getStatus(userID);
     }
@@ -56,6 +58,9 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
 let mapStateToProps = (state: AppStateType) => ({
     profilePage: state.profilePage,
     status: state.profilePage.status,
+
+    isAuth: state.auth.isAuth,
+    autorizedUserID: state.auth.id,
 });
 
 function withRouter(Component: React.ComponentType) {

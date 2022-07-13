@@ -29,7 +29,7 @@ const App = () => {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<UsersAPIContainer />} />
 
-                    <Route path="profile" element={<Navigate to={'/profile/2'}/>} />
+                    <Route path="profile" element={<ProfileContainer />} /> {/*{<Navigate to={'/profile/'}/>} />*/}
                     <Route path="profile/:id" element={<ProfileContainer />} />
                     {/*<Route path="profile" element={<ProfileContainer />} >
                         <Route path=':id' element={<ProfileContainer />} />

@@ -2,6 +2,8 @@ import React from 'react';
 import {Form, Field} from 'react-final-form'
 import { render } from 'react-dom'
 import { authAPI } from '../../api/api';
+import { FORM_ERROR } from 'final-form';
+import { LoginPropsType } from './LoginContainer';
 
 //types
 export type ValuesType = {
@@ -11,7 +13,9 @@ export type ValuesType = {
     captcha?: boolean,
 }
 type LoginFormPropsType = {
-    onSubmit: (values: any) => void
+    authError: boolean,
+    onSubmit: (values: ValuesType) => void,
+    //onSubmit: (values: ValuesType) => { "FINAL_FORM/form-error": string; },
 }
 type ErrorType = {
     email?: string
@@ -19,28 +23,29 @@ type ErrorType = {
     rememberMe?: boolean,
     captcha?: boolean,
 }
-type LoginPropsType = {
-    onSubmitLoginForm: (values:ValuesType) => void
-}
 
 const Login = (props: LoginPropsType) => {
-    /*const onSubmit = (values:ValuesType) => {
-        authAPI.login(values).then(response => {
-            window.alert(JSON.stringify(response))
-        });
-    }*/
+    //debugger;
+    const onSubmit = (values: ValuesType) => {
+        props.onLoginRequest(values);
+        /*let loginResult = props.onLoginRequest(values);
+        if (loginResult === 0) return { [FORM_ERROR]: 'Login Failed 0000000' };
+            else return { [FORM_ERROR]: 'Login Failed 1111111' }*/
+    }
 
     return <div>
         <div><h1>LOGIN FORM</h1></div>
-        <LoginForm onSubmit={props.onSubmitLoginForm}/>
+        <LoginForm onSubmit={onSubmit} authError={props.authError}/>
+        { props.isAuth && <div>{ <button onClick={props.logoutProcedure}>LOGOUT!</button> }</div> }
     </div>
 }
 
 const LoginForm = (props: LoginFormPropsType) => (
     <div>
-
         <Form
-            onSubmit={props.onSubmit}
+            name={'login'}
+            onSubmit={values => props.onSubmit(values as ValuesType)}
+            //onSubmit={onSubmitFormFunction1}
             validate={values => {
                 const errors:ErrorType = {}
                 if (!values.email) {
@@ -49,19 +54,15 @@ const LoginForm = (props: LoginFormPropsType) => (
                 if (!values.password) {
                     errors.password = 'Required'
                 }
-                /*if (!values.confirm) {
-                    errors.confirm = 'Required'
-                } else if (values.confirm !== values.password) {
-                    errors.confirm = 'Must match'
-                }*/
                 return errors
             }}
-            render={({handleSubmit, form, submitting, pristine, values}) => (
+
+            render={({submitError, handleSubmit, form, submitting, pristine, values}) => (
                 <form onSubmit={handleSubmit}>
                     <Field name="email">
                         {({input, meta}) => (
                             <div>
-                                <label>Username</label>
+                                <label>email</label>
                                 <input {...input} type="text" placeholder="Username"/>
                                 {meta.error && meta.touched && <span>{meta.error}</span>}
                             </div>
@@ -76,15 +77,7 @@ const LoginForm = (props: LoginFormPropsType) => (
                             </div>
                         )}
                     </Field>
-                    {/*<Field name="confirm">
-                        {({input, meta}) => (
-                            <div>
-                                <label>Confirm</label>
-                                <input {...input} type="password" placeholder="Confirm"/>
-                                {meta.error && meta.touched && <span>{meta.error}</span>}
-                            </div>
-                        )}
-                    </Field>*/}
+
                     <Field name="rememberMe">
                         {({input, meta}) => (
                             <div>
@@ -105,49 +98,30 @@ const LoginForm = (props: LoginFormPropsType) => (
                         )}
                     </Field>
 
+                    {/*{<div>___ {submitError} ___ </div>}*/}
+                    <div>Err:</div>
+                    { props.authError && <div>Bad credentials!</div>}
 
                     <div className="buttons">
                         <button type="submit"
                                 disabled={submitting}>
                             Submit
                         </button>
-                        <button
+                        {/*<button
                             type="button"
                             onClick={form.reset}
                             disabled={submitting || pristine}
                         >
                             Reset
-                        </button>
+                        </button>*/}
                     </div>
                     <pre>{JSON.stringify(values)}</pre>
+
                 </form>
             )}
         />
 
     </div>
 )
-/*
-return (
-    <Form>
-        onSubmit={onSubmit}
-        validate={validate}
-        <div>
-            username:
-            <Field placeholder={"login"}/>
-        </div>
-        <div>
-            password:
-            <input type={'password'} placeholder={'password'}/>
-        </div>
-        <div>
-            <input type={'checkbox'}/> Remember me
-        </div>
-        <div>
-            <button>LogIn</button>
-        </div>
-    </Form>
-)
-
- */
 
 export default Login
