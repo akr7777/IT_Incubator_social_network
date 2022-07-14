@@ -4,31 +4,31 @@ import {friendsSidebarReducer} from "./friendsSidebar-reducer";
 
 /*export type ProfilePostsPropsType1 = Array< {id: number, postText: string, likes: number} >*/
 
-export type actionPropsType = {
+/*export type actionPropsType = {
     type: string,
     newText?: string,
     messageText?: string,
     updatedMessageText?: string,
     profile?: any,
     data?: authDataType,
-}
-export type authDataType = {
+}*/
+/*export type authDataType = {
     id: number,
     email: string,
     login: string,
     isAuth: boolean,
-}
+}*/
 /*export type state_ProfilePage_profileDescription_PropsType = {
     name: string,
     birthday: string,
     phone: string,
     email: string
 }*/
-export type state_profilePage_profilePosts_PropsType = {
+/*export type state_profilePage_profilePosts_PropsType = {
     id: number,
     postText: string,
     likes: number,
-}
+}*/
 /*export type state_ProfilePage_PropsType = {
     profileDescription: state_ProfilePage_profileDescription_PropsType,
     profilePosts: Array<state_profilePage_profilePosts_PropsType>,
