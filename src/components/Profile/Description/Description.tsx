@@ -6,6 +6,7 @@ import Preloader from "../../common/Preloader";
 import {Navigate, NavLink } from "react-router-dom";
 import {profileReducer, profileReducerType, profileType } from "../../../redux/profile-reducer";
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 type DescriptionPropsType5 = {
     /*profileDescription: state_ProfilePage_profileDescription_PropsType*/
@@ -29,7 +30,7 @@ export const Description = (props: DescriptionPropsType5) => {
             <div>
                 <div>Имя: {props.profile.fullName}</div>
                 <div>lookingForAJob: {props.profile.lookingForAJob}</div>
-                <div><ProfileStatus status={props.status} updateStatus={props.updateStatus}/></div>
+                <div><ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/></div>
             </div>
             {/*<div>Name: {props.profileDescription.name}</div>
             <div>Birthdate: {props.profileDescription.birthday}</div>
