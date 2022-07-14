@@ -11,7 +11,7 @@ import {userAPI} from './../../api/api';
 import { Navigate } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
-import {getFollowingInProgres, getIsFetching, requestCurrentPage, requestPageSize, requestTotalUsersCount, requestUsers } from "../../redux/users-selectors";
+import {getFollowingInProgres, getIsFetching, requestCurrentPage, requestPageSize, requestTotalUsersCount, /*requestUsers,*/ requestUsersSuperSelector } from "../../redux/users-selectors";
 
 type toggleFollowingProgressPropsType = {
     type: string,
@@ -62,7 +62,7 @@ class UsersAPIComponent extends Component<UsersContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType):UsersInitialStateType => {
     return {
-        users: requestUsers(state),
+        users: requestUsersSuperSelector(state),
         pageSize: requestPageSize(state),
         totalUsersCount: requestTotalUsersCount(state),
         currentPage: requestCurrentPage(state),

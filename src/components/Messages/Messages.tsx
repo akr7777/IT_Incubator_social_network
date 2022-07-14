@@ -3,7 +3,7 @@ import s from "./Messages.module.css";
 import {Navigate, NavLink} from "react-router-dom";
 import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../redux/messages-reducer";
 import {
-    actionPropsType,
+    //actionPropsType,
     state_messagePage_userMessages_PropsType,
     state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
 } from "../../redux/state";

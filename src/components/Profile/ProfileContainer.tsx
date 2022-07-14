@@ -1,10 +1,10 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {Description} from "./Description/Description";
-import {
+/*import {
     actionPropsType,
     state_profilePage_profilePosts_PropsType,
-} from "../../redux/state";
+} from "../../redux/state";*/
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {DescriptionContainer} from "./Description/DescriptionContainer";
 

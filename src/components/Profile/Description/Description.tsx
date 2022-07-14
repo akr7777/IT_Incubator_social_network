@@ -1,6 +1,6 @@
 import React from "react";
 import ccs_classes from "./Description.module.css";
-import {actionPropsType} from "../../../redux/state";
+//import {actionPropsType} from "../../../redux/state";
 import myava from './../../../assets/images/myava.jpeg';
 import Preloader from "../../common/Preloader";
 import {Navigate, NavLink } from "react-router-dom";

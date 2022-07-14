@@ -2,7 +2,7 @@
 import { AnyAction } from "redux";
 import {profileAPI, userAPI } from "../api/api";
 import { dispatchType } from "./redux-store";
-import {actionPropsType} from "./state";
+//import {actionPropsType} from "./state";
 
 const add_Post = 'ADD-POST';
 const update_new_post_text = 'UPDATE-NEW-POST-TEXT';

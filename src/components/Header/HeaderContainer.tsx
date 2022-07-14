@@ -3,7 +3,7 @@ import Header from './Header';
 import axios from "axios";
 import {getAuthUserDataThunkCreator/*, setAuthUserDataAC*/ } from "../../redux/auth-reducer";
 import { connect } from "react-redux";
-import { actionPropsType } from "../../redux/state";
+//import { actionPropsType } from "../../redux/state";
 import {authAPI, userAPI} from './../../api/api';
 import { AppStateType } from "../../redux/redux-store";
 

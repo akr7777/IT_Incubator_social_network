@@ -2,10 +2,10 @@ import React from "react";
 import s1 from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import {Description} from "./Description/Description";
-import {
+/*import {
     actionPropsType,
     state_profilePage_profilePosts_PropsType,
-} from "../../redux/state";
+} from "../../redux/state";*/
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {DescriptionContainer} from "./Description/DescriptionContainer";
 import {profileReducer, profileReducerType, profileType } from "../../redux/profile-reducer";

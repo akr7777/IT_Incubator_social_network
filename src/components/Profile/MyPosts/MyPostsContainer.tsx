@@ -1,6 +1,6 @@
 import React from "react";
 import {addPostActionCreator, updateTextAreaActionCreator} from "../../../redux/profile-reducer";
-import {actionPropsType, state_profilePage_profilePosts_PropsType} from "../../../redux/state";
+//import {actionPropsType, state_profilePage_profilePosts_PropsType} from "../../../redux/state";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import { AppStateType } from "../../../redux/redux-store";
