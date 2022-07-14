@@ -3,46 +3,93 @@ import './App.css';
 import Profile from "./components/Profile/Profile";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import Layout from "./components/Layout/Layout";
-import {Routes, Route, Navigate} from "react-router-dom";
 import MessagesContainer from "./components/Messages/MessagesContainer";
-//import {state_ProfilePage_profileDescription_PropsType, storePropsType} from "./redux/state";
-//import UsersAPIComponent from "./components/Users/UsersAPIComponent";
 import UsersAPIContainer from "./components/Users/UsersContainer";
-/*import {DescriptionPropsType} from "./components/Profile/Description/Description";*/
 import ProfileContainer from './components/Profile/ProfileContainer';
-import Login from './components/Login/Login';
 import { LoginContainer } from './components/Login/LoginContainer';
+import { connect } from 'react-redux';
+import {
+    Navigate,
+    useLocation,
+    useNavigate,
+    useParams,
+    Routes, Route, NavigateFunction, Params, Location
+} from "react-router-dom";
+import {inicializeApp} from './redux/app-reducer';
+import { AppStateType } from './redux/redux-store';
+import Preloader from './components/common/Preloader';
+import { compose } from 'redux';
 
-/*type AppPropsType = {
-    dialogsNames: Array<{ id: number, name: string }>,
-    userMessages: Array<{ id: number, messageText: string }>,
-    profileDescription: state_ProfilePage_profileDescription_PropsType
-};*/
-/*type AppPropsType1 = {
-    store: storePropsType
-}*/
 
-const App = () => {
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<UsersAPIContainer />} />
 
-                    <Route path="profile" element={<ProfileContainer />} /> {/*{<Navigate to={'/profile/'}/>} />*/}
-                    <Route path="profile/:id" element={<ProfileContainer />} />
-                    {/*<Route path="profile" element={<ProfileContainer />} >
-                        <Route path=':id' element={<ProfileContainer />} />
-                    </Route>*/}
-                    <Route path="messages" element={<MessagesContainer />} />
-                    <Route path="users" element={<UsersAPIContainer />} />
-                    <Route path="login" element={<LoginContainer />}/>
-                    <Route path="*" element={<NotFoundPage/>}/>
-                </Route>
-            </Routes>
-        </>
-    );
+type AppPropsType = {
+    inicialized: boolean,
+    //myUserID: number,
+
+    inicializeApp: () => void,
+    router: any // { location: Location; navigate: NavigateFunction; params: Readonly<Params<string>>; },
 }
 
+class App extends React.Component<AppPropsType> {
+    componentDidMount() {
+        this.props.inicializeApp();
+    }
+    render() {
+        if (!this.props.inicialized) {
+            return <Preloader />
+        }
+        return (
+            <>
+                <Routes>
+                    <Route path="/" element={<Layout/>}>
+                        <Route index element={<UsersAPIContainer/>}/>
 
-export default App;
+                        <Route path="profile" element={<ProfileContainer/>}/> {/*{<Navigate to={'/profile/'}/>} />*/}
+                        <Route path="profile/:id" element={<ProfileContainer/>}/>
+                        {/*<Route path="profile" element={<ProfileContainer />} >
+                        <Route path=':id' element={<ProfileContainer />} />
+                        </Route>*/}
+                        <Route path="messages" element={<MessagesContainer/>}/>
+                        <Route path="users" element={<UsersAPIContainer/>}/>
+                        <Route path="login" element={<LoginContainer/>}/>
+                        <Route path="*" element={<NotFoundPage/>}/>
+                    </Route>
+                </Routes>
+            </>
+        );
+    }
+}
+
+function withRouter(Component: React.ComponentType) {
+    function ComponentWithRouterProp(props: any) {
+        let location = useLocation();
+        let navigate = useNavigate();
+        let params = useParams();
+        return (
+            <Component
+                {...props}
+                router={{ location, navigate, params }}
+            />
+        );
+    }
+    return ComponentWithRouterProp;
+}
+
+const mapStateToProps1 = (state: AppStateType) => {
+    return {
+        inicialized: state.app.inicialized,
+        //myUserID: state.auth.id,
+    };
+}
+
+type mapStateToPropsType = {
+    inicialized: boolean,
+    //myUserID: number,
+}
+type mapDispatchToPropsType = {
+    inicializeApp: () => void,
+}
+export default compose<React.ComponentType>(
+    withRouter,
+    connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps1, {inicializeApp})
+)(App);

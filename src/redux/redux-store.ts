@@ -5,6 +5,7 @@ import {messagesReducer} from "./messages-reducer";
 import {userReducer} from "./users-reducer";
 import {authReducer} from './auth-reducer';
 import thunkMiddleware from 'redux-thunk';
+import appReducer from "./app-reducer";
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -12,6 +13,7 @@ let reducers = combineReducers({
     friendsSidebar: friendsSidebarReducer,
     usersPage: userReducer,
     auth: authReducer,
+    app: appReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

@@ -44,7 +44,6 @@ export type ProfileContainerPropsType = {
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
-        debugger
         let userID = this.props.router.params.id ? this.props.router.params.id : this.props.autorizedUserID;
         this.props.getUserProfile(userID);
         this.props.getStatus(userID);

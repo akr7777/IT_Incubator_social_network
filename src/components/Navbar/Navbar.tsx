@@ -33,6 +33,9 @@ const Navbar = (props: NavbarPropsType) => {
                 <div className={s.friends_ava_div}>
                     {friends}
                 </div>
+                <div>
+                    <NavLink to="/login" className={ ({isActive}) => isActive ? s.active_link : s.a_link}>LoginPAge</NavLink>
+                </div>
             </div>
 
         </div>

@@ -12,25 +12,13 @@ type dataPropsType = {
     email: string,
     login: string,
 }
-type HeaderComponentPropsType = {
-        isAuth: boolean,
-        login: string,
-        /*data: dataPropsType,*/
-        //setAuthUserDataAC: (id: number, email:string, login:string) => void,
-        getAuthUserDataThunkCreator: () => void,
-}
+export type HeaderComponentPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 class HeaderContainer extends React.Component<HeaderComponentPropsType> {
 
-    componentDidMount() {
-        /*authAPI.authMe().then(data => {
-            if (data.resultCode === 0) {
-                let {id, login, email} = data.data;
-                this.props.setAuthUserDataAC(id, login, email);
-            }
-        });*/
+    /*componentDidMount() {
         this.props.getAuthUserDataThunkCreator()
-    }
+    }*/
 
     render() {
         return <Header {...this.props} />
@@ -41,4 +29,12 @@ let mapStateToProps = (state: AppStateType) => ({
     login: state.auth.login,
 })
 
-export default connect(mapStateToProps, {/*setAuthUserDataAC*/getAuthUserDataThunkCreator})(HeaderContainer);
+type MapStateToPropsType = {
+    isAuth: boolean,
+    login: string,
+}
+type MapDispatchToPropsType = {
+    getAuthUserDataThunkCreator: () => void,
+}
+
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {getAuthUserDataThunkCreator})(HeaderContainer);

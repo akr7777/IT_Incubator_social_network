@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import { authAPI } from '../../api/api';
 import { FORM_ERROR } from 'final-form';
 import { LoginPropsType } from './LoginContainer';
+import { Navigate } from 'react-router-dom';
 
 //types
 export type ValuesType = {
@@ -13,7 +14,7 @@ export type ValuesType = {
     captcha?: boolean,
 }
 type LoginFormPropsType = {
-    authError: boolean,
+    authError: string | null,
     onSubmit: (values: ValuesType) => void,
     //onSubmit: (values: ValuesType) => { "FINAL_FORM/form-error": string; },
 }
@@ -25,15 +26,12 @@ type ErrorType = {
 }
 
 const Login = (props: LoginPropsType) => {
-    //debugger;
     const onSubmit = (values: ValuesType) => {
         props.onLoginRequest(values);
-        /*let loginResult = props.onLoginRequest(values);
-        if (loginResult === 0) return { [FORM_ERROR]: 'Login Failed 0000000' };
-            else return { [FORM_ERROR]: 'Login Failed 1111111' }*/
     }
 
     return <div>
+        { props.isAuth && <Navigate to={'/profile'}/>}
         <div><h1>LOGIN FORM</h1></div>
         <LoginForm onSubmit={onSubmit} authError={props.authError}/>
         { props.isAuth && <div>{ <button onClick={props.logoutProcedure}>LOGOUT!</button> }</div> }
@@ -45,7 +43,6 @@ const LoginForm = (props: LoginFormPropsType) => (
         <Form
             name={'login'}
             onSubmit={values => props.onSubmit(values as ValuesType)}
-            //onSubmit={onSubmitFormFunction1}
             validate={values => {
                 const errors:ErrorType = {}
                 if (!values.email) {
@@ -98,9 +95,8 @@ const LoginForm = (props: LoginFormPropsType) => (
                         )}
                     </Field>
 
-                    {/*{<div>___ {submitError} ___ </div>}*/}
-                    <div>Err:</div>
-                    { props.authError && <div>Bad credentials!</div>}
+                    {/* ERRROR MESSAGE */}
+                    { props.authError && <div>{props.authError}</div>}
 
                     <div className="buttons">
                         <button type="submit"
