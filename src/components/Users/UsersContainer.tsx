@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {/*statePropsType*/ userType} from "../../redux/state";
 import {follow, setCurrentPage, setTotalUsersCount, setUsers, unfollow, toggleIsFetching,
-    toggleFollowingProgress, getUsers, UsersInitialStateType} from "../../redux/users-reducer";
+    toggleFollowingProgress, getUsers, UsersInitialStateType, userType} from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
 import {AppStateType} from "./../../redux/redux-store";
@@ -12,6 +11,7 @@ import {userAPI} from './../../api/api';
 import { Navigate } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
+import {getFollowingInProgres, getIsFetching, requestCurrentPage, requestPageSize, requestTotalUsersCount, requestUsers } from "../../redux/users-selectors";
 
 type toggleFollowingProgressPropsType = {
     type: string,
@@ -62,6 +62,16 @@ class UsersAPIComponent extends Component<UsersContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType):UsersInitialStateType => {
     return {
+        users: requestUsers(state),
+        pageSize: requestPageSize(state),
+        totalUsersCount: requestTotalUsersCount(state),
+        currentPage: requestCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgres(state),
+    }
+}
+/*const mapStateToProps = (state: AppStateType):UsersInitialStateType => {
+    return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
@@ -69,7 +79,7 @@ const mapStateToProps = (state: AppStateType):UsersInitialStateType => {
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
     }
-}
+}*/
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps,

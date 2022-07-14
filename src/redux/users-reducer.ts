@@ -2,7 +2,7 @@ import React from "react";
 import { AnyAction } from "redux";
 import { userAPI } from "../api/api";
 import { dispatchType } from "./redux-store";
-import {userType} from "./state"
+//import {userType} from "./state"
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -13,6 +13,23 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
 
+//types
+export type locationType = {
+    city: string,
+    country: string
+}
+type userPhotosType = {
+    small: string,
+    large: string,
+}
+export type userType = {
+    id: number,
+    name: string,
+    uniqueUrlName: string,
+    status?: string,
+    photos: userPhotosType,
+    followed: boolean /*Is current authorized user following returned user. If current user is anonymous then value always will be false*/
+}
 export type UsersInitialStateType = {
     users: userType[],
     pageSize: number,

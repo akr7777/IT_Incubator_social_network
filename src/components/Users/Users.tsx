@@ -1,10 +1,10 @@
 import React from "react";
-import {userType} from "../../redux/state";
 import s from "./users.module.css";
 import abstractUserPhoto from "./../../assets/images/abst_user_ava.png";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {userAPI} from "../../api/api";
+import { userType } from "../../redux/users-reducer";
 
 type UsersPropsType = {
     users: userType[],//Array<userType>
