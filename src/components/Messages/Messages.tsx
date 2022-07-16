@@ -1,16 +1,12 @@
 import React, {useRef} from "react";
 import s from "./Messages.module.css";
 import {Navigate, NavLink} from "react-router-dom";
-import {addNewMessageActionCreator, updateNewMessageActionCreator} from "../../redux/messages-reducer";
-import {
-    //actionPropsType,
-    state_messagePage_userMessages_PropsType,
-    state_messagesPage_dialogsNames_PropsType, state_messagesPage_PropsType
-} from "../../redux/state";
+import {addNewMessageActionCreator, dialogsNamesType, updateNewMessageActionCreator, userMessagesType} from "../../redux/messages-reducer";
 import {Form, Field} from 'react-final-form'
 import { render } from 'react-dom'
+import { MessagesPropsType } from "./MessagesContainer";
 
-export type MessagesPropsType = {
+/*export type MessagesPropsType = {
     dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
     userMessages: Array<state_messagePage_userMessages_PropsType>,
     typingNewMessageText: string,
@@ -18,9 +14,9 @@ export type MessagesPropsType = {
     addNewMessage: (txt: string) => void,
     updateTextArea: (txt:string)=> void,
     isAuth: boolean,
-    /*dispatch: (action: actionPropsType) => number*/
+    /!*dispatch: (action: actionPropsType) => number*!/
     onSubmitNewMessageForm: (values:any) => void,
-}
+}*/
 
 export const Messages = (props: MessagesPropsType) => {
 
@@ -69,7 +65,7 @@ export const Messages = (props: MessagesPropsType) => {
     name: string,
     img_link: string
 }*/
-const Dialog = (props: state_messagesPage_dialogsNames_PropsType) => {
+const Dialog = (props: dialogsNamesType) => {
     return(
         <div className={s.names}>
                 <img className={s.ava_img_friends} src={props.img_link}/>
@@ -82,7 +78,7 @@ const Dialog = (props: state_messagesPage_dialogsNames_PropsType) => {
     userID: number
     messageText: string
 }*/
-const Message = (props: state_messagePage_userMessages_PropsType) => {
+const Message = (props: userMessagesType) => {
     let messageText1 = props.userID == 1 ? <div className={s.msg_left}>{props.messageText}</div> : <div className={s.msg_rigth}>{props.messageText}</div>
     return(
         <div>

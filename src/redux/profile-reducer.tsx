@@ -4,11 +4,11 @@ import {profileAPI, userAPI } from "../api/api";
 import { dispatchType } from "./redux-store";
 //import {actionPropsType} from "./state";
 
-const add_Post = 'ADD-POST';
-const update_new_post_text = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const GET_USER_PROFILE = 'GET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
+const add_Post = 'profileReducer/ADD-POST';
+const update_new_post_text = 'profileReducer/UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
+const GET_USER_PROFILE = 'profileReducer/GET_USER_PROFILE';
+const SET_STATUS = 'profileReducer/SET_STATUS';
 
 //types
 type contactsPropsType = {
@@ -33,14 +33,14 @@ export type profileType = {
     fullName: string | null,
     photos: photosPropsType,
 }
-export type profilePostType = {
+export type ProfilePostType = {
     id: number
     postText: string
     likes: number
 }
 export type profileReducerType = {
     profile: profileType
-    profilePosts: profilePostType[]
+    profilePosts: ProfilePostType[]
     updatedPostText_inTextArea: string
     status: string
 }
@@ -137,17 +137,14 @@ export const getUserProfile = (userID: number) => (dispatch: dispatchType) => {
     });
 }
 
-export const getStatus = (userID: number) => (dispatch: dispatchType) => {
-    profileAPI.getStatus(userID).then(response => {
-        dispatch(setStatus(response));
-    });
+export const getStatus = (userID: number) => async (dispatch: dispatchType) => {
+    let response = await profileAPI.getStatus(userID);
+    dispatch(setStatus(response));
 }
 
-export const updateStatus = (status: string) => (dispatch: dispatchType) => {
-    profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setStatus(status));
-        }
-
-    });
+export const updateStatus = (status: string) => async (dispatch: dispatchType) => {
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+    }
 }

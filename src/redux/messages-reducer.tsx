@@ -1,21 +1,21 @@
 import { AnyAction } from "redux";
 
-const add_new_message_string = "ADD-NEW-MESSAGE";
-const update_new_message_text = "UPDATE-NEW-MESSAGE-TEXT";
+const add_new_message_string = "messagesReducer/ADD-NEW-MESSAGE";
+const update_new_message_text = "messagesReducer/UPDATE-NEW-MESSAGE-TEXT";
 
-type dialogsNamesType = {
+export type dialogsNamesType = {
     id: number
     name: string
     img_link: string
 }
-type userMessagesType = {
+export type userMessagesType = {
     userID: number
     messageText: string
 }
 export type MessagesReducerType = {
-    dialogsNames: dialogsNamesType[]
-    userMessages: userMessagesType[]
-    typingNewMessageText: string
+    dialogsNames: Array<dialogsNamesType>,
+    userMessages: Array<userMessagesType>,
+    typingNewMessageText: string,
 }
 let initialState: MessagesReducerType = {
     dialogsNames: [
@@ -43,19 +43,12 @@ export const messagesReducer = (state: MessagesReducerType = initialState, actio
                 typingNewMessageText: "",
                 userMessages: [...state.userMessages, newMsg]
             };
-           /* copyState.userMessages = [...state.userMessages, newMsg];*/
-            /*copyState.userMessages.push(newMsg);
-            copyState.typingNewMessageText = "";*/
-            /*return copyState;*/
         }
         case update_new_message_text: {
             return {
                 ...state,
                 typingNewMessageText: action.updatedMessageText
             }
-            /*let copyState = {...state}
-            copyState.typingNewMessageText = action.updatedMessageText;
-            return copyState;*/
         }
         default:
             return state;

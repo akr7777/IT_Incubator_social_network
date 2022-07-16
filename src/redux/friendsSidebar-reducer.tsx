@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 
-type friendSidebarType = {
+export type FriendSidebarType = {
     id: number
     name: string
     link: string
@@ -11,7 +11,6 @@ let initialState = [
     {id: 3, name: 'Nika', link: "https://i.pinimg.com/236x/88/26/32/882632057c16a4f3ddd2b0eb81e1b09a.jpg"}
 ]
 
-export const friendsSidebarReducer = (state: friendSidebarType[] = initialState, action: AnyAction) => {
-
+export const friendsSidebarReducer = (state: Array<FriendSidebarType> = initialState, action: AnyAction) => {
     return state;
 }

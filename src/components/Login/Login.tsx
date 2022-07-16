@@ -26,6 +26,7 @@ type ErrorType = {
 }
 
 const Login = (props: LoginPropsType) => {
+    //debugger;
     const onSubmit = (values: ValuesType) => {
         props.onLoginRequest(values);
     }
@@ -35,6 +36,7 @@ const Login = (props: LoginPropsType) => {
         <div><h1>LOGIN FORM</h1></div>
         <LoginForm onSubmit={onSubmit} authError={props.authError}/>
         { props.isAuth && <div>{ <button onClick={props.logoutProcedure}>LOGOUT!</button> }</div> }
+        <hr/><hr/><hr/>
     </div>
 }
 

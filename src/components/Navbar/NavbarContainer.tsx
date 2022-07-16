@@ -5,17 +5,24 @@ import {Friend} from "./Friend/Friend";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
 import { AppStateType } from "../../redux/redux-store";
+import { logoutProcedure } from '../../redux/auth-reducer';
+import { FriendSidebarType } from "../../redux/friendsSidebar-reducer";
 
-type NavbarPropsType = {
-    friendsSidebar: Array<{id: number, name: string, link: string}>
+
+export type NavbarPropsType = MapStateToPropsType & MapDispatchToPropsType;
+type MapStateToPropsType = {
+    friendsSidebar: Array<FriendSidebarType>,
+    isAuth: boolean,
+}
+type MapDispatchToPropsType = {
+    logoutProcedure: () => void,
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
-        friendsSidebar: state.friendsSidebar
+        friendsSidebar: state.friendsSidebar,
+        isAuth: state.auth.isAuth,
     }
 }
-const NavbarContainer = connect(mapStateToProps)(Navbar);
+const NavbarContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>( mapStateToProps, {logoutProcedure} )(Navbar);
 export default NavbarContainer;
-
-//-------

@@ -7,17 +7,18 @@ import {Navigate, NavLink } from "react-router-dom";
 import {profileReducer, profileReducerType, profileType } from "../../../redux/profile-reducer";
 import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import { DescriptionPropsType } from "./DescriptionContainer";
 
-type DescriptionPropsType5 = {
-    /*profileDescription: state_ProfilePage_profileDescription_PropsType*/
+/*type DescriptionPropsType5 = {
+    /!*profileDescription: state_ProfilePage_profileDescription_PropsType*!/
     profile: profileType,
     status: string,
-    updateStatus: (status: string) => void,
+    //updateStatus: (status: string) => void,
     //dispatch: (action: actionPropsType) => void,
     //setUserProfile: (data: ProfilePropsType1) => void,
 
-}
-export const Description = (props: DescriptionPropsType5) => {
+}*/
+export const Description = (props: DescriptionPropsType) => {
     if (!props.profile) {
         return <Preloader />
     }

@@ -2,11 +2,9 @@ import React from "react";
 import s from "./Navbar.module.css";
 import {NavLink} from "react-router-dom";
 import {Friend} from "./Friend/Friend";
+import { NavbarPropsType } from "./NavbarContainer";
 
-type NavbarPropsType = {
-    friendsSidebar: Array<{id: number, name: string, link: string}>
-}
-const Navbar = (props: NavbarPropsType) => {
+const Navbar:React.FC<NavbarPropsType> = (props) => {
     const friends = props.friendsSidebar.map(elem => <Friend key={elem.id} name={elem.name} link={elem.link}/> );
 
     return(
@@ -37,6 +35,8 @@ const Navbar = (props: NavbarPropsType) => {
                     <NavLink to="/login" className={ ({isActive}) => isActive ? s.active_link : s.a_link}>LoginPAge</NavLink>
                 </div>
             </div>
+
+            {props.isAuth && <div>{ <button onClick={props.logoutProcedure}>LOGOUT</button> }</div>}
 
         </div>
     );

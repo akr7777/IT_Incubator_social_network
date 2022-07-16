@@ -1,13 +1,27 @@
 import React, {useRef} from "react";
 import s from "./Messages.module.css";
 import {Navigate, NavLink} from "react-router-dom";
-import {addNewMessageActionCreator, MessagesReducerType, updateNewMessageActionCreator} from "../../redux/messages-reducer";
-import Messages, { MessagesPropsType } from "./Messages";
+import {addNewMessageActionCreator, dialogsNamesType, MessagesReducerType, updateNewMessageActionCreator, userMessagesType} from "../../redux/messages-reducer";
+import Messages from "./Messages";
 import {connect} from "react-redux";
 import { AppStateType, dispatchType } from "../../redux/redux-store";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
 
+
+//types
+type MapStateToPropsType = {
+    dialogsNames: Array<dialogsNamesType>,
+    userMessages: Array<userMessagesType>,
+    typingNewMessageText: string,
+}
+type MapDispatchToPropsType = {
+    addNewMessage: (txt: string) => void,
+    updateTextArea: (txt: string) => void,
+    onSubmitNewMessageForm: (values: any) => void,
+}
+
+export type MessagesPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -33,6 +47,6 @@ let mapDispatchToProps = (dispatch: dispatchType) => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
 )(Messages)

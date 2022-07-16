@@ -6,7 +6,7 @@ import { getAuthUserDataThunkCreator } from "./auth-reducer";
 import { dispatchType } from "./redux-store";
 //import {actionPropsType} from "./state"
 
-const INICIALIZED_SUCCESS = 'INICIALIZED_SUCCESS';
+const INICIALIZED_SUCCESS = 'appReducer/INICIALIZED_SUCCESS';
 
 let appInicialState = {
     inicialized: false,

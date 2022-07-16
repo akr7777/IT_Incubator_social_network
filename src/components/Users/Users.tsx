@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {userAPI} from "../../api/api";
 import { userType } from "../../redux/users-reducer";
+import {User} from "./User";
 
 type UsersPropsType = {
     users: userType[],//Array<userType>
@@ -45,64 +46,20 @@ const Users = (props: UsersPropsType) => {
 
     return (
         <div>
-
             {pagesDiv}
+            <div className={s.wrapped_users_div}>
+                {
+                    props.users.map((u: userType) =>
+                        <User user={u} isFetching={props.isFetching}
+                              followingInProgress={props.followingInProgress}
+                              follow={props.follow}
+                              unfollow={props.unfollow}
+                              toggleFollowingProgress={props.toggleFollowingProgress}
+                        />
+                    )
+                }
+            </div>
 
-            {
-                props.users.map((u: userType) => <div key={u.id}>
-                    <span key={u.id.toString() + "_1"}>
-                        <div key={u.id.toString() + "_11"}>
-                            <NavLink to={"/profile/" + u.id} key={u.id.toString() + "_111_"}>
-                                <img src={u.photos.small !== null ? u.photos.small : abstractUserPhoto}
-                                     className={s.user_photo}/>
-                            </NavLink>
-                        </div>
-                        <div key={u.id.toString() + "_12"}>
-                            {
-                                u.followed
-                                    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                        props.unfollow(u.id);
-                                        /*props.toggleFollowingProgress(true, u.id);
-                                        userAPI.unfollow(u.id).then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.unfollow(u.id)
-                                            }
-                                            props.toggleFollowingProgress(false, u.id);
-                                        });*/
-                                    }}>Unfollow</button>
-                                    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                        props.follow(u.id);
-                                        /*props.toggleFollowingProgress(true, u.id);
-                                        userAPI.follow(u.id).then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.follow(u.id)
-                                            }
-                                            props.toggleFollowingProgress(false, u.id);
-                                        });*/
-                                    }}>Follow</button>
-                            }
-                        </div>
-                    </span>
-                    <span key={u.id.toString() + "_2"}>
-                        <span key={u.id.toString() + "_21"}>
-                            <div key={u.id.toString() + "_211"}>
-                                {u.name}
-                            </div>
-                            <div key={u.id.toString() + "_212"}>
-                                {u.status}
-                            </div>
-                        </span>
-                        <span key={u.id.toString() + "_22"}>
-                            <div key={u.id.toString() + "_221"}>
-                                {"u.location.city"}
-                            </div>
-                            <div key={u.id.toString() + "_222"}>
-                                {"u.location.country"}
-                            </div>
-                        </span>
-                    </span>
-                </div>)
-            }
         </div>)
 }
 

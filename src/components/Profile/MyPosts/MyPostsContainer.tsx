@@ -1,12 +1,21 @@
 import React from "react";
-import {addPostActionCreator, updateTextAreaActionCreator} from "../../../redux/profile-reducer";
+import {addPostActionCreator, ProfilePostType, updateTextAreaActionCreator} from "../../../redux/profile-reducer";
 //import {actionPropsType, state_profilePage_profilePosts_PropsType} from "../../../redux/state";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import { AppStateType } from "../../../redux/redux-store";
 
-
-
+//types
+type MapStateToPropsType = {
+    profilePosts: Array<ProfilePostType>,
+    updatedPostText_inTextArea: string,
+}
+type MapDispatchToPropsType = {
+    addPost: () => void,
+    updateNewPostText: (text: string) => void,
+    onSubmitNewPostForm: (values: any) => void,
+}
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -32,5 +41,5 @@ let mapDispatchToProps = (dispatch: any) => {
         },
     }
 }
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer:React.ComponentType = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(MyPosts);
 export default MyPostsContainer;

@@ -1,3 +1,11 @@
+.wrapped_div_for_users {
+    display: flex;
+    flex-direction: column;
+}
+.one_user_div {
+    display: flex;
+    flex-direction: row;
+}
 .user_photo {
     width: 100px;
     height: 100px;
