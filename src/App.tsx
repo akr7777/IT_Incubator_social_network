@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Profile from "./components/Profile/Profile";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import Layout from "./components/Layout/Layout";
-import MessagesContainer from "./components/Messages/MessagesContainer";
-import UsersAPIContainer from "./components/Users/UsersContainer";
+
+//import MessagesContainer from "./components/Messages/MessagesContainer";
+const MessagesContainer = React.lazy(() => import("./components/Messages/MessagesContainer"));
+
+//import UsersAPIContainer from "./components/Users/UsersContainer";
+const UsersAPIContainer = React.lazy(() => import("./components/Users/UsersContainer"));
+
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { LoginContainer } from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
@@ -19,6 +24,7 @@ import {inicializeApp} from './redux/app-reducer';
 import { AppStateType } from './redux/redux-store';
 import Preloader from './components/common/Preloader';
 import { compose } from 'redux';
+import WithSuspense from './components/hoc/WithSuspense';
 
 
 
@@ -35,22 +41,35 @@ class App extends React.Component<AppPropsType> {
         this.props.inicializeApp();
     }
     render() {
-        if (!this.props.inicialized) {
-            return <Preloader />
-        }
+        //if (!this.props.inicialized) return <Preloader />
         return (
             <>
+               {/* { !this.props.inicialized && <Preloader /> }*/}
                 <Routes>
                     <Route path="/" element={<Layout/>}>
-                        <Route index element={<UsersAPIContainer/>}/>
+                        <Route index element={<ProfileContainer/>}/>
 
                         <Route path="profile" element={<ProfileContainer/>}/> {/*{<Navigate to={'/profile/'}/>} />*/}
                         <Route path="profile/:id" element={<ProfileContainer/>}/>
                         {/*<Route path="profile" element={<ProfileContainer />} >
                         <Route path=':id' element={<ProfileContainer />} />
                         </Route>*/}
-                        <Route path="messages" element={<MessagesContainer/>}/>
-                        <Route path="users" element={<UsersAPIContainer/>}/>
+                        {/*<Route path="messages" element={<MessagesContainer/>}/>*/}
+                        <Route path="messages" element={
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <MessagesContainer />
+                            </Suspense>
+                        }/>
+                        {/*<Route path="users" element={<UsersAPIContainer/>}/>*/}
+                        <Route path="users" element={
+                            WithSuspense(UsersAPIContainer)
+                            /*<Suspense fallback={/!*<Preloader/>*!/<div>Loading...</div>}>
+                                <UsersAPIContainer />
+                            </Suspense>*/
+                        }/>
+                        <Route path="settings" element={
+                            WithSuspense(UsersAPIContainer)
+                        }/>
                         <Route path="login" element={<LoginContainer/>}/>
                         <Route path="*" element={<NotFoundPage/>}/>
                     </Route>

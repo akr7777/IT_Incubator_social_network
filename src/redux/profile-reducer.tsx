@@ -9,9 +9,10 @@ const update_new_post_text = 'profileReducer/UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
 const GET_USER_PROFILE = 'profileReducer/GET_USER_PROFILE';
 const SET_STATUS = 'profileReducer/SET_STATUS';
+const SAVE_PHOTO_SUCCESS = 'profileReducer/SAVE_PHOTO_SUCCESS';
 
 //types
-type contactsPropsType = {
+type ContactsPropsType = {
     facebook: string | null,
     website: string | null,
     vk: string | null,
@@ -20,14 +21,23 @@ type contactsPropsType = {
     youtube: string | null,
     github: string | null,
     mainLink: string | null,
+    /*"facebook": string
+    "website": string
+    "vk": string
+    "twitter": string
+    "instagram": string
+    "youtube": string
+    "github": string
+    "mainLink": string*/
 }
 type photosPropsType = {
     small: string,
     large: string,
 }
-export type profileType = {
+export type ProfileType = {
     userId: number,
-    contacts: contactsPropsType,
+    aboutMe?: string,
+    contacts: ContactsPropsType,
     lookingForAJob: boolean,
     lookingForAJobDescription: string | null,
     fullName: string | null,
@@ -38,24 +48,25 @@ export type ProfilePostType = {
     postText: string
     likes: number
 }
-export type profileReducerType = {
-    profile: profileType
+export type ProfileReducerType = {
+    profile: ProfileType
     profilePosts: ProfilePostType[]
     updatedPostText_inTextArea: string
     status: string
 }
-let initialState12: profileReducerType = {
+let initialState12: ProfileReducerType = {
     profile: {
         userId: 1,
+        aboutMe: "",
         contacts: {
-            facebook: null,
-            website: null,
-            vk: null,
-            twitter: null,
-            instagram: null,
-            youtube: null,
-            github: null,
-            mainLink: null,
+            "facebook": 'null',
+            "website": 'null',
+            "vk": 'null',
+            "twitter": 'null',
+            "instagram": 'null',
+            "youtube": 'null',
+            "github": 'null',
+            "mainLink": 'null',
         },
         lookingForAJob: false,
         lookingForAJobDescription: "sfhskh@sifj.com",
@@ -75,7 +86,7 @@ let initialState12: profileReducerType = {
     //profile: null,
 }
 
-export const profileReducer = (state: profileReducerType = initialState12, action: AnyAction): profileReducerType => {
+export const profileReducer = (state: ProfileReducerType = initialState12, action: AnyAction):ProfileReducerType => {
 
     switch (action.type) {
         case add_Post: {
@@ -107,6 +118,11 @@ export const profileReducer = (state: profileReducerType = initialState12, actio
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state;
     }
@@ -123,12 +139,15 @@ export const updateTextAreaActionCreator = (text: string) => {
         newText: text
     }
 }
-export const setUserProfile = (profile: profileType) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {type: SET_USER_PROFILE, profile}
 }
 
 export const setStatus = (status: string) => {
     return {type: SET_STATUS, status}
+}
+export const savePhotoSuccess = (photos: any) => {
+    return {type: SAVE_PHOTO_SUCCESS, photos}
 }
 
 export const getUserProfile = (userID: number) => (dispatch: dispatchType) => {
@@ -146,5 +165,12 @@ export const updateStatus = (status: string) => async (dispatch: dispatchType) =
     let response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
+    }
+}
+
+export const saveMainPhoto = (file: any) => async (dispatch: dispatchType) => {
+    let response = await profileAPI.saveMainPhoto(file);
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }

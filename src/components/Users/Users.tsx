@@ -6,6 +6,7 @@ import axios from "axios";
 import {userAPI} from "../../api/api";
 import { userType } from "../../redux/users-reducer";
 import {User} from "./User";
+import Paginator from "./Paginator";
 
 type UsersPropsType = {
     users: userType[],//Array<userType>
@@ -18,7 +19,6 @@ type UsersPropsType = {
     follow: (userid: number) => void,
     unfollow: (userid: number) => void,
     onPageChanged: (pageNumber: number) => void,
-    //followingInProgress: boolean,
     toggleFollowingProgress: (isFetching: boolean, userID: number) => void,
 
 }
@@ -46,7 +46,13 @@ const Users = (props: UsersPropsType) => {
 
     return (
         <div>
-            {pagesDiv}
+            {/*{pagesDiv}*/}
+            <Paginator
+                totalUsersCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                onPageChanged={props.onPageChanged}
+            />
             <div className={s.wrapped_users_div}>
                 {
                     props.users.map((u: userType) =>

@@ -23,6 +23,9 @@ const Navbar:React.FC<NavbarPropsType> = (props) => {
             <div className={s.item}>
                 <NavLink to="/users" className={ ({isActive}) => isActive ? s.active_link : s.a_link}>Users</NavLink>
             </div>
+            <div className={s.item}>
+                <NavLink to="/settings" className={ ({isActive}) => isActive ? s.active_link : s.a_link}>Settings</NavLink>
+            </div>
 
             <div className={s.friends_div}>
                 <div>

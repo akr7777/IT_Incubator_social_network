@@ -4,6 +4,7 @@ import {AnyAction} from "redux";
 import { authAPI } from "../api/api";
 import { ValuesType } from "../components/Login/Login";
 import { dispatchType } from "./redux-store";
+import { Dispatch } from 'redux';
 
 const SET_USER_DATA = 'authReducer/SET_USER_DATA';
 const SET_AUTH_ERROR = 'authReducer/SET_AUTH_ERROR';
@@ -31,7 +32,11 @@ export const authReducer = (state: authReducerPropsType = initialState, action: 
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
+                //...action.data,
+                id: action.data.id,
+                email: action.data.email,
+                login: action.data.login,
+                isAuth: action.data.isAuth,
             }
         case SET_AUTH_ERROR:
             return {
@@ -67,8 +72,7 @@ export const setAuthError = (authError: string | null):setAuthErrorType => ({
     authError,
 })
 
-export const getAuthUserDataThunkCreator = () => async (dispatch: dispatchType) => {
-    /*return*/
+export const getAuthUserDataThunkCreator = () => async (dispatch: Dispatch) => {
     let response = await authAPI.authMe();
     if (response.resultCode === 0) {
         let {id, email, login} = response.data;

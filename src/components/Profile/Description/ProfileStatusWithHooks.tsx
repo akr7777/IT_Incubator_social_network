@@ -28,26 +28,26 @@ const ProfileStatusWithHooks = (props:ProfileStatusPropsType) => {
     }
     const onchangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value);
-        props.updateStatus(status);
+        props.updateStatus(/*status*/e.currentTarget.value);
     }
 
 
-    return <div>
+    return <>
             { !editMode &&
-                <div>
+                <>
                     <span onClick={activateMode}>{props.status || '------'}</span>
-                </div>
+                </>
             }
             { editMode &&
-                <div>
+                <>
                     <input autoFocus={true}
                            onBlur={deactivateMode}
                            onChange={ (e) => onchangeStatus(e) }
                            value={status}/>
-                </div>
+                </>
             }
 
-        </div>
+        </>
 
 
 }

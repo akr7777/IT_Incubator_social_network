@@ -3,7 +3,8 @@ import {AnyAction} from "redux";
 import { authAPI } from "../api/api";
 import { ValuesType } from "../components/Login/Login";
 import { getAuthUserDataThunkCreator } from "./auth-reducer";
-import { dispatchType } from "./redux-store";
+import {AppThunkType, dispatchType } from "./redux-store";
+import { Dispatch } from 'redux';
 //import {actionPropsType} from "./state"
 
 const INICIALIZED_SUCCESS = 'appReducer/INICIALIZED_SUCCESS';
@@ -31,14 +32,16 @@ export const appReducer = (state: appReducerPropsType1 = appInicialState, action
 
 export const setInicializedSuccess = () => ( { type: INICIALIZED_SUCCESS });
 
-export const inicializeApp = () => (dispatch: dispatchType) => {
-    let promise = new Promise((resolve, reject) => {
+
+export const inicializeApp = ():AppThunkType => (dispatch) => {
+    dispatch(getAuthUserDataThunkCreator());
+    /*let promise = new Promise((resolve, reject) => {
         resolve(getAuthUserDataThunkCreator());
     });
 
     promise.then( () => {
         dispatch(setInicializedSuccess());
-    } )
+    } )*/
 }
 
 export default appReducer;

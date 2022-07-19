@@ -7,7 +7,7 @@ import Profile from './Profile';
 import {Component} from 'react';
 import axios from "axios";
 import {connect} from "react-redux";
-import {profileReducerType, profileType, getUserProfile, getStatus, updateStatus} from './../../redux/profile-reducer';
+import {ProfileReducerType, ProfileType, getUserProfile, getStatus, updateStatus, saveMainPhoto} from './../../redux/profile-reducer';
 import {
     Navigate,
     useLocation,
@@ -37,7 +37,7 @@ import { compose } from "redux";
     updateStatus: (status: string) => void,
 }*/
 type MapStateToPropsType = {
-    profilePage: profileReducerType,
+    profilePage: ProfileReducerType,
     status: string,
     isAuth: boolean,
     autorizedUserID: number,
@@ -45,6 +45,8 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     getUserProfile: (userID: number) => void,
     getStatus: (userID: number) => void,
+    updateStatus: (status: string) => void,
+    saveMainPhoto: (photoFile: any) => void,
 }
 type OwnPropsType = {
     router: any,
@@ -52,14 +54,28 @@ type OwnPropsType = {
 export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType;
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
-    componentDidMount() {
+    refreshProfile () {
         let userID = this.props.router.params.id ? this.props.router.params.id : this.props.autorizedUserID;
         this.props.getUserProfile(userID);
         this.props.getStatus(userID);
     }
-
+    componentDidMount() {
+        this.refreshProfile();
+    }
+    componentDidUpdate(prevProps:ProfileContainerPropsType, prevState:any, snapshot:any) {
+        if (this.props.profilePage.profile.userId != prevProps.profilePage.profile.userId) {
+            this.refreshProfile();
+        }
+    }
     render () {
-        return ( <Profile /> );
+        return ( <Profile
+            isOwner={!this.props.router.params.id}
+            profilePage={this.props.profilePage}
+            status={this.props.status}
+            autorizedUserID={this.props.autorizedUserID}
+            updateStatus={this.props.updateStatus}
+            saveMainPhoto={this.props.saveMainPhoto}
+        /> );
     }
 }
 
@@ -89,7 +105,7 @@ function withRouter(Component: React.ComponentType) {
 
 //export default connect(mapStateToProps, {getUserProfile})(withRouter(withAuthRedirect(ProfileContainer)))
 export default compose<React.ComponentType>(
-    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {getUserProfile, getStatus}),
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {getUserProfile, getStatus, updateStatus, saveMainPhoto}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)
