@@ -1,0 +1,18 @@
+.main_wrapper_div {
+    border: black 1px solid;
+    width: 60px;
+    height: 30px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.red_div {
+    background-color: red;
+    width: 30px;
+    height: 30px;
+}
+.green_div {
+    background-color: green;
+    width: 30px;
+    height: 30px;
+}

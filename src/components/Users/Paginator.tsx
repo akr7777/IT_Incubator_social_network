@@ -24,7 +24,7 @@ const Paginator = (props:PaginatorPropsType) => {
     return <div>
         {
             pages.map((p) => {
-                return <span
+                return <span key={p}
                     className={props.currentPage === p ? s.selected_page : s.non_selected_page}
                     onClick={() => props.onPageChanged(p)}
                 >{p}</span>

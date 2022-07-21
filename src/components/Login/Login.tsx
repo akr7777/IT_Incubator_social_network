@@ -1,11 +1,10 @@
 import React from 'react';
 import {Form, Field} from 'react-final-form'
 import { render } from 'react-dom'
-import { authAPI } from '../../api/api';
 import { FORM_ERROR } from 'final-form';
 import { LoginPropsType } from './LoginContainer';
 import { Navigate } from 'react-router-dom';
-
+import { authAPI } from '../../api/api';
 //types
 export type ValuesType = {
     email: string

@@ -25,6 +25,7 @@ import { AppStateType } from './redux/redux-store';
 import Preloader from './components/common/Preloader';
 import { compose } from 'redux';
 import WithSuspense from './components/hoc/WithSuspense';
+import SettingsContainer from './components/Settings/SettingsContainer';
 
 
 
@@ -68,7 +69,7 @@ class App extends React.Component<AppPropsType> {
                             </Suspense>*/
                         }/>
                         <Route path="settings" element={
-                            WithSuspense(UsersAPIContainer)
+                            WithSuspense(SettingsContainer)
                         }/>
                         <Route path="login" element={<LoginContainer/>}/>
                         <Route path="*" element={<NotFoundPage/>}/>

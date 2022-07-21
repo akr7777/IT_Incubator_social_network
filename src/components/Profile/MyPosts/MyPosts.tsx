@@ -26,7 +26,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <div className={s.new_post_div}>
                 <NewPostForm onSubmitNewPostForm={props.onSubmitNewPostForm}/>
             </div>
-            { props.profilePosts.map((p) => <Post id={p.id} postText={p.postText} likes={p.likes}/>) }
+            { props.profilePosts.map((p) => <Post key={p.id} id={p.id} postText={p.postText} likes={p.likes}/>) }
         </div>
     );
 }

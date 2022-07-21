@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { ProfileSettingsValuesType } from '../components/Settings/Settings';
+import { ProfileType } from '../redux/profile-reducer';
 
 type LoginDataType = {
     email: string
@@ -50,10 +52,10 @@ export const userAPI = {
             return response.data;
         })
     },
-    getProfile (userID: number) {
+    /*getProfile (userID: number) {
         console.warn('obsolite method. use profileAPI.getProfile')
         return profileAPI.getProfile(userID) //instance.get(`profile/${userID}`)
-    }
+    }*/
 
 }
 
@@ -61,14 +63,17 @@ export const profileAPI = {
     getProfile (userID: number) {
         return instance.get(`profile/${userID}`)
     },
+
     getStatus (userID: number) {
         return instance.get(`profile/status/${userID}`).then(response => {
             return response.data;
         })
     },
+
     updateStatus (status: string) {
         return instance.put(`profile/status`, { status: status} );
     },
+
     saveMainPhoto (photoFile:any) {
         let formData = new FormData();
         formData.append("image", photoFile)
@@ -77,6 +82,10 @@ export const profileAPI = {
                 "Content-Type": "multipart/form-data"
             }
         });
+    },
+
+    saveProfile (values:ProfileSettingsValuesType) {
+        return instance.put(`profile`, values);
     }
 }
 

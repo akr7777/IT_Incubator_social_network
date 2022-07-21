@@ -1,10 +1,9 @@
-import React from "react";
+import React, {Component} from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {Description} from "./Description/Description";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {DescriptionContainer} from "./Description/DescriptionContainer";
 import Profile from './Profile';
-import {Component} from 'react';
 import axios from "axios";
 import {connect} from "react-redux";
 import {ProfileReducerType, ProfileType, getUserProfile, getStatus, updateStatus, saveMainPhoto} from './../../redux/profile-reducer';
@@ -19,23 +18,6 @@ import { AppStateType } from "../../redux/redux-store";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
 
-/*type ProfilePropsType = {
-    profile: profileType,
-    profilePosts: Array<state_profilePage_profilePosts_PropsType>,
-    updatedPostText_inTextArea: string,
-    dispatch: (action: actionPropsType) => number
-}*/
-
-/*export type ProfileContainerPropsType = {
-    profilePage: profileReducerType,
-    isAuth: boolean,
-    getUserProfile: (userID: number) => void,
-    router: any,
-    autorizedUserID: number,
-
-    getStatus: (userID: number) => void,
-    updateStatus: (status: string) => void,
-}*/
 type MapStateToPropsType = {
     profilePage: ProfileReducerType,
     status: string,
@@ -55,7 +37,9 @@ export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToProps
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     refreshProfile () {
-        let userID = this.props.router.params.id ? this.props.router.params.id : this.props.autorizedUserID;
+        let userID = this.props.router.params.id
+            ? this.props.router.params.id
+            : this.props.autorizedUserID;
         this.props.getUserProfile(userID);
         this.props.getStatus(userID);
     }
@@ -63,7 +47,10 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
         this.refreshProfile();
     }
     componentDidUpdate(prevProps:ProfileContainerPropsType, prevState:any, snapshot:any) {
-        if (this.props.profilePage.profile.userId != prevProps.profilePage.profile.userId) {
+        let userID = this.props.router.params.id
+            ? this.props.router.params.id
+            : this.props.autorizedUserID;
+        if (userID !== prevProps.profilePage.profile.userId) {
             this.refreshProfile();
         }
     }
@@ -92,6 +79,7 @@ function withRouter(Component: React.ComponentType) {
         let location = useLocation();
         let navigate = useNavigate();
         let params = useParams();
+        //debugger
         return (
             <Component
                 {...props}

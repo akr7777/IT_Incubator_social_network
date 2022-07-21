@@ -1,7 +1,8 @@
 //import { ProfilePropsType1 } from "../components/Profile/Profile";
 import { AnyAction } from "redux";
 import {profileAPI, userAPI } from "../api/api";
-import { dispatchType } from "./redux-store";
+import { ProfileSettingsValuesType } from "../components/Settings/Settings";
+import {AppThunkType, dispatchType } from "./redux-store";
 //import {actionPropsType} from "./state";
 
 const add_Post = 'profileReducer/ADD-POST';
@@ -10,6 +11,7 @@ const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
 const GET_USER_PROFILE = 'profileReducer/GET_USER_PROFILE';
 const SET_STATUS = 'profileReducer/SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'profileReducer/SAVE_PHOTO_SUCCESS';
+const SAVE_PROFILE_INFO = 'profileReducer/SAVE_PROFILE_INFO';
 
 //types
 type ContactsPropsType = {
@@ -56,24 +58,24 @@ export type ProfileReducerType = {
 }
 let initialState12: ProfileReducerType = {
     profile: {
-        userId: 1,
+        userId: -1,
         aboutMe: "",
         contacts: {
-            "facebook": 'null',
-            "website": 'null',
-            "vk": 'null',
-            "twitter": 'null',
-            "instagram": 'null',
-            "youtube": 'null',
-            "github": 'null',
-            "mainLink": 'null',
+            "facebook": '',
+            "website": '',
+            "vk": '',
+            "twitter": '',
+            "instagram": '',
+            "youtube": '',
+            "github": '',
+            "mainLink": '',
         },
         lookingForAJob: false,
-        lookingForAJobDescription: "sfhskh@sifj.com",
-        fullName: 'sdffsd',
+        lookingForAJobDescription: "",
+        fullName: '',
         photos: {
-            small: 'dsf',
-            large: 'dsf',
+            small: '',
+            large: '',
         }
     },
     profilePosts: [
@@ -86,7 +88,10 @@ let initialState12: ProfileReducerType = {
     //profile: null,
 }
 
-export const profileReducer = (state: ProfileReducerType = initialState12, action: AnyAction):ProfileReducerType => {
+type ProfileReducerActionType = addPostActionCreatorType | updateTextAreaActionCreatorType | setUserProfileType |
+    setStatusType | savePhotoSuccessType | saveProfileInfoType;
+export const profileReducer = (state: ProfileReducerType = initialState12,
+                               action: ProfileReducerActionType):ProfileReducerType => {
 
     switch (action.type) {
         case add_Post: {
@@ -123,35 +128,55 @@ export const profileReducer = (state: ProfileReducerType = initialState12, actio
                 ...state,
                 profile: {...state.profile, photos: action.photos}
             }
+        case SAVE_PROFILE_INFO:
+            return {
+                ...state,
+                //profile: action.newProfileData,
+                //fullName: action.newProfileData.fullName,
+
+            }
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = () => {
+type addPostActionCreatorType = {type: typeof add_Post}
+export const addPostActionCreator = ():addPostActionCreatorType => {
     return {
         type: add_Post
     }
 }
-export const updateTextAreaActionCreator = (text: string) => {
+
+type updateTextAreaActionCreatorType = {type: typeof update_new_post_text, newText: string}
+export const updateTextAreaActionCreator = (text: string):updateTextAreaActionCreatorType => {
     return {
         type: update_new_post_text,
         newText: text
     }
 }
-export const setUserProfile = (profile: ProfileType) => {
+
+type setUserProfileType = {type: typeof SET_USER_PROFILE, profile: ProfileType}
+export const setUserProfile = (profile: ProfileType):setUserProfileType => {
     return {type: SET_USER_PROFILE, profile}
 }
 
-export const setStatus = (status: string) => {
+type setStatusType = {type: typeof SET_STATUS, status:string}
+export const setStatus = (status: string):setStatusType => {
     return {type: SET_STATUS, status}
 }
-export const savePhotoSuccess = (photos: any) => {
+
+type savePhotoSuccessType = {type: typeof SAVE_PHOTO_SUCCESS, photos:any}
+export const savePhotoSuccess = (photos: any):savePhotoSuccessType => {
     return {type: SAVE_PHOTO_SUCCESS, photos}
 }
 
+type saveProfileInfoType = {type: typeof SAVE_PROFILE_INFO, newProfileData: ProfileSettingsValuesType}
+export const saveProfileInfo = (values:ProfileSettingsValuesType):saveProfileInfoType => {
+    return {type: SAVE_PROFILE_INFO, newProfileData: values}
+}
+
 export const getUserProfile = (userID: number) => (dispatch: dispatchType) => {
-    userAPI.getProfile(userID).then(response => {
+    profileAPI.getProfile(userID).then(response => {
         dispatch(setUserProfile(response.data));
     });
 }
@@ -172,5 +197,12 @@ export const saveMainPhoto = (file: any) => async (dispatch: dispatchType) => {
     let response = await profileAPI.saveMainPhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+export const onProfileSettingsSubmit = (values: ProfileSettingsValuesType) => async (dispatch: dispatchType) => {
+    let response = await profileAPI.saveProfile(values);
+    if (response.data.resultCode === 0) {
+        dispatch(saveProfileInfo(values));
     }
 }

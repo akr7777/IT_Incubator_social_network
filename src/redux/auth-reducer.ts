@@ -82,21 +82,6 @@ export const getAuthUserDataThunkCreator = () => async (dispatch: Dispatch) => {
 
 
 export const onLoginRequest = (values:ValuesType) => async (dispatch:dispatchType) => {
-        /*authAPI.login(values).then(response => {
-            if (response.resultCode === 0) {
-                //Далее идет Дублирование кода thunk getAuthUserDataThunkCreator, т.к. не могу из одной санки вызвать другую
-                authAPI.authMe().then(data => {
-                    if (data.resultCode === 0) {
-                        let {id, email, login} = data.data;
-                        dispatch(setAuthUserDataAC(id, email, login, true));
-                    }
-                });
-            } else {
-                let message = response.messages[0].length>0 ? response.messages[0] : 'some error 444'
-                dispatch(setAuthError(message));
-                //window.alert('Bad credentials!!!!! ' + JSON.stringify(response))
-            }
-        })*/
     let response = await authAPI.login(values)
     if (response.resultCode === 0) {
         //Далее идет Дублирование кода thunk getAuthUserDataThunkCreator, т.к. не могу из одной санки вызвать другую

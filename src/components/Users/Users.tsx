@@ -56,7 +56,8 @@ const Users = (props: UsersPropsType) => {
             <div className={s.wrapped_users_div}>
                 {
                     props.users.map((u: userType) =>
-                        <User user={u} isFetching={props.isFetching}
+                        <User key={u.id}
+                              user={u} isFetching={props.isFetching}
                               followingInProgress={props.followingInProgress}
                               follow={props.follow}
                               unfollow={props.unfollow}
