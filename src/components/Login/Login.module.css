@@ -1,0 +1,12 @@
+.error_div {
+    border: red 1px solid;
+    margin-left: 5px;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.error_text {
+    color: red;
+    margin: 5px;
+}

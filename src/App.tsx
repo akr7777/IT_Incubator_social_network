@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import Profile from "./components/Profile/Profile";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
@@ -11,8 +11,8 @@ const MessagesContainer = React.lazy(() => import("./components/Messages/Message
 const UsersAPIContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 
 import ProfileContainer from './components/Profile/ProfileContainer';
-import { LoginContainer } from './components/Login/LoginContainer';
-import { connect } from 'react-redux';
+import LoginContainer from './components/Login/LoginContainer';
+import {connect} from 'react-redux';
 import {
     Navigate,
     useLocation,
@@ -21,12 +21,11 @@ import {
     Routes, Route, NavigateFunction, Params, Location
 } from "react-router-dom";
 import {inicializeApp} from './redux/app-reducer';
-import { AppStateType } from './redux/redux-store';
+import {AppStateType} from './redux/redux-store';
 import Preloader from './components/common/Preloader';
-import { compose } from 'redux';
+import {compose} from 'redux';
 import WithSuspense from './components/hoc/WithSuspense';
 import SettingsContainer from './components/Settings/SettingsContainer';
-
 
 
 type AppPropsType = {
@@ -38,14 +37,23 @@ type AppPropsType = {
 }
 
 class App extends React.Component<AppPropsType> {
+    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
+        alert('Some error occured. promiseRejectionEvent='+promiseRejectionEvent)
+    }
+
     componentDidMount() {
         this.props.inicializeApp();
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
+
     render() {
         //if (!this.props.inicialized) return <Preloader />
         return (
             <>
-               {/* { !this.props.inicialized && <Preloader /> }*/}
+                {/* { !this.props.inicialized && <Preloader /> }*/}
                 <Routes>
                     <Route path="/" element={<Layout/>}>
                         <Route index element={<ProfileContainer/>}/>
@@ -58,7 +66,7 @@ class App extends React.Component<AppPropsType> {
                         {/*<Route path="messages" element={<MessagesContainer/>}/>*/}
                         <Route path="messages" element={
                             <Suspense fallback={<div>Loading...</div>}>
-                                <MessagesContainer />
+                                <MessagesContainer/>
                             </Suspense>
                         }/>
                         {/*<Route path="users" element={<UsersAPIContainer/>}/>*/}
@@ -88,10 +96,11 @@ function withRouter(Component: React.ComponentType) {
         return (
             <Component
                 {...props}
-                router={{ location, navigate, params }}
+                router={{location, navigate, params}}
             />
         );
     }
+
     return ComponentWithRouterProp;
 }
 

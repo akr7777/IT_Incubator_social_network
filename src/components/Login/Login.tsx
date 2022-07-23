@@ -2,30 +2,45 @@ import React from 'react';
 import {Form, Field} from 'react-final-form'
 import { render } from 'react-dom'
 import { FORM_ERROR } from 'final-form';
-import { LoginPropsType } from './LoginContainer';
 import { Navigate } from 'react-router-dom';
 import { authAPI } from '../../api/api';
+import s from './Login.module.css';
+
 //types
 export type ValuesType = {
     email: string
     password: string
     rememberMe?: boolean,
-    captcha?: boolean,
+    captcha?: string,
 }
 type LoginFormPropsType = {
     authError: string | null,
     onSubmit: (values: ValuesType) => void,
+    capchaURL: string,
     //onSubmit: (values: ValuesType) => { "FINAL_FORM/form-error": string; },
 }
 type ErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean,
-    captcha?: boolean,
+    captcha?: string,
 }
 
-const Login = (props: LoginPropsType) => {
-    //debugger;
+type LoginPropsType1 = {
+    isAuth: boolean,
+    authError: string | null,
+    captchaURL: string,
+
+    onLoginRequest: (values:ValuesType) => void,
+    logoutProcedure: () => void,
+
+    /*id: number,
+    email: string,
+    login: string,*/
+}
+
+const Login = (props: LoginPropsType1) => {
+    //debugger
     const onSubmit = (values: ValuesType) => {
         props.onLoginRequest(values);
     }
@@ -33,7 +48,7 @@ const Login = (props: LoginPropsType) => {
     return <div>
         { props.isAuth && <Navigate to={'/profile'}/>}
         <div><h1>LOGIN FORM</h1></div>
-        <LoginForm onSubmit={onSubmit} authError={props.authError}/>
+        <LoginForm onSubmit={onSubmit} authError={props.authError} capchaURL={props.captchaURL}/>
         { props.isAuth && <div>{ <button onClick={props.logoutProcedure}>LOGOUT!</button> }</div> }
         <hr/><hr/><hr/>
     </div>
@@ -51,6 +66,9 @@ const LoginForm = (props: LoginFormPropsType) => (
                 }
                 if (!values.password) {
                     errors.password = 'Required'
+                }
+                if (props.capchaURL && !values.captcha) {
+                    errors.captcha = 'Required'
                 }
                 return errors
             }}
@@ -86,18 +104,30 @@ const LoginForm = (props: LoginFormPropsType) => (
                         )}
                     </Field>
 
-                    <Field name="captcha">
-                        {({input, meta}) => (
-                            <div>
-                                <label>Confirm</label>
-                                <input {...input} type="text" placeholder={"captha"}/>
-                                {meta.error && meta.touched && <span>{meta.error}</span>}
-                            </div>
-                        )}
-                    </Field>
+                    {/*-------------CAPTCHA---------------*/}
+                    {
+                        props.capchaURL &&
+                        <Field name="captcha">
+                            {({input, meta}) => (
+                                <div>
+                                    <div>
+                                        <label>Confirm</label>
+                                    </div>
+                                    <div>
+                                        <img src={props.capchaURL}/>
+                                    </div>
+                                    <div>
+                                        <input {...input} type="text" placeholder={"captha"}/>
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                    </div>
+                                </div>
+                            )}
+                        </Field>
+                    }
+
 
                     {/* ERRROR MESSAGE */}
-                    { props.authError && <div>{props.authError}</div>}
+                    { props.authError && <div className={s.error_div}> <label className={s.error_text}> {props.authError} </label></div>}
 
                     <div className="buttons">
                         <button type="submit"
@@ -112,7 +142,7 @@ const LoginForm = (props: LoginFormPropsType) => (
                             Reset
                         </button>*/}
                     </div>
-                    <pre>{JSON.stringify(values)}</pre>
+                    {/*<pre>{JSON.stringify(values)}</pre>*/}
 
                 </form>
             )}

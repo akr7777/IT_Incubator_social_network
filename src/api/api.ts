@@ -6,7 +6,7 @@ type LoginDataType = {
     email: string
     password: string,
     rememberMe?: boolean,
-    captcha?: boolean,
+    captcha?: string,
 }
 
 const instance = axios.create({
@@ -33,6 +33,11 @@ export const authAPI = {
             return response.data;
         });
     }
+    /*getCapcha () {
+        return instance.get(`security/get-captcha-url`).then(response => {
+            return response.data;
+        })
+    }*/
 }
 
 export const userAPI = {
@@ -86,6 +91,15 @@ export const profileAPI = {
 
     saveProfile (values:ProfileSettingsValuesType) {
         return instance.put(`profile`, values);
+    }
+}
+
+export const Security = {
+    getCapcha () {
+        debugger
+        return instance.get(`security/get-captcha-url`).then(response => {
+            return response.data;
+        })
     }
 }
 

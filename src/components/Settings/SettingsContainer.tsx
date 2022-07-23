@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { getAuthUserDataThunkCreator } from '../../redux/auth-reducer';
 import {getUserProfile, onProfileSettingsSubmit, ProfileReducerType, ProfileType } from '../../redux/profile-reducer';
 import { AppStateType, dispatchType } from '../../redux/redux-store';
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import Settings, { ProfileSettingsValuesType } from './Settings';
 
 export type SettingsContainerPropsType = MapStateToPropsType & MapDispatchToPropsType;
@@ -41,5 +43,8 @@ type MapDispatchToPropsType = {
     getUserProfile: (userID:number)=> void,
 }
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>
-            (mapStateToProps, {onProfileSettingsSubmit, getUserProfile})(SettingsContainer)
+export default compose<React.ComponentType>(
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>
+            (mapStateToProps, {onProfileSettingsSubmit, getUserProfile}),
+    withAuthRedirect
+    )(SettingsContainer)

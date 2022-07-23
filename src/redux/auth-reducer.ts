@@ -1,20 +1,23 @@
 import { FORM_ERROR } from "final-form";
 import React from "react";
 import {AnyAction} from "redux";
-import { authAPI } from "../api/api";
+import { authAPI, Security } from "../api/api";
 import { ValuesType } from "../components/Login/Login";
 import { dispatchType } from "./redux-store";
 import { Dispatch } from 'redux';
+import * as stream from "stream";
 
 const SET_USER_DATA = 'authReducer/SET_USER_DATA';
 const SET_AUTH_ERROR = 'authReducer/SET_AUTH_ERROR';
+const SET_CAPCHA_URL = 'authReducer/SET_CAPCHA_URL';
 
 let initialState = {
     id: -564,
-    email: 'null123',
-    login: 'null312',
+    email: '',
+    login: '',
     isAuth: false,
     authError: null,
+    captchaURL: "",
 }
 
 export type authReducerPropsType = {
@@ -23,9 +26,10 @@ export type authReducerPropsType = {
     login: string,
     isAuth: boolean,
     authError: string | null,
+    captchaURL: string,
 }
 
-type ActionAuthReducerTypes = setAuthUserDataACType | setAuthErrorType;
+type ActionAuthReducerTypes = setAuthUserDataACType | setAuthErrorType | SetCaphchaURLType;
 
 export const authReducer = (state: authReducerPropsType = initialState, action: ActionAuthReducerTypes) => {
     switch (action.type) {
@@ -42,6 +46,12 @@ export const authReducer = (state: authReducerPropsType = initialState, action: 
             return {
                 ...state,
                 authError: action.authError,
+            }
+        case SET_CAPCHA_URL:
+            //debugger
+            return {
+                ...state,
+                captchaURL: action.captchaURL,
             }
         default: {
             return state;
@@ -72,6 +82,9 @@ export const setAuthError = (authError: string | null):setAuthErrorType => ({
     authError,
 })
 
+type SetCaphchaURLType = { type: typeof SET_CAPCHA_URL, captchaURL: string}
+export const SetCaphchaURL = (capchaServerURL: string):SetCaphchaURLType => ({ type: SET_CAPCHA_URL, captchaURL: capchaServerURL})
+
 export const getAuthUserDataThunkCreator = () => async (dispatch: Dispatch) => {
     let response = await authAPI.authMe();
     if (response.resultCode === 0) {
@@ -91,6 +104,15 @@ export const onLoginRequest = (values:ValuesType) => async (dispatch:dispatchTyp
                 dispatch(setAuthUserDataAC(id, email, login, true));
             }
         });
+    } else if (response.resultCode === 10) {
+        //dispatch(getCapchaURL());
+        let response = await Security.getCapcha();
+        let message = 'Captcha is needed!';
+        if (response.url) {
+            dispatch(SetCaphchaURL(response.url));
+            if (response.messages) message = response.messages[0].length>0 ? response.messages[0] : 'Bad captcha'
+        }
+        dispatch(setAuthError(message));
     } else {
         let message = response.messages[0].length>0 ? response.messages[0] : 'some error 444'
         dispatch(setAuthError(message));
@@ -103,5 +125,14 @@ export const logoutProcedure = () => async (dispatch:dispatchType) => {
     let response = await authAPI.logout();
     if (response.resultCode === 0) {
         dispatch(setAuthUserDataAC(0, 'null', 'nill', false))
+    }
+}
+
+export const getCapchaURL = () => async (dispatch:dispatchType) => {
+    debugger
+    let response = await Security.getCapcha();
+    debugger
+    if (response.url) {
+        dispatch(SetCaphchaURL(response.url));
     }
 }
