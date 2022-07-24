@@ -40,14 +40,14 @@ class App extends React.Component<AppPropsType> {
     /*catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
         alert('Some error occured. promiseRejectionEvent='+promiseRejectionEvent)
     }
-
+    */
     componentDidMount() {
         this.props.inicializeApp();
-        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+        //window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
     componentWillUnmount() {
-        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
-    }*/
+        //window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
 
     render() {
         //if (!this.props.inicialized) return <Preloader />

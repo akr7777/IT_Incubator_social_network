@@ -1,9 +1,9 @@
 import { FORM_ERROR } from "final-form";
 import React from "react";
 import {AnyAction} from "redux";
-import { authAPI, Security } from "../api/api";
+import { authAPI, ResultCodeForCaptcha, ResultCodesEnum, Security } from "../api/api";
 import { ValuesType } from "../components/Login/Login";
-import { dispatchType } from "./redux-store";
+import {AppStateType, dispatchType } from "./redux-store";
 import { Dispatch } from 'redux';
 import * as stream from "stream";
 
@@ -87,16 +87,16 @@ export const SetCaphchaURL = (capchaServerURL: string):SetCaphchaURLType => ({ t
 
 export const getAuthUserDataThunkCreator = () => async (dispatch: Dispatch) => {
     let response = await authAPI.authMe();
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         let {id, email, login} = response.data;
         dispatch(setAuthUserDataAC(id, email, login, true));
     }
 }
 
 
-export const onLoginRequest = (values:ValuesType) => async (dispatch:dispatchType) => {
+export const onLoginRequest = (values:ValuesType) => async (dispatch:dispatchType, getState: () => AppStateType) => {
     let response = await authAPI.login(values)
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         //Далее идет Дублирование кода thunk getAuthUserDataThunkCreator, т.к. не могу из одной санки вызвать другую
         authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
@@ -104,7 +104,7 @@ export const onLoginRequest = (values:ValuesType) => async (dispatch:dispatchTyp
                 dispatch(setAuthUserDataAC(id, email, login, true));
             }
         });
-    } else if (response.resultCode === 10) {
+    } else if (response.resultCode === ResultCodeForCaptcha.CaptchaNeeded) {
         //dispatch(getCapchaURL());
         let response = await Security.getCapcha();
         let message = 'Captcha is needed!';
@@ -121,14 +121,14 @@ export const onLoginRequest = (values:ValuesType) => async (dispatch:dispatchTyp
 
 }
 
-export const logoutProcedure = () => async (dispatch:dispatchType) => {
+export const logoutProcedure = () => async (dispatch:dispatchType, getState: () => AppStateType) => {
     let response = await authAPI.logout();
     if (response.resultCode === 0) {
         dispatch(setAuthUserDataAC(0, 'null', 'nill', false))
     }
 }
 
-export const getCapchaURL = () => async (dispatch:dispatchType) => {
+export const getCapchaURL = () => async (dispatch:dispatchType, getState: () => AppStateType) => {
     debugger
     let response = await Security.getCapcha();
     debugger

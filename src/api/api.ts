@@ -17,19 +17,48 @@ const instance = axios.create({
     }
 });
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+}
+export enum ResultCodeForCaptcha {
+    CaptchaNeeded = 10
+}
+type MeResponseType = {
+    data: {
+        id: number,
+        email: string,
+        login: string,
+    }
+    resultCode: ResultCodesEnum,
+    messages: Array<string>,
+}
+type LoginResponseType = {
+    data: {
+        userId: number,
+    }
+    resultCode: ResultCodesEnum & ResultCodeForCaptcha,
+    messages: Array<string>,
+}
+type LoginDeleteResponseType = {
+    resultCode: ResultCodesEnum,
+    messages: Array<string>,
+    data: any,
+}
+
 export const authAPI = {
     authMe() {
-        return instance.get(`auth/me`).then(response => {
+        return instance.get<MeResponseType>(`auth/me`).then(response => {
             return response.data;
         });
     },
     login(data:LoginDataType) {
-        return instance.post(`auth/login`, {...data}).then(response => {
+        return instance.post<LoginResponseType>(`auth/login`, {...data}).then(response => {
             return response.data;
         });
     },
     logout() {
-        return instance.delete(`auth/login`).then(response => {
+        return instance.delete<LoginDeleteResponseType>(`auth/login`).then(response => {
             return response.data;
         });
     }

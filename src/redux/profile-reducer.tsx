@@ -2,7 +2,7 @@
 import { AnyAction } from "redux";
 import {profileAPI, userAPI } from "../api/api";
 import { ProfileSettingsValuesType } from "../components/Settings/Settings";
-import {AppThunkType, dispatchType } from "./redux-store";
+import {AppStateType, AppThunkType, dispatchType } from "./redux-store";
 //import {actionPropsType} from "./state";
 
 const add_Post = 'profileReducer/ADD-POST';
@@ -83,8 +83,8 @@ let initialState12: ProfileReducerType = {
         {id: 2, postText: "the second post!", likes: 5},
         {id: 3, postText: "Whats new?", likes: 1},
     ],
-    updatedPostText_inTextArea: "text post",
-    status: '97',
+    updatedPostText_inTextArea: "",
+    status: '',
     //profile: null,
 }
 
@@ -175,32 +175,33 @@ export const saveProfileInfo = (values:ProfileSettingsValuesType):saveProfileInf
     return {type: SAVE_PROFILE_INFO, newProfileData: values}
 }
 
-export const getUserProfile = (userID: number) => (dispatch: dispatchType) => {
+export const getUserProfile = (userID: number) => (dispatch: dispatchType, getState: AppStateType) => {
     profileAPI.getProfile(userID).then(response => {
         dispatch(setUserProfile(response.data));
     });
 }
 
-export const getStatus = (userID: number) => async (dispatch: dispatchType) => {
+export const getStatus = (userID: number) => async (dispatch: dispatchType, getState: AppStateType) => {
     let response = await profileAPI.getStatus(userID);
     dispatch(setStatus(response));
 }
 
-export const updateStatus = (status: string) => async (dispatch: dispatchType) => {
+export const updateStatus = (status: string) => async (dispatch: dispatchType, getState: AppStateType) => {
     let response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
 }
 
-export const saveMainPhoto = (file: any) => async (dispatch: dispatchType) => {
+export const saveMainPhoto = (file: any) => async (dispatch: dispatchType, getState: AppStateType) => {
     let response = await profileAPI.saveMainPhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }
 
-export const onProfileSettingsSubmit = (values: ProfileSettingsValuesType) => async (dispatch: dispatchType) => {
+export const onProfileSettingsSubmit = (values: ProfileSettingsValuesType) => async (dispatch: dispatchType,
+                                                                                     getState: AppStateType) => {
     let response = await profileAPI.saveProfile(values);
     if (response.data.resultCode === 0) {
         dispatch(saveProfileInfo(values));

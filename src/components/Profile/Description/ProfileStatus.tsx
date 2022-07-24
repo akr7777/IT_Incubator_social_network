@@ -11,7 +11,7 @@ type LocalStateType = {
 }
 
 
-class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+class ProfileStatus extends React.Component<ProfileStatusPropsType, LocalStateType> {
     state = {
         editMode: false,
         status: this.props.status,
