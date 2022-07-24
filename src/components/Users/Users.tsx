@@ -4,12 +4,12 @@ import abstractUserPhoto from "./../../assets/images/abst_user_ava.png";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {userAPI} from "../../api/api";
-import { userType } from "../../redux/users-reducer";
+import {userType} from "../../redux/users-reducer";
 import {User} from "./User";
 import Paginator from "./Paginator";
 
 type UsersPropsType = {
-    users: userType[],//Array<userType>
+    users: userType[],
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
@@ -24,36 +24,17 @@ type UsersPropsType = {
 }
 
 const Users = (props: UsersPropsType) => {
-
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages: Array<number> = [];
-    const startPageIndex = (props.currentPage - 10) < 1
-        ? 1
-        : props.currentPage - 10;
-    const endPageIndex = (props.currentPage + 10) > pagesCount
-        ? pagesCount
-        : props.currentPage + 10;
-    for (let i = startPageIndex; i <= endPageIndex; i++) {
-        pages.push(i);
-    }
-
-    const pagesDiv = pages.map((p) => {
-        return <span
-            className={props.currentPage === p ? s.selected_page : s.non_selected_page}
-            onClick={() => props.onPageChanged(p)}
-        >{p}</span>
-    })
-
     return (
-        <div>
-            {/*{pagesDiv}*/}
-            <Paginator
-                totalUsersCount={props.totalUsersCount}
-                pageSize={props.pageSize}
-                currentPage={props.currentPage}
-                onPageChanged={props.onPageChanged}
-            />
-            <div className={s.wrapped_users_div}>
+        <div className={s.userPageWrapping}>
+            <div className={s.paginatorDiv}>
+                <Paginator
+                    totalUsersCount={props.totalUsersCount}
+                    pageSize={props.pageSize}
+                    currentPage={props.currentPage}
+                    onPageChanged={props.onPageChanged}
+                />
+            </div>
+            <div className={s.wrapped_div_for_users}>
                 {
                     props.users.map((u: userType) =>
                         <User key={u.id}

@@ -37,7 +37,7 @@ type AppPropsType = {
 }
 
 class App extends React.Component<AppPropsType> {
-    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
+    /*catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
         alert('Some error occured. promiseRejectionEvent='+promiseRejectionEvent)
     }
 
@@ -47,7 +47,7 @@ class App extends React.Component<AppPropsType> {
     }
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
-    }
+    }*/
 
     render() {
         //if (!this.props.inicialized) return <Preloader />
@@ -57,24 +57,15 @@ class App extends React.Component<AppPropsType> {
                 <Routes>
                     <Route path="/" element={<Layout/>}>
                         <Route index element={<ProfileContainer/>}/>
-
                         <Route path="profile" element={<ProfileContainer/>}/> {/*{<Navigate to={'/profile/'}/>} />*/}
                         <Route path="profile/:id" element={<ProfileContainer/>}/>
-                        {/*<Route path="profile" element={<ProfileContainer />} >
-                        <Route path=':id' element={<ProfileContainer />} />
-                        </Route>*/}
-                        {/*<Route path="messages" element={<MessagesContainer/>}/>*/}
                         <Route path="messages" element={
                             <Suspense fallback={<div>Loading...</div>}>
                                 <MessagesContainer/>
                             </Suspense>
                         }/>
-                        {/*<Route path="users" element={<UsersAPIContainer/>}/>*/}
                         <Route path="users" element={
                             WithSuspense(UsersAPIContainer)
-                            /*<Suspense fallback={/!*<Preloader/>*!/<div>Loading...</div>}>
-                                <UsersAPIContainer />
-                            </Suspense>*/
                         }/>
                         <Route path="settings" element={
                             WithSuspense(SettingsContainer)
@@ -107,13 +98,11 @@ function withRouter(Component: React.ComponentType) {
 const mapStateToProps1 = (state: AppStateType) => {
     return {
         inicialized: state.app.inicialized,
-        //myUserID: state.auth.id,
-    };
+    }
 }
 
 type mapStateToPropsType = {
     inicialized: boolean,
-    //myUserID: number,
 }
 type mapDispatchToPropsType = {
     inicializeApp: () => void,

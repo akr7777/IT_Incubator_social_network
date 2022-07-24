@@ -5,8 +5,7 @@ import s from './Settings.module.css';
 import {Form, Field} from 'react-final-form'
 import {render} from 'react-dom'
 import {FORM_ERROR} from 'final-form';
-import { useDispatch } from 'react-redux';
-//import { useAppDispatch } from '../../redux/redux-store';
+import {useDispatch} from 'react-redux';
 
 export type ProfileSettingsValuesType = {
     aboutMe: string,
@@ -35,29 +34,9 @@ type ProfileSettingsFormpropsType = {
 
 const Settings = (props: SettingsPropsType) => {
 
-    const onFormSubmit = (values: any) => {
-
-        /*const values1:ProfileSettingsValuesType = {
-            aboutMe: values.aboutMe ? values.aboutMe : "",
-            lookingForAJob: values.lookingForAJob,
-            lookingForAJobDescription: values.lookingForAJobDescription ? values.lookingForAJobDescription : 0,
-            fullName: values.fullName ? values.fullName : "",
-            contacts: {
-                facebook: values.facebook ? values.facebook : "",
-                website: values.website ? values.website : "",
-                vk: values.vk ? values.vk : "",
-                twitter: values.twitter ? values.twitter : "",
-                instagram: values.instagram ? values.instagram : "",
-                youtube: values.youtube ? values.youtube : "",
-                github: values.github ? values.github : "",
-                mainLink: values.mainLink ? values.mainLink : "",
-            }
-        }*/
-
+    const onFormSubmit = (values: ProfileSettingsValuesType) => {
         props.onProfileSettingsSubmit(values);
     }
-
-    //console.log('profile.contacts.facebook=', props.profile.contacts.facebook);
 
     return <div className={s.main_wrapped_div}>
         <h2>This is settings!</h2>
@@ -72,24 +51,35 @@ const Settings = (props: SettingsPropsType) => {
 const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) => (
     <Form
         initialValues={{
-            fullName: profile.fullName || "full name",
-            aboutMe: profile.aboutMe || "about me",
+            fullName: profile.fullName || "",
+            aboutMe: profile.aboutMe || "",
             lookingForAJob: profile.lookingForAJob || false,
-            lookingForAJobDescription: profile.lookingForAJobDescription || "lookingForAJobDescription",
+            lookingForAJobDescription: profile.lookingForAJobDescription || "",
+            contacts: {
+                //facebook: profile.contacts.facebook ? profile.contacts.facebook : "facebook",
+                /*facebook: profile.contacts.facebook || "https://www.facebook.com/",
+                website: profile.contacts.website || "https://www.website.com/",
+                vk: profile.contacts.vk || "https://www.vk.com/",
+                twitter: profile.contacts.twitter || "https://www.twitter.com/",
+                instagram: profile.contacts.instagram || "https://www.instagram.com/",
+                youtube: profile.contacts.youtube || "https://www.youtube.com/",
+                github: profile.contacts.github || "https://www.github.com/",
+                mainLink: profile.contacts.mainLink || "https://www.mainLink.com/"*/
+                facebook: profile.contacts.facebook,
+                website: profile.contacts.website,
+                vk: profile.contacts.vk,
+                twitter: profile.contacts.twitter,
+                instagram: profile.contacts.instagram,
+                youtube: profile.contacts.youtube,
+                github: profile.contacts.github,
+                mainLink: profile.contacts.mainLink,
+            }
 
-            facebook: profile.contacts.facebook ?  profile.contacts.facebook : "facebook",
-            website: profile.contacts.website || "website",
-            vk: profile.contacts.vk || "vk",
-            twitter: profile.contacts.twitter || "twitter",
-            instagram: profile.contacts.instagram || "instagram",
-            youtube: profile.contacts.youtube || "youtube",
-            github: profile.contacts.github || "github",
-            mainLink: profile.contacts.mainLink || "mainLink"
         }}
 
         onSubmit={values => onSubmit(values as ProfileSettingsValuesType)}
         render={({handleSubmit, form, submitting, pristine, values}) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={s.wrappedDiv1}>
                 <div>
                     <label>Full Name</label>
                     <Field
@@ -125,11 +115,11 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                     />
                 </div>
 
-                {/*<h4>Contacts:</h4>
+                <h4>Contacts:</h4>
                 <div>
                     <label>facebook:</label>
                     <Field
-                        name="facebook"
+                        name="contacts.facebook"
                         component="input"
                         type="text"
                     />
@@ -137,7 +127,7 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>website:</label>
                     <Field
-                        name="website"
+                        name="contacts.website"
                         component="input"
                         type="text"
                     />
@@ -145,7 +135,7 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>vk:</label>
                     <Field
-                        name="vk"
+                        name="contacts.vk"
                         component="input"
                         type="text"
                     />
@@ -153,7 +143,7 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>twitter:</label>
                     <Field
-                        name="twitter"
+                        name="contacts.twitter"
                         component="input"
                         type="text"
                     />
@@ -161,7 +151,7 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>instagram:</label>
                     <Field
-                        name="instagram"
+                        name="contacts.instagram"
                         component="input"
                         type="text"
                     />
@@ -169,7 +159,7 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>youtube:</label>
                     <Field
-                        name="youtube"
+                        name="contacts.youtube"
                         component="input"
                         type="text"
                     />
@@ -177,7 +167,7 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>github:</label>
                     <Field
-                        name="github"
+                        name="contacts.github"
                         component="input"
                         type="text"
                     />
@@ -185,13 +175,11 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                 <div>
                     <label>mainLink:</label>
                     <Field
-                        name="mainLink"
+                        name="contacts.mainLink"
                         component="input"
                         type="text"
                     />
-                </div>*/}
-
-                //-----------------
+                </div>
 
                 {/* <div>
                     <label>Favorite Color</label>
@@ -293,10 +281,15 @@ const ProfileSettingsForm = ({profile, onSubmit}: ProfileSettingsFormpropsType) 
                     <Field name="notes" component="textarea" placeholder="Notes" />
                 </div>*/}
                 <div className="buttons">
-                    <button type="submit" disabled={submitting || pristine}>
+                    <button
+                        className={s.theButton + ' ' + s.green}
+                        type="submit"
+                        disabled={submitting || pristine}
+                    >
                         Submit
                     </button>
                     <button
+                        className={s.theButton + ' ' + s.red}
                         type="button"
                         onClick={form.reset}
                         disabled={submitting || pristine}

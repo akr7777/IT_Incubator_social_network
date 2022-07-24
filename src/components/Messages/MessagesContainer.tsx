@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import { AppStateType, dispatchType } from "../../redux/redux-store";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { getDialogNames, getTypingNewMessageText, getUserMessages } from "../../redux/messages_selector";
 
 
 //types
@@ -25,9 +26,9 @@ export type MessagesPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 let mapStateToProps = (state: AppStateType) => {
     return {
-        dialogsNames: state.messagesPage.dialogsNames,
-        userMessages: state.messagesPage.userMessages,
-        typingNewMessageText: state.messagesPage.typingNewMessageText,
+        dialogsNames: getDialogNames(state),
+        userMessages: getUserMessages(state),
+        typingNewMessageText: getTypingNewMessageText(state),
     }
 }
 let mapDispatchToProps = (dispatch: dispatchType) => {

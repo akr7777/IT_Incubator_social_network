@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { compose } from 'redux';
 import {authAPI} from '../../api/api';
 import {getCapchaURL, logoutProcedure, onLoginRequest} from '../../redux/auth-reducer';
+import {getAuthError, getCaptchaURL, getEmail, getId, getIsAuth, getLogin } from '../../redux/auth_selectors';
 import {AppStateType, dispatchType} from '../../redux/redux-store';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import Login, {ValuesType} from './Login';
@@ -28,26 +29,17 @@ type mapStateToPropsType = {
     isAuth: boolean,
     authError: string | null,
     captchaURL: string,
-
-    /*isAuth: boolean,
-    authError: string | null,
-    capchaURLforLogin: string,
-
-    id: number,
-    email: string,
-    login: string,*/
-
 }
 let mapStateToProps = (state: AppStateType) => {
     return {
-        isAuth: state.auth.isAuth,
-        authError: state.auth.authError,
+        isAuth: getIsAuth(state),
+        authError: getAuthError(state),
 
-        id: state.auth.id,
-        email: state.auth.email,
-        login: state.auth.login,
+        id: getId(state),
+        email: getEmail(state),
+        login: getLogin(state),
 
-        captchaURL: state.auth.captchaURL,
+        captchaURL: getCaptchaURL(state),
     }
 }
 

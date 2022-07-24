@@ -17,6 +17,7 @@ import { AppStateType } from "../../redux/redux-store";
 //import { userAPI } from "../../api/api";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from "redux";
+import {getAutorizedIDSelector, getProfilePageSelector, getStatusSelector, getIsAuthSelector } from "../../redux/profile_selectors";
 
 type MapStateToPropsType = {
     profilePage: ProfileReducerType,
@@ -67,11 +68,11 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
 }
 
 let mapStateToProps = (state: AppStateType) => ({
-    profilePage: state.profilePage,
-    status: state.profilePage.status,
+    profilePage: getProfilePageSelector(state),
+    status: getStatusSelector(state),
 
-    isAuth: state.auth.isAuth,
-    autorizedUserID: state.auth.id,
+    isAuth: getIsAuthSelector(state),
+    autorizedUserID: getAutorizedIDSelector(state),
 });
 
 function withRouter(Component: React.ComponentType) {

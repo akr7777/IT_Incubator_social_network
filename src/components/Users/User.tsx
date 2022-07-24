@@ -17,46 +17,39 @@ type UserPropsType = {
 
 }
 
-export const User:React.FC<UserPropsType> = ( {user, isFetching, followingInProgress, follow, unfollow, toggleFollowingProgress} ) => {
+export const User: React.FC<UserPropsType> = ({
+                                                  user,
+                                                  isFetching,
+                                                  followingInProgress,
+                                                  follow,
+                                                  unfollow,
+                                                  toggleFollowingProgress
+                                              }) => {
     return <div className={s.one_user_div} key={user.id}>
-        <span key={user.id.toString() + "_1"}>
-            <div key={user.id.toString() + "_11"}>
-                <NavLink to={"/profile/" + user.id} key={user.id.toString() + "_111_"}>
-                    <img src={user.photos.small !== null ? user.photos.small : abstractUserPhoto}
-                         className={s.user_photo}/>
-                </NavLink>
-            </div>
-            <div key={user.id.toString() + "_12"}>
-                {
-                    user.followed
-                        ? <button disabled={followingInProgress.some(id => id === user.id)}
-                                  onClick={() => {
-                                      unfollow(user.id);
-                                  }}>Unfollow</button>
-                        : <button disabled={followingInProgress.some(id => id === user.id)}
-                                  onClick={() => {
-                                      follow(user.id);
-                                  }}>Follow</button>
-                }
-            </div>
-        </span>
-<span key={user.id.toString() + "_2"}>
-            <span>
-                <div>
-                    {user.name}
-                </div>
-                <div key={user.id.toString() + "_212"}>
-                    {user.status}
-                </div>
-            </span>
-            <span key={user.id.toString() + "_22"}>
-                <div key={user.id.toString() + "_221"}>
-                    {"u.location.city"}
-                </div>
-                <div key={user.id.toString() + "_222"}>
-                    {"u.location.country"}
-                </div>
-            </span>
-        </span>
+        <div>
+            <NavLink to={"/profile/" + user.id}>
+                <img src={user.photos.small !== null ? user.photos.small : abstractUserPhoto}
+                     className={s.user_photo}/>
+            </NavLink>
         </div>
+        <div>
+            {
+                user.followed
+                    ? <button className={s.followButton}
+                              disabled={followingInProgress.some(id => id === user.id)}
+                              onClick={() => {
+                                  unfollow(user.id);
+                              }}>Unfollow</button>
+                    : <button className={s.followButton}
+                              disabled={followingInProgress.some(id => id === user.id)}
+                              onClick={() => {
+                                  follow(user.id);
+                              }}>Follow</button>
+            }
+        </div>
+        <div className={s.u_item}>
+                {user.name}
+                {user.status}
+        </div>
+    </div>
 }

@@ -1,20 +1,51 @@
-.wrapped_div_for_users {
+.userPageWrapping {
+    /*background-color: darkkhaki;*/
     display: flex;
     flex-direction: column;
+    /*justify-content: center;*/
+    text-align: center;
 }
-.one_user_div {
+.paginatorDiv {
+    margin-top: 30px;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+}
+.wrapped_div_for_users {
+    /*background-color: green;*/
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    margin-top: 30px;
+}
+.one_user_div {
+    /*background-color: red;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*margin-right: 50px;*/
+    margin-right: 50px;
 }
 .user_photo {
     width: 100px;
     height: 100px;
+}
+.followButton {
+    height: 20px;
+    width: 100px;
 }
 .selected_page {
     font-weight: bold;
     padding-right: 5px;
 }
 .non_selected_page {
-    color: red;
+    color: mediumpurple;
     padding-right: 5px;
+}
+.u_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }

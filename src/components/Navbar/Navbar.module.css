@@ -5,6 +5,12 @@
     text-align: center;
 
 }
+
+.name_label {
+    color: green;
+    padding: 20px 10px 20px 10px;
+}
+
 .item {
     padding: 5px;
 }
@@ -31,4 +37,9 @@
     display: grid;
     padding-left: 20px;
     grid-template-columns: repeat(3, auto);
+}
+
+.loguot_div {
+    margin-top: 50px;
+    margin-bottom: 30px;
 }

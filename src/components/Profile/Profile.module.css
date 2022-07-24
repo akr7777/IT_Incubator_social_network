@@ -3,7 +3,7 @@
     background-color: #edf1f1;
     grid-area: cc;
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 4fr;
     grid-template-rows: 1fr;
     grid-template-areas:
           "high-img high-img"

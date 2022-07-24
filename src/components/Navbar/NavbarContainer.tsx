@@ -13,6 +13,7 @@ export type NavbarPropsType = MapStateToPropsType & MapDispatchToPropsType;
 type MapStateToPropsType = {
     friendsSidebar: Array<FriendSidebarType>,
     isAuth: boolean,
+    loginName: string,
 }
 type MapDispatchToPropsType = {
     logoutProcedure: () => void,
@@ -22,7 +23,9 @@ let mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
         friendsSidebar: state.friendsSidebar,
         isAuth: state.auth.isAuth,
+        loginName: state.auth.login,
     }
 }
-const NavbarContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>( mapStateToProps, {logoutProcedure} )(Navbar);
-export default NavbarContainer;
+
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>( mapStateToProps, {logoutProcedure} )(Navbar);
+

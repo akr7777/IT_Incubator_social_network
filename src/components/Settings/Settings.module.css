@@ -1,3 +1,6 @@
+.wrappedDiv1 {
+    margin-inside: 20px;
+}
 .main_wrapped_div {
     padding: 20px;
     text-align: center;
@@ -16,4 +19,18 @@
 .profile_items_block {
     align-items: end;
     text-align: right;
+}
+
+.theButton {
+    border-radius: 3px;
+    width: 100px;
+    margin: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.red {
+    background-color: indianred;
+}
+.green {
+    background-color: darkseagreen;
 }

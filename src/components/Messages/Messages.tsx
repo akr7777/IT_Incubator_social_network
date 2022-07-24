@@ -6,22 +6,9 @@ import {Form, Field} from 'react-final-form'
 import { render } from 'react-dom'
 import { MessagesPropsType } from "./MessagesContainer";
 
-/*export type MessagesPropsType = {
-    dialogsNames: Array<state_messagesPage_dialogsNames_PropsType>,
-    userMessages: Array<state_messagePage_userMessages_PropsType>,
-    typingNewMessageText: string,
-
-    addNewMessage: (txt: string) => void,
-    updateTextArea: (txt:string)=> void,
-    isAuth: boolean,
-    /!*dispatch: (action: actionPropsType) => number*!/
-    onSubmitNewMessageForm: (values:any) => void,
-}*/
-
 export const Messages = (props: MessagesPropsType) => {
-
-    const dialogsNamesElements = props.dialogsNames.map( elem => <Dialog id={elem.id} name={elem.name} img_link={elem.img_link}/> );
-    const messagesElements = props.userMessages.map( elem => <Message userID={elem.userID} messageText={elem.messageText} /> );
+    const dialogsNamesElements = props.dialogsNames.map( elem => <Dialog key={elem.id} id={elem.id} name={elem.name} img_link={elem.img_link}/> );
+    const messagesElements = props.userMessages.map( (elem,index) => <Message key={index} userID={elem.userID} messageText={elem.messageText} /> );
     let newMessageTextarea = useRef<HTMLTextAreaElement>(null);
 
     let onAddNewMessage = () => {
@@ -29,7 +16,6 @@ export const Messages = (props: MessagesPropsType) => {
         if (el !== null) {
             let txt = el.value;
             props.addNewMessage(txt);
-            /*props.store.dispatch(addNewMessageActionCreator(txt));*/
             el.value = "";
         }
     }
@@ -39,11 +25,8 @@ export const Messages = (props: MessagesPropsType) => {
         if (el !== null) {
             let txt = el.value;
             props.updateTextArea(txt);
-            /*props.dispatch( updateNewMessageActionCreator(txt) );*/
         }
     }
-
-    //if (!props.isAuth) return <Navigate to="/login" replace={true} />
 
     return (
         <div className={s.messages}>
@@ -51,8 +34,8 @@ export const Messages = (props: MessagesPropsType) => {
                 { dialogsNamesElements }
             </div>
             <div className={s.message}>
-                { messagesElements }
 
+                { messagesElements }
                 <NewMessageForm onSubmitNewMessageForm={props.onSubmitNewMessageForm}/>
 
             </div>
@@ -60,11 +43,6 @@ export const Messages = (props: MessagesPropsType) => {
     );
 }
 
-/*type DialogPropsType = {
-    id: number,
-    name: string,
-    img_link: string
-}*/
 const Dialog = (props: dialogsNamesType) => {
     return(
         <div className={s.names}>
@@ -74,10 +52,6 @@ const Dialog = (props: dialogsNamesType) => {
     );
 }
 
-/*type MessagePropsType = {
-    userID: number
-    messageText: string
-}*/
 const Message = (props: userMessagesType) => {
     let messageText1 = props.userID == 1 ? <div className={s.msg_left}>{props.messageText}</div> : <div className={s.msg_rigth}>{props.messageText}</div>
     return(

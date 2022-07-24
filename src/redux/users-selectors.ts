@@ -9,8 +9,6 @@ export const requestUsersSelector = (state: AppStateType):Array<userType> => {
     return requestUsers(state).filter( u => true);
 }
 
-
-
 export const requestPageSize = (state: AppStateType):number => {
     return  state.usersPage.pageSize;
 }

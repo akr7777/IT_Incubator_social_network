@@ -41,11 +41,11 @@ export type UsersInitialStateType = {
 type userReducerActionType = FollowSuccessType | SetUsersType | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetchingType | ToggleFollowingProgressType;
 let initState1 = {
     users: [],
-    pageSize: 5,
+    pageSize: 7,
     totalUsersCount: 20,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [12332, 11213],
+    followingInProgress: [0, 0],
 }
 
 export const userReducer = (state: UsersInitialStateType = initState1, action: userReducerActionType): UsersInitialStateType => {
